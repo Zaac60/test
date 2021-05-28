@@ -119,8 +119,8 @@ categories:
       index: Position
       id: More options
       icon: Icon
-      color: Colour
-    nameShort_help: The code sign will be used in the menu as we are often short on
+      color: Color
+    nameShort_help: The short version is used in the menu as we are often short on
       space
     name: Group name
     isMandatory_help: A category from this group must be selected
@@ -141,7 +141,7 @@ categories:
     displayInForm: In the form
     descriptionLabel: Description area label
     customId: Personalized id
-    nameShort: Name(shortened)
+    nameShort: Name (shortened)
   _label: Categories
 config_style:
   fields:
