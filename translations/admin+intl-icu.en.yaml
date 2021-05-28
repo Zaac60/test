@@ -3,6 +3,7 @@ config_infobar:
   fields:
     description:
       colorOptionId: The category ID that gives its main colour to this element
+      _label: Description
 abouts:
   _label: Popups
   fields:
@@ -109,6 +110,7 @@ categories:
     displayInForm: In the form
     descriptionLabel: Description area label
     customId: Personalized id
+    nameShort: Name(shortened)
   _label: Categories
 config_style:
   fields:
@@ -132,11 +134,19 @@ config_style:
     contentBackgroundColor: Background colour of page content
     choose_color: Click to choose a colour
     backgroundColor: Page background colour
+    titleFont: Title font
+    theme: Theme
+    mainFont: Main font
+    iconImport: Link for the icons CDN (by default, FontAwesome icons are loaded)
+    fontImport: Link to the font CDN
   form:
     groups:
       secondaryColor: Other colours
       primaryColors: Main colours
       advancedColor: Advanced colours
+      theme: Theme and fonts
+      fontImport: Load other fonts and icons
+  _label: Style / Colors / Icons
 projects:
   initialize:
     plainPassword-1: Password
@@ -172,6 +182,7 @@ config_emails:
       edit: During an update - <a href=''{url}'' target='_blank'>TEST</a>
       delete: During a deletion - <a href=''{url}'' target='_blank'>TEST</a>
       add: During an addition - <a href=''{url}'' target='_blank'>TEST</a>
+      validation: During validation- <a href=''{url}'' target='_blank'>TEST</a>
   _label: E-mails / newsletter
 wrappers:
   fields:
@@ -311,3 +322,192 @@ config_custom_js_css:
   fields:
     customCSS: Custom CSS
     customJavascript: Custom Javascript
+duplicates:
+  node:
+    address: Address
+  index:
+    wantMore: I want more! (Only {count} duplicates left to process)
+    title: Duplicate management
+    return: Return to duplicate management
+    none: No duplicates to process!
+    merge: Merge duplicate entries
+    leftDuplicatesToProceedCount: '{count} duplicates are in fact still to be processed,
+      but have been blocked by another user. Wait 10 minutes for them to unblock'
+dashboard:
+  welcome: <b>Welcome to your Administrator space!</b><</br> The adventure is just
+    beginning for you, now you have to start configuring your site :)</br><a target="_blank"
+    href="https://doc.gogocarto.fr/">View the documentation</a> to help you get started!
+    Video tutorials, frequently asked questions…
+  sidebar:
+    gogo_partners: Who we are
+    gogo_homepage: Back to website
+    gogo_element_add: Form
+    gogo_directory: The Map
+  menu:
+    users: Users
+    saas: Close Carto
+    other_config: Other Settings
+    emailing: E-mails / Newsletter
+    data: Data / Import
+    custom: Customization
+    contents: Contents
+  delete: Delete this project
+  confirm: This action cannot be undone. You will delete your entire project. Are
+    you sure you want to continue?
+  _label: GoGoCarto Admin
+config_users:
+  fields:
+    user:
+      sendConfirmationEmail: Validate the creation with a confirmation email
+      loginWithMonPrintemps: Activate the connection with MonPrintemps
+      loginWithLesCommuns: Activate the connection with "LesCommuns.org"
+      loginWithGoogle: Activate the connection with Google
+      loginWithFacebook: Activate the connection with Facebook
+      enableRegistration: Authorize account creation
+  _label: Configuration
+config_saas:
+  fields:
+    saas:
+      newProjectInstructions: Custom text displayed at the top of the new project
+        creation form
+      endUserLicenceAgreement: Terms and Conditions of Use
+      donationUrl: URL to make a donation (a button will be added on the home page)
+  _label: Configuration
+config_osm:
+  form:
+    groups:
+      host_description: URL of the OpenStreetMap server on which to send the data
+        edited by GoGoCarto
+      account_description: To enable editing to OpenStreetMap, fill in a user account
+        below. If you do not have an account, you can create one at<a href='https://www.openstreetmap.org/user/new'>OpenStreetMap
+        website</a>.
+      account: Instance account
+  fields.osm:
+    osmUsername: User name
+    osmPassword: Password
+    osmHost: Server URL
+  _label: OpenStreetMap
+config_mobile:
+  form:
+    groups:
+      trusted_description: This feature is under testing, please wait for future explanations
+      trusted: Real mobile application (Trusted Web Activity)
+      progressive_description: 'Gogocarto is a natively<b>Progressive Web App</b>:
+        when a user visits the site from their cell phone, the user will have the
+        possibility to add a shortcut on his/her home screen. By clicking on this
+        shortcut, the site will open in full screen like a standard mobile application.'
+      progressive: Simulated mobile application (Progressive Web App)
+  fields:
+    sha256CertFingerprints: 'SHA256 certificate fingerprints (if you publish it as
+      TWA).Format: 57:2B:36:…'
+    packageName: 'Domain name of the app (if you publish it as a TWA). Format: fr.gogocarto.macarto'
+    hideHeaderInPwa: Hide the top bar when the map is open in PWA mode
+    appNameShort: Short name of the application (12 characters max.)
+  _label: Mobile App
+config_menu:
+  form:
+    groups:
+      search: Search
+      menu: Menu (contains filters and search bar)
+      general: General
+      custom: Customize the filters in the menu
+  fields:
+    searchPlaceFeature: Search for a location
+    searchGeolocateFeature: Geolocation button
+    searchExcludingWords_title: If you make a directory of local producers, you may
+      want to exclude words like "organic", because this kind of search would give
+      bad results. For example if you search for "Organic Farm of bayou", results
+      that have nothing to do with it such as "Amap Organic" would appear in the results,
+      due to the word "organic". As a general rule, exclude commonly used words in
+      the titles of your files. Note that the search is also used in the detection
+      of duplicates
+    searchExcludingWords: Words to exclude from the search, separated by commas
+    searchElementsFeature: Search for an element
+config_home:
+  fields:
+    home:
+      seeMoreButtonText_placeholder: 'Example: "More information"'
+      seeMoreButtonText: Text to invite scrolling (if home page banners exist)
+      displayCategoriesToPick: Show main categories selectable for searching
+      addElementHintText_placeholder: 'Example: "Help us to enrich the database by
+        adding an element!"'
+      addElementHintText: Text above the "Add Item" button
+    backgroundImage_placeholder: Select an already imported image, or add one!
+    backgroundImage: Background image (file name must not contain spaces or special
+      characters)
+    activateHomePage: Activate the homepage
+  _label: Homepage
+config_general:
+  form:
+    groups:
+      text: Name of the entities listed in the directory
+      pages: Main features
+      main_description: <div class="iframe-container"><iframe height="110" sandbox="allow-same-origin
+        allow-scripts" src="https://video.colibris-outilslibres.org/videos/embed/fc7d3784-7bd1-4f3a-b915-ab6daefdd52d"
+        frameborder="0" allowfullscreen></iframe></div>
+      main: The website
+      images: General images
+  fields:
+    socialShareImage: Image to display when sharing on social networks
+    publishOnSaasPage: Make this project visible on {url}
+    partnerPageTitle: Title of the page 'Partners
+    logoInline: Logo for menu bar
+    logo: Logo
+    locale: Language
+    favicon: Favicon
+    elementDisplayNamePlural: Plural noun
+    elementDisplayNameDefinite: Name with definite article
+    elementDisplayNameIndefinite: Name with indefinite article
+    dataLicenseUrl: URL of the license that protects your data
+    activatePartnersPage: Activate the "Partner" page
+    activateAbouts: Enable 'About' popups
+    aboutHeaderTitle: Title of the 'About' section
+    elementDisplayName: Name
+    customDomain_help: After purchasing the domain name mymap.org, you must first
+      redirect it to the IP address of the GoGoCarto server ({ip}).   Then enter your
+      domain name here, and wait for it to be configured by GoGoCarto (an attempt
+      is made every hour). GoGoCarto gives up after 4 attempts. If after several hours
+      nothing happens, you will have to reset the subdomain configuration,  save,
+      then fill it out again to create a new attempt
+    customDomain: Use a personalized domain name (for example, mymap.org instead of
+      mymap.gogocarto.fr)
+    appTags: Keywords for referencing (separate them by a comma)
+    appName: Site name
+    appBaseline: Site description (baseline)
+  downloadImage: Upload/Download an image
+  cannot_delete: Impossible to delete the configuration, this action is forbidden
+    because it would break your whole map
+  _label: General Setup
+config_form:
+  fields:
+    elementFormValidationText_placeholder: 'Example: I certify that the information
+      provided in this form is correct'
+    elementFormValidationText: Label the form validation checkbox (leave empty to
+      deactivate)
+    elementFormOwningText_placeholder: 'Example: I am involved in the management of
+      the described structure'
+    elementFormOwningText: Label to ask if the user is the owner of the record (leave
+      empty to disable)
+    elementFormIntroText_placeholder: 'Example: Attention we do not refere to such
+      and such type of elements'
+    elementFormIntroText: Introductory text that appears at the top of the form
+    elementFormGeocodingHelp: Geolocation help text
+  _label: Form
+  form:
+    groups:
+      other: Additional texts and options
+      form: Form
+      config_description: <div class='text-and-iframe-container'><div class='iframe-container-aside'><iframe
+        height='200' sandbox='allow-same-origin allow-scripts' src='https://video.colibris-outilslibres.org/videos/embed/2dd4dad3-63fa-4bb4-b48c-e518f8e56d36'
+        frameborder='0' allowfullscreen></iframe></div> <b>The form allows one to
+        add/edit data from the public interface</b></br> If you have imported any
+        data, you can add a field to the form and link it to the imported field using
+        the \"field's name\"</div>
+      config: Form setup
+config_features:
+  fields:
+    allow_role_user: Allow Users
+    allow_role_admin: Enable Moderators
+    allow_role_anonymous: Enable Anonymous
+    activeInIframe: Enabled in Iframe
+    active: Activate
