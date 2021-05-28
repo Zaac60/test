@@ -207,12 +207,12 @@ reports:
 vote:
   vote_modified: 'Thank you {user}: your vote has been edited!'
   vote_added: Thanks for your contribution!
-  user_vote_for_him: "Come on, you weren't planning to vote for your own contribution,\
+  user_vote_for_him: "Come on, you weren't going to vote for your own contribution,\
     \ were you? Leave some for others! </br> Attention clever ones, if you use another\
-    \ of your personal address we will see it too! "
+    \ of your personal addresses, we will see it too! "
   pending:
     user_validated:
-      positive: Congratulations, the changes received enough votes to be validated!
+      positive: Congratulations, the changes have received enough votes to be validated!
       negative: The proposed amendment has received sufficient negative votes, it
         is revoked.
     admin_validated:
@@ -259,7 +259,7 @@ my_contributions:
 login:
   register: Need an account? <a href="{url}">Sign up</a>
   _label: Log in
-  login_with: Connect with {provider}
+  login_with: Log in with {provider}
 load_configuration:
   AppBaseline: Create maps à gogo
   AddElementHintText: Contribute to the database!
