@@ -98,3 +98,7 @@ home:
 my_contributions:
   edit: Bearbeiten
   me: Ich
+api_ui:
+  json: JSON
+  include_external: Externe Quellen in die Datenbank einbinden
+  format: 'Format:'
