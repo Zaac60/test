@@ -35,7 +35,7 @@ bulk:
 categories:
   _label: Catégories
   fields:
-    customId: Id personnalisé
+    customId: ID personnalisé
     descriptionLabel: Label pour le champ de description
     displayInForm: Dans le formulaire
     displayInForm_help: Ni le groupe ni les catégories ne seront affichés dans le
