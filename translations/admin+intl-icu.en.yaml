@@ -4,6 +4,26 @@ config_infobar:
     description:
       colorOptionId: The category ID that gives its main colour to this element
       _label: Description
+      updatedAt: Date of last update
+      status: "<ul>\n  <li>-6: Duplicate</li>\n  <li>-4: Deleted </li>\n  <li>-3:\
+        \ Rejected (votes) </li>\n  <li>-2: Rejected (admin) </li>\n  <li>-1: Pending\
+        \ (changes) </li>\n  <li> 0: Pending (added)</li>\n  <li> 1: Validated (admin)</li>\n\
+        \  <li> 2: Validated (votes)</li>\n  <li> 3: Added by admin</li>\n  <li> 4:\
+        \ Edited by admin</li>\n  <li> 5: Edited by owner</li>\n  <li> 6: Edited with\
+        \ direct link</li>\n  <li> 7: Imported</li>\n</ul>"
+      sourceKey: Name of the source of this element (can be empty)
+      originalAddress: The detailed address with postal code, city etc…
+      createdAt: Date of creation in the database
+      categoriesFull: Complete list of categories, including id, name, description
+        and position
+      categories: List of category names of the element
+      isDeleted: Shortcut for status = Denied or Deleted
+      images: Table of URLs of the different images
+      distance: If an address has been entered, distance between the point and the
+        address
+      isPending: Shortcut for status == Pending (changes or additions)
+    example:
+      categories: "'{% if \"my category\" in categories '%} … '{% endif '%}"
 abouts:
   _label: Popups
   fields:
@@ -37,6 +57,17 @@ js:
   element_form:
     geocoded_marker_text: Move me to specify the position</br>(in the centre of the
       building)
+  osm_query_builder:
+    title: List of queries in the OpenStreetMap database
+  mapping_taxonomy:
+    selectCategory: Select an existing category or enter the name of a new category
+      to create
+    createTerm: '{term} (Will be created when saving)'
+  mapping_ontology:
+    streetNumber: 'Address: street number'
+    streetAddress: 'Address: street'
+    specificData: Specific fields
+    source: Origin of the item (source)
 categories:
   list:
     multiple: Multiple
@@ -154,6 +185,11 @@ projects:
 partners:
   form:
     websiteUrl: Website's URL
+    name: Name
+    logo_placeholder: Select an already imported image, or add one!
+    logo: Logo
+    content: Content
+  _label: Partners
 sonata.user.user:
   batch:
     error: 'ERROR: {message}'
@@ -165,12 +201,28 @@ sonata.user.user:
     gamification: Interactions
     email: E-mail
     sendMail: Send e-mail
+    reportsCount: Reports
+    object: Title
+    votesCount: Votes
+    username: Name
   facebook_warning: 'WARNING: If your e-mail is private on Facebook, you will not
     be informed of the evolution of your contributions'
   form:
     plainPassword: Password
     main-roles: Main roles
     watchModeration: Send notification e-mail when items are to be moderated
+    locked: Locked
+    groups:
+      user: User
+      status: Status
+      security: Security
+      roles: Roles
+      general: General
+    expired: Expired
+    enabled: Activated
+    allowedStamps: Authorized labels
+  _label: Users
+  forgottedPassword: Forgot your password
 config_emails:
   form:
     groups:
@@ -183,11 +235,30 @@ config_emails:
       delete: During a deletion - <a href=''{url}'' target='_blank'>TEST</a>
       add: During an addition - <a href=''{url}'' target='_blank'>TEST</a>
       validation: During validation- <a href=''{url}'' target='_blank'>TEST</a>
+      newsletter: Newsletter - <a href=''{url}'' target='_blank'>TEST</a>
+      report: When a report is taken into account - <a href=''{url}'' target='_blank'>TEST</a>
+      refusal: In case of a refusal- <a href=''{url}'' target='_blank'>TEST</a>
+      newsletters: News letter
+      infosContributors_description: "These emails are automatically sent to contributors\
+        \ when their contributions are accepted, refused etc...</br>It is possible\
+        \ to include the following variables in the messages (keeping the ''{{'}}''):\
+        \ </br> <li>'{{ element '}} the name of {element}</li> <li>'{{ user '}} the\
+        \ name or email address of the contributor</li> <li>'{{ showUrl '}} the address\
+        \ which refers to the visualization of the file</li> <li>'{{ editUrl '}} the\
+        \ address that refers to the modification of the file</li> <li>'{{ homeUrl\
+        \ '}} the address of the home page of the site</li> <li>'{{ userContributionsUrl\
+        \ '}} the address of the \"My contributions\" page</li> <li>'{{ customMessage\
+        \ '}} the personal message that has been written by the admins (only in case\
+        \ of a refusal)</li></br> You can also use these variables in the special\
+        \ contents of the text editor. For example in the URL field of the popup that\
+        \ opens when you click on 'add link'.</br> <b>Once the email is saved</b>,\
+        \ you can click on the buttons <b>TESTER</b> to see the rendering"
   _label: E-mails / newsletter
 wrappers:
   fields:
     textColor: Text colour
     backgroundColor: Background colour
+    rawContent: Raw HTML content (optional)
 options:
   fields:
     useColorForMarker_help: If an item has several categories that give the colour,
@@ -198,6 +269,57 @@ options:
       if it has been filled in
     softColor: Softened colour
     color: Colour
+    add_a_tag: Add a tag
+    displayInForm: In the form
+    displayChildrenInMenu: In the menu
+    displayChildrenInInfoBar: In the detail file
+    displayChildrenInForm: In the form
+    descriptionLabel: Label for additional field
+    customId_help: When importing items, we will compare the category name of the
+      imported item with the category name of your map. We will also compare with
+      the custom Ids
+    customId: Custom Id
+    nameShort: Name (shortened)
+    name: Name
+    index: Position (to sort categories)
+    icon: Icon
+    enableDescription_help: You can fill in a text to describe this category. For
+      example, for a category "Other" you can specify the value. If you want to activate
+      this field for all categories, activate the "category description" parameter
+      in the Category Group
+    enableDescription: Add a text field to this category
+    displayInMenu: In the menu
+    displayInInfoBar: In the detail file
+    showExpanded: In the initial position, display the subgroups of this category
+    return_to_list: Back to the list
+    pickingOptionText: 'Text to be displayed in the form: Choose…'
+    parent: Parent Category Group
+    osmTags_help: When exporting OSM, each element that has this category will be
+      assigned the corresponding OSM tag
+    osmTags: OSM tags list
+    nameShort_help: The short version is used in the menu, because we often lack space
+    url_help: In the detail file, a small icon will appear next to the category with
+      a link to the external URL. This can be for example an age of a wiki describing
+      the category
+    url: URL to an external page
+    unexpandable_help: The subgroups and subcategories will always be displayed
+    unexpandable: Cannot reduce this category
+    textHelper_help: It will be displayed in the menu and in the form
+    textHelper: Help message to quickly describe this category
+  _label: Option
+  form:
+    groups:
+      display: Show category
+      description: Text fields adjacent to the category
+      advanced: Advanced setup
+      subcategories: Sub-groups
+      secondary: Secondary parameters
+      primary: Main parameters
+      osm_help: When exporting OSM, each element that has this category will be assigned
+        the corresponding OSM tag
+      osm: Link to OpenStreetMap
+      main: Primary
+      displayChildren: Show subgroups and subcategories
 config_contributions:
   fields:
     maxOppositeVoteTolerated: Number of allowed opposite votes
@@ -488,7 +610,7 @@ config_form:
       the described structure'
     elementFormOwningText: Label to ask if the user is the owner of the record (leave
       empty to disable)
-    elementFormIntroText_placeholder: 'Example: Attention we do not refere to such
+    elementFormIntroText_placeholder: 'Example: Attention we do not refer to such
       and such type of elements'
     elementFormIntroText: Introductory text that appears at the top of the form
     elementFormGeocodingHelp: Geolocation help text
@@ -511,3 +633,51 @@ config_features:
     allow_role_anonymous: Enable Anonymous
     activeInIframe: Enabled in Iframe
     active: Activate
+mapping-ontology:
+  alert: Please click on the "Read Data" button to load the attributes of the data
+    to be imported
+  original: Original name
+  mapped: "To be transformed into <span style='font-weight: normal'>(empty fields\
+    \ will not be imported)</span>"
+  displayMore: View all fields (fields present in less than {percent}% of items are
+    hidden by default)
+  clearTitle: Do not import this field again
+  arrowTitle: Use the original name
+mapping-taxonomy:
+  arrowTitle: Create a category from the original name
+  alert: First, select the field corresponding to the categories in the 'Field mapping
+    table' tab and click on 'Read data'
+  original: Categories read from the original file
+  moreInfos: " Values : \n{values}"
+  mapped: Site categories
+  create-missing-categories: Create all missing categories
+  collectedPercent: Present in {percent}% of imported items.
+  clearTitle: Don't use this category
+  category-group: Group {name}
+monitoring:
+  activeUsersNewsletter: Subscribers to the newsletter
+  error: Errors have occurred recently
+  duplicates: Potential duplicates
+  display_all: Display all
+  display: Display
+  detectDuplicates: Detect duplicates
+  delete: Delete all messages
+  all_elements: All visible elements
+  users: Users
+  title: New on GoGoCarto !
+  pending: Pending validation
+  moderationNeeded: Items to be moderated
+  manageDuplicates: Manage duplicates
+news:
+  fields:
+    publicationDate: Publication date
+    content: Content
+    title: Title
+    status_choices:
+      published: Published
+      draft: Draft (unpublished)
+    status: Status
+  _label: Latest news (newsletter)
+  form:
+    groups:
+      list_header: Create news items to be included in the newsletter
