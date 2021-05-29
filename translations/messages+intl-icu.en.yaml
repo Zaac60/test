@@ -206,7 +206,7 @@ reports:
   status: Status
 vote:
   vote_modified: 'Thank you {user}: your vote has been edited!'
-  vote_added: Thanks for your contribution!
+  vote_added: Thank you for your contribution!
   user_vote_for_him: "Come on, you weren't going to vote for your own contribution,\
     \ were you? Leave some for others! </br> Attention clever ones, if you use another\
     \ of your personal addresses, we will see it too! "
@@ -289,7 +289,7 @@ projects:
     _label: Create an admin account
   form:
     project_name: Project name
-    message: your project is being created, please wait...
+    message: Your project is being created, please wait…
     domaine_name: Domain name
     data-error: Oops, this name is too long!
     contribOptions:
