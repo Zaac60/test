@@ -1497,8 +1497,8 @@ js:
   import:
     source_this_map: Cette Carte
   mapping_ontology:
-    addressCountry: 'Adresse: pays'
-    addressLocality: 'Adresse: ville'
+    addressCountry: 'Adresse : pays'
+    addressLocality: 'Adresse : ville'
     categories: Catégories (plusieurs champs sélectionnable)
     coreData: Champs principaux
     email: Email de l'élement
