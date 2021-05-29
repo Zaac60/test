@@ -26,6 +26,15 @@ commons:
 duplicates:
   controller:
     marked: Markiert als nicht dupliziert
+    merged: Dieses Element wurde mit einem potenziellen Duplikat zusammengeführt
+    marked_long: Elemente sind als nicht dupliziert markiert worden
+  title: Suche nach Duplikaten
+  subtitle: Es wurden ähnliche Elemente erkannt, vielleicht wollten Sie eines davon
+    hinzufügen?
+  see_on_map: (Auf OpenStreetMap ansehen)
+  new_element: Nein, es ist ein neues Element, ich mache weiter!
+  label: Duplikat-Erkennung
+  duplicated_element: Dies ist es!
 directory:
   _label: Die Karte
 contributor-login:
@@ -55,6 +64,7 @@ action:
         <a href="mailto:{sender}">{sender}</a> empfangen</br> </p> <p><b>Nachrichtsbetreff</b></p><p>
         {subject}</p> <p><b>Inhalt</b></p><p>{content}</p>
       done: Die E-Mail ist gesendet worden
+      emailSubject: Nachricht von der Plattform {instance} empfangen
     sendEditLink:
       emailContent: <p>Hallo <i>'{{ element '}}</i>,</p><p><a href="'{{ directEditElementUniqueUrl
         '}}">Klicken Sie hier</a>, um Ihr Datenblatt zu bearbeiten</p>
@@ -85,16 +95,53 @@ element.form:
   controller:
     thankyou:
       edited: Vielen Dank für Ihre Hilfe! Die Änderungen sind berücksichtigt worden!
+      added: Vielen Dank für Ihre Hilfe! {name} ist hinzugefügt worden
     success: Ihr Konto ist erstellt worden! Sie können jetzt <a href="{url}" >Ihr
       Profil</a> vervollständigen!
+    user_contributions: Finden und bearbeiten Sie Ihre Beiträge auf der Seite <a href="{url}">Meine
+      Beiträge</a>
+    pending: Ihr Beitrag wartet derzeit auf die Validierung, <a class='validation-process'
+      onclick="$('#popup-collaborative-explanation').openModal()">klicken Sie hier</a>,
+      um mehr über den kollaborativen Moderationsprozess zu erfahren!
+    error_unauthorized: Entschuldigung, Sie dürfen dieses Element leider nicht verändern!
+    error_dont_exist: Das angeforderte Element existiert nicht …
   admin_section:
     send_mail:
       modify: Benachrichtigen über Bearbeitungen zu {element} per E-Mail
       add: Benachrichtigen über Aktualisierungen zu {element} per E-Mail
     admin_message: Detail der Änderung; dieser Text wird 'customMessage' in den automatischen
       E-Mails ersetzen
+    recopy_info: Informationen in ein neues Formular kopieren
+    _label: Validierung
+  title_edit: Datenänderung
+  title_add: '{element} hinzufügen'
+  success_becomeOwner: Sie besitzen jetzt den Datensatz {name}!
+  open_hours:
+    to: bis
+    recopy_tooltip: Vorherigen Zeitpläne kopieren
+    from: Von
+    and: Und
+    add_tooltip: Zeitfenster hinzufügen
+  need_help: Hilfe?
+  localize: Lokalisieren
+  info_saved: Gespeicherte Änderungen!
+  error_username: Dieser Benutzername ist bereits vergeben!
+  error_missing_adress: Wenn Sie die Neuzugänge erhalten möchten, müssen Sie eine
+    Adresse eingeben
+  error_geocode: Diese Adresse kann nicht gefunden werden
+  error_becomeOwner: Entschuldigung, dieses Element gehört bereits jemandem!
 home:
   logout: Abmelden
+  search:
+    placeholder: Geben Sie ein
+    category: eine Kategorie
+    all: Alle
+    address: eine Adresse
+  pick_category: 'Wählen Sie eine Kategorie (Standard: alle)'
+  my_space: Mein Raum
+  geolocalize: Geolokalisieren Sie Ihre Position
+  credits: Angetrieben von {ggc}
+  admin_interface: Admin-Schnittstelle
 my_contributions:
   edit: Bearbeiten
   me: Ich
@@ -102,3 +149,77 @@ api_ui:
   json: JSON
   include_external: Externe Quellen in die Datenbank einbinden
   format: 'Format:'
+  use_limit: Anzahl der Ergebnisse begrenzen
+  use_categories: Nach Kategorie einschränken
+  use_bounds: Auf einem geografischen Gebiet einschränken (zeichnen Sie ein Rechteck
+    auf der Karte)
+  title: Zugriff auf Daten über eine API
+  test: Testen
+  jsonld: JSON-LD (Semantisch)
+  api_url: API-URL
+  _label: API einrichten
+load_configuration:
+  AppBaseline: Erstellen Sie Karten in rauen Mengen
+  AddElementHintText: Helfen Sie, die Datenbank zu vergrößern!
+  AboutHeaderTitle: Über
+js:
+  login:
+    wrong_id: Die Anmeldedaten sind nicht korrekt
+    exception: Beim Verbindungsversuch ist ein Fehler aufgetreten
+  element_form:
+    geocoded_marker_text: Bewegen Sie mich, um die Position festzulegen</br>(in die
+      Mitte des Gebäudes)
+votes:
+  vote: Abstimmen
+  status: Status
+  empty: Sie haben noch nicht abgestimmt! Und dann muss man anfangen :) </br>Abstimmungen
+    ermöglichen kollaborative Moderation!
+  element: Name
+  date: Datum
+  _label: Meine Stimmen
+vote:
+  vote_added: Danke für Ihren Beitrag!
+  user_vote_for_him: 'Mal sehen, Sie hatten doch nicht vor, für Ihren eigenen Beitrag
+    zu stimmen, oder? Lassen Sie einige für die anderen übrig! Seien Sie vorsichtig,
+    Schlaumeier, wenn Sie eine andere Ihrer persönlichen Adressen verwenden, sehen
+    wir es auch! '
+  pending:
+    user_validated:
+      positive: Herzlichen Glückwunsch, die Änderungen haben genug Stimmen erhalten,
+        um validiert zu werden!
+      negative: Der Änderungsvorschlag hat genügend negative Stimmen erhalten, er
+        ist damit gestrichen.
+    admin_validated:
+      positive: Die Änderungen sind übernommen worden
+      negative: Die Änderungen sind abgelehnt worden
+  collaborative:
+    positive: Herzlichen Glückwunsch, {element} hat genug Stimmen erhalten, um validiert
+      zu werden!
+    negative: '{element} hat genügend negative Stimmen erhalten, wird es entfernt.'
+  admin:
+    positive: '{element} ist validiert worden'
+    negative: '{element} ist abgelehnt worden'
+reports:
+  status: Status
+  reportValues:
+    v3: Das Element wird mehrfach referenziert
+    v2: Das Element respektiert die Charta nicht
+    v1: Informationen sind falsch
+    v0: Das Element existiert nicht mehr
+  report: Meldung
+  pending_moderation: Warten auf Moderation
+  empty: Sie haben noch keine Fehler gemeldet. Könnte unsere Datenbank perfekt sein?
+    :P
+  element: Name
+  date: Datum
+  _label: Meine Meldungen
+projects:
+  initialize:
+    username: Benutzername
+    plainPassword-2: Geben Sie Ihr Passwort erneut ein
+    plainPassword-1: Passwort
+    email: E-Mail-Adresse
+    _label: Administratorkonto erstellen
+  form:
+    project_name: Projektname
+    message: Ihr Projekt wird erstellt, bitte warten …
