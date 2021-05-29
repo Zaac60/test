@@ -1,4 +1,3 @@
-
 api_ui:
   _label: Configurer une API
   api_url: URL de l'API
@@ -12,7 +11,7 @@ api_ui:
     carte)
   use_categories: Restreindre par catégories
   use_limit: Limiter le nombre de résultat
-  
+
 action:
   cancel: Annuler
   continue: Continuer
@@ -66,9 +65,8 @@ commons:
   errors:
     bad_email: Veuillez renseigner une adresse email valide
     bad_number: Ceci n'est pas un nombre !
-    bad_url: Veuillez renseigner une url du type http://...
-    file-too-big: Ce fichier est trop lourd, la taille maximum autorisée est {size}
-      Mo
+    bad_url: Veuillez renseigner une URL du type http://…
+    file-too-big: Ce fichier est trop lourd, la taille maximum autorisée est {size} Mo
     too_long: Oups, ce texte est un peu long !
   every:
     month: Chaque mois
@@ -90,7 +88,7 @@ contributor-login:
   email: Entrez simplement une adresse mail
   error:
     admin_only: Attention ! Cette fonctionnalité est reservée aux administrateur
-    invalid_email: V"euillez renseigner une adresse mail valide"
+    invalid_email: Veuillez renseigner une adresse électronique valide
     used_email: >-
       Oups, un compte avec cette adresse email existe déjà ! Connectez-vous ou utilisez
       une autre
@@ -125,7 +123,7 @@ element.form:
       add: Avertir de l'ajout d''{element} en lui envoyant un mail
       modify: Avertir des modifications d''{element} en lui envoyant un mail
   controller:
-    error_dont_exist: L'élément demandé n'existe pas...
+    error_dont_exist: L'élément demandé n'existe pas…
     error_unauthorized: Désolé, vous n'êtes pas autorisé à modifier cet élement !
     pending: >-
       Votre contribution est pour l'instant en attente de validation, <a class='validation-process'
@@ -157,7 +155,7 @@ element.form:
     from: De
     recopy_tooltip: Recopier les horaires précédents
     to: à
-  success_becomeOwner: Vous êtes maintenant propriétaire de la fiche {name} !'
+  success_becomeOwner: Vous êtes maintenant propriétaire de la fiche {name} !
   title_add: Ajouter {element}
   title_edit: Modification des données
 
@@ -183,7 +181,7 @@ js:
     wrong_id: Les identifiants de connexion ne sont pas corrects
 
 load_configuration:
-  AboutHeaderTitle: A propos
+  AboutHeaderTitle: À propos
   AddElementHintText: Contribuez à enrichir la base de donnée !
   AppBaseline: Créez des cartes à GoGo
   CollaborativeModerationExplanations: ' <p> Lorsqu''un élément est ajouté ou modifié,
@@ -255,7 +253,7 @@ pending-contributions:
   form: Fiche
 
 projects:
-  pitch: Créez des cartes à GoGo !   
+  pitch: Créez des cartes à GoGo !
   form:
     _label: Créer un projet
     accept_cgu: J'accepte les conditions générales d'utilisation
@@ -265,7 +263,8 @@ projects:
       closed: Seuls les administrateurs peuvent contribuer
       inherit: Utiliser les paramètres par défaut de {base_url}
       intermediate: >-
-        Tous les utilisateurs peuvent contribuer, mais les contributions doivent être modérées par des
+        Tous les utilisateurs peuvent contribuer, mais les contributions doivent être
+        modérées par des
         administrateurs
       open: Tous les utilisateurs peuvent ajouter/modifier/supprimer librement
     contribOptions:
@@ -275,8 +274,8 @@ projects:
       open: Ouvert
     data-error: Oups, ce nom est trop long !
     domaine_name: Nom du domaine
-    message: Votre projet est en cours de création, veuillez patienter...
-    project_name: Nom du projet  
+    message: Votre projet est en cours de création, veuillez patienter…
+    project_name: Nom du projet
   initialize:
     _label: Créer un compte administrateur
     email: Adresse e-mail
@@ -297,7 +296,7 @@ reports:
     v1: Les informations sont incorrectes
     v2: L'élément ne respecte pas la charte
     v3: L'élément est référencé plusieurs fois
-  status: Status
+  status: Statut
 
 vote:
   admin:
@@ -317,11 +316,9 @@ vote:
         validées !
   user_vote_for_him: >-
     Voyons voyons, vous ne comptiez quand même pas voter pour votre propre contribution
-    si ?
-    Laissez-en un peu pour les autres !</br> Attention les petits malins, si vous
-    utilisez une autre
-    de vos adresse perso on le verra aussi ! 
-  vote_added: Merci de votre contribution !
+    si ? Laissez-en un peu pour les autres !</br> Attention les petits malins, si
+    vous utilisez une autre de vos adresse perso on le verra aussi ! 
+  vote_added: Merci de votre contribution !
   vote_modified: 'Merci {user} : votre vote a bien été modifié !'
 
 votes:
@@ -332,5 +329,5 @@ votes:
     Vous n'avez pas encore voté ! ! Et alors, faut vous y mettre :) </br>Les votes
     permettent la
     modération collaborative !
-  status: Status
+  status: Statut
   vote: Vote
