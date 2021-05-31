@@ -12,16 +12,16 @@ config_infobar:
         \ Edited by admin</li>\n  <li> 5: Edited by owner</li>\n  <li> 6: Edited with\
         \ direct link</li>\n  <li> 7: Imported</li>\n</ul>"
       sourceKey: Name of the source of this element (can be empty)
-      originalAddress: The detailed address with postal code, city etc…
-      createdAt: Date of creation in the database
+      originalAddress: The detailed address with the postal code, the city etc…
+      createdAt: Creation date in the database
       categoriesFull: Complete list of categories, including id, name, description
         and position
       categories: List of category names of the element
       isDeleted: Shortcut for status = Denied or Deleted
-      images: Table of URLs of the different images
+      images: URLs table of the different images
       distance: If an address has been entered, distance between the point and the
         address
-      isPending: Shortcut for status == Pending (changes or additions)
+      isPending: Shortcut for status == Pending (changes or addition)
     example:
       categories: "'{% if \"my category\" in categories '%} … '{% endif '%}"
       createdAt: "Created on: '{{ createdAt '}}"
@@ -238,8 +238,8 @@ config_emails:
       validation: During validation- <a href=''{url}'' target='_blank'>TEST</a>
       newsletter: Newsletter - <a href=''{url}'' target='_blank'>TEST</a>
       report: When a report is taken into account - <a href=''{url}'' target='_blank'>TEST</a>
-      refusal: In case of a refusal- <a href=''{url}'' target='_blank'>TEST</a>
-      newsletters: News letter
+      refusal: In case of refusal - <a href=''{url}'' target='_blank'>TEST</a>
+      newsletters: Newsletter
       infosContributors_description: "These emails are automatically sent to contributors\
         \ when their contributions are accepted, refused etc...</br>It is possible\
         \ to include the following variables in the messages (keeping the ''{{'}}''):\
@@ -254,6 +254,37 @@ config_emails:
         \ contents of the text editor. For example in the URL field of the popup that\
         \ opens when you click on 'add link'.</br> <b>Once the email is saved</b>,\
         \ you can click on the buttons <b>TESTER</b> to see the rendering"
+      infosElements_description: "<div class=\"text-and-iframe-container\"> <div class=\"\
+        iframe-container-aside\"><iframe height=\"200\" sandbox=\"allow-same-origin\
+        \ allow-scripts\" src=\"https://video.colibris-outilslibres.org/videos/embed/d5d007ec-e5c6-4a50-ab66-572e35e8905a\"\
+        \ frameborder=\"0\" allowfullscreen></iframe></div> These emails are automatically\
+        \ sent to {elements} when their entry is added, modified or deleted.</br>\
+        \ It is possible to include the following variables in messages (keeping the\
+        \ '''{{'}}'''): </br> <li>'{{ element '}} the name of {element}</li> <li>'{{\
+        \ showUrl '}}the address that refers to the visualization of the file</li>\
+        \ <li>'{{ editUrl '}} the address that refers to the modification of the record</li>\
+        \ <li>'{{ homeUrl '}} the address of the home page of the site</li> <li>'{{\
+        \ directEditElementUniqueUrl '}} the unique address to edit the element directly\
+        \ without being admin</li> <li>'{{ customMessage '}} the personal message\
+        \ that has been written by the admins (only when deleting)</li></br> </div>\
+        \ You can also use these variables in the special contents of the text editor.\
+        \ For example in the URL field of the popup that opens when you click on \"\
+        add link\".</br> <b>Once the email is saved</b>, you can click on the <b>TEST</b>\
+        \ buttons to view the rendering"
+      infosNewletter_description: "This email is automatically sent to users who have\
+        \ subscribed. It gives the list of the latest additions in a determined geographical\
+        \ area and optionally pieces of news.</br></br> <b>It is necessary to include\
+        \ the variable <u>'{{ newElements'}}</u> and/or <u>'{{ pendingElements'}}</u></b>\
+        \ which will be respectively replaced by the list of the newly added elements\
+        \ and the list of elements pending validation</br></br> It is also possible\
+        \ to include the following variables in the messages (keep the ''{{'}}''):\
+        \ </br> <ul> <li>'{{ news '}} which will be replaced by the latest published\
+        \ news</li> <li>'{{ user '}} replaced by the contributor's name or email address</li>\
+        \ <li>'{{ homeUrl '}} replaced by the URL of the site''s home page</li> <li>'{{\
+        \ userProfileUrl'}} replaced by the URL of the \"My Settings\" page.</li>\
+        \ <li>'{{ showOnMapBtn '}} replaced by a button allowing the user to return\
+        \ to the map centered on her position</li> </ul> </br> <b>Once the email is\
+        \ saved</b>, you can click on the <b>TEST</b> button to preview an email"
   _label: E-mails / newsletter
 wrappers:
   fields:
@@ -587,8 +618,8 @@ config_general:
     locale: Language
     favicon: Favicon
     elementDisplayNamePlural: Plural noun
-    elementDisplayNameDefinite: Name with definite article
-    elementDisplayNameIndefinite: Name with indefinite article
+    elementDisplayNameDefinite: Name with a definite article
+    elementDisplayNameIndefinite: Name with an indefinite article
     dataLicenseUrl: URL of the licence that protects your data
     activatePartnersPage: Activate the "Partner" page
     activateAbouts: Enable 'About' popups
@@ -613,15 +644,15 @@ config_form:
   fields:
     elementFormValidationText_placeholder: 'Example: I certify that the information
       provided in this form is correct'
-    elementFormValidationText: Label the form validation checkbox (leave empty to
-      deactivate)
+    elementFormValidationText: Label of the form validation checkbox (leave empty
+      to deactivate)
     elementFormOwningText_placeholder: 'Example: I am involved in the management of
       the described structure'
     elementFormOwningText: Label to ask if the user is the owner of the record (leave
       empty to disable)
     elementFormIntroText_placeholder: 'Example: Attention we do not refer to such
       and such type of elements'
-    elementFormIntroText: Introductory text that appears at the top of the form
+    elementFormIntroText: Introduction appearing at the top of the form
     elementFormGeocodingHelp: Geolocation help text
   _label: Form
   form:
@@ -640,7 +671,7 @@ config_features:
     allow_role_user: Allow Users
     allow_role_admin: Enable Moderators
     allow_role_anonymous: Enable Anonymous
-    activeInIframe: Enabled in Iframe
+    activeInIframe: Enabled in an Iframe
     active: Activate
 mapping-ontology:
   alert: Please click on the "Read Data" button to load the attributes of the data
