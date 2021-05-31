@@ -44,6 +44,10 @@ services:
       arguments:
         $rootDir: '%kernel.root_dir%'
         $env: '%kernel.environment%'
+
+    App\Services\ElementSynchronizationService:
+      arguments:
+        $appVersion: '%app.version%'
     
     App\Services\UrlService:
       arguments:

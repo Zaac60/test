@@ -19,10 +19,11 @@ class ElementSynchronizationService
     const EARTH_RADIUS = 6378;
     const OSM_SEARCH_RADIUS_METERS = 50;
 
-    public function __construct(DocumentManager $dm, UrlService $urlService)
+    public function __construct(DocumentManager $dm, UrlService $urlService, $appVersion)
     {
         $this->dm = $dm;
         $this->urlService = $urlService;
+        $this->appVersion = $appVersion;
     }
 
     public function getConfig()
@@ -175,8 +176,7 @@ class ElementSynchronizationService
         $changeset = $osm->createChangeset();
         $changeset->setId(-1); // To prevent bug with setTag
         $changeset->setTag('host', $this->urlService->generateUrl());
-        $changeset->setTag('created_by:library', 'GoGoCarto');
-        $changeset->setTag('created_by', $this->getConfig()->getAppName());
+        $changeset->setTag('created_by', "GoGoCarto"); // not including version for now to keep it simple, but in future we cna change that : " v" . $this->appVersion . ' - ' . $this->getConfig()->getAppName());
         $changeset->begin($comment);
 
         // Add edited feature to changeset
@@ -453,13 +453,11 @@ class ElementSynchronizationService
 
     /**
      * Generate comment for OSM changeset
-     */
+     */ 
     private function getOsmComment($preparedData) {
         $actionsLabels = ['add' => 'Ajout', 'edit' => 'Modification', 'delete' => 'Suppression']; // TODO translate
-        $category = isset($preparedData['data']) && isset($preparedData['data']['categories']) && count($preparedData['data']['categories']) > 0 ? $preparedData['data']['categories'][0] : 'objet'; // TODO translate
-        $name = isset($preparedData['data']) && isset($preparedData['data']['name']) ? $preparedData['data']['name'] : null;
-
-        return implode(" ", array_filter([$actionsLabels[$preparedData['action']], $category, $name], function($k) { return $k !== null; }));
+        $name = isset($preparedData['data']) && isset($preparedData['data']['name']) ? " " . $preparedData['data']['name'] : "";
+        return $actionsLabels[$preparedData['action']] . $name;
     }
 
     /**
