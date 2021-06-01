@@ -448,6 +448,14 @@ config_custom_js_css:
 duplicates:
   node:
     address: Address
+    non-duplicates_title: Nothing will happen, GoGoCarto will remember that these
+      two elements are not duplicates and they will not be detected as such anymore
+    non-duplicates: No duplicates
+    merge_title: The elements will be merged. Only the first element will be kept,
+      and the attributes of the second will be merged
+    merge: Merge
+    deleted: This element has been deleted. The merged element will remain in deleted
+      status
   index:
     wantMore: I want more! (Only {count} duplicates left to process)
     title: Duplicate management
@@ -682,3 +690,47 @@ news:
   form:
     groups:
       list_header: Create news items to be included in the newsletter
+dynamic_imports:
+  fields:
+    needToHaveOptionsOtherThanTheOnesAddedToEachElements_help: Sans prendre en compte
+      les catégories ajoutés via le champs "Catégories à ajouter à chaque élément
+      importé", si les éléments importés n'ont pas de catégories, ils seront marqués
+      comme "Modération aucune catégorie renseignée"
+    needToHaveOptionsOtherThanTheOnesAddedToEachElements: Imported items without a
+      category (other than those manually added above) will be marked as "to be moderated"
+    moderateElements_help: The imported elements will have the status "pending validation"
+      and will have to be manually validated. Same for updates of existing elements
+      (modification)
+    moderateElements: Edit the imported elements
+    manualRefresh: Manual
+    logs: Number of elements
+    lastRefresh: Last import
+    isSynchronized_help: Each change will be sent to OpenStreetMap
+    isSynchronized: Allow data editing {submessage}
+    idsToIgnore_help: To ignore an element, delete it (permanently) and it will never
+      be imported again. If you delete a dynamically imported element just by changing
+      its status (soft delete), the element will still be imported but will keep its
+      deleted status. You can restore this element at any time to display it again
+    idsToIgnore: List of IDs that will be ignored during import
+    geocodeIfNecessary: Geocode elements without latitude or longitude from their
+      address
+    file: CSV file to import (comma separated, UTF8 encoding)
+    fieldToCheckElementHaveBeenUpdated_help: 'When updating a source, some of the
+      elements to be imported already exist in our database. You can fill in a field
+      here that will allow you to compare if the element has been updated in the source
+      since the last import. Example of field: updatedAt, date_maj etc... (leave empty
+      to update the elements each time)'
+    fieldToCheckElementHaveBeenUpdated: Name of the attribute to compare for the update
+    elementsUpdatedCount: '{count} updated'
+    elementsPreventImportedNoTaxo: '{count} not imported because no categories'
+    elementsNothingToDoCount: '{count, plural, =1 {# unchanged} other {# unchanged}
+      } '
+    elementsMissingTaxoCount: '{count} without categories'
+    elementsMissingGeoCount: '{count} without geolocation'
+    elementsErrorsCount: '{count, plural, =1 {# error} other {# errors} } '
+    elementsDeletedCount: -{count}
+    elementsCreatedCount: +{count}
+    deletedCount: '{count} locally deleted'
+    customCodeForExport: PHP code that will be executed
+    customCode: PHP code that will be executed
+  _label: Dynamic import
