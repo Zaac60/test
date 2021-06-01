@@ -24,6 +24,7 @@ config_infobar:
       isPending: Shortcut for status == Pending (changes or additions)
     example:
       categories: "'{% if \"my category\" in categories '%} … '{% endif '%}"
+      createdAt: "Created on: '{{ createdAt '}}"
 abouts:
   _label: Popups
   fields:
@@ -140,7 +141,7 @@ categories:
       the form
     displayInForm: In the form
     descriptionLabel: Description area label
-    customId: Personalized id
+    customId: Custom ID
     nameShort: Name (shortened)
   _label: Categories
 config_style:
@@ -580,7 +581,7 @@ config_general:
     elementDisplayNamePlural: Plural noun
     elementDisplayNameDefinite: Name with definite article
     elementDisplayNameIndefinite: Name with indefinite article
-    dataLicenseUrl: URL of the license that protects your data
+    dataLicenseUrl: URL of the licence that protects your data
     activatePartnersPage: Activate the "Partner" page
     activateAbouts: Enable 'About' popups
     aboutHeaderTitle: Title of the 'About' section
