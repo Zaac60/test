@@ -280,85 +280,64 @@ config_duplicates:
       manualDetection: Restreindre la détection manuelle (optionel)
 
 config_emails:
-  _label: Mails / Newsletter
+  _label: E-mails / Newsletter
   form:
     groups:
       add: Lors d'un ajout - <a href=''{url}'' target='_blank'>TESTER</a>
       delete: Lors d'une suppression - <a href=''{url}'' target='_blank'>TESTER</a>
       edit: Lors d'une modification - <a href=''{url}'' target='_blank'>TESTER</a>
-      infosContributors: Informations concernant les mails automatiques
+      infosContributors: Informations concernant les e-mails automatiques
       infosContributors_description: >-
-        Ces mails sont envoyés automatiquement aux contributeurs lorsque leurs contributions
-        sont acceptées, refusées etc…</br> Il est possible d''inclure les variables
-        suivantes dans les messages (en conservant les '''{{'}}'' ) : </br> <li>'{{
-        element '}} le nom de {element}</li> <li>'{{ user '}} le nom ou l''adresse
-        mail du contributeur</li> <li>'{{ showUrl '}} l''adresse qui renvoie à la
-        visualisation de la fiche</li> <li>'{{ editUrl '}} l''adresse qui renvoie
-        à la modification de la fiche</li> <li>'{{ homeUrl '}} l''adresse de la page
-        d'accueil du site</li> <li>'{{ userContributionsUrl '}} l''adresse de la page
-        "Mes contributions"</li> <li>'{{ customMessage '}} le message personnel qui
-        a été rédigé par les admins (uniquement lors d''un refus)</li></br> Vous pouvez
-        également utiliser ces variables dans les contenus spéciaux de l'éditeur de
-        texte. Par example dans le champs URL de la popup qui s'ouvre lorsqu''on clique
-        sur d''ajouter un lien.</br> <b>Une fois le mail sauvegardé</b>, vous pouvez
-        cliquer sur les boutons <b>TESTER</b> pour visualiser le rendu
-      infosElements: Informations concernant les mails automatiques
+        Ces courriels sont envoyés automatiquement aux contributeurs lorsque leurs
+        contributions sont acceptées, refusées etc.</br> Il est possible d'inclure
+        les variables suivantes dans les messages (en conservant les '''{{'}}'' )
+        : </br> <li>'{{ element '}} le nom de {element}</li> <li>'{{ user '}} le nom
+        ou l'adresse électronique du contributeur</li> <li>'{{ showUrl '}} l'adresse
+        qui renvoie à la visualisation de la fiche</li> <li>'{{ editUrl '}} l'adresse
+        qui renvoie à la modification de la fiche</li> <li>'{{ homeUrl '}} l'adresse
+        de la page d'accueil du site</li> <li>'{{ userContributionsUrl '}} l'adresse
+        de la page « Mes contributions »</li> <li>'{{ customMessage '}} le message
+        personnel qui a été rédigé par les admins (uniquement lors d''un refus)</li></br>
+        Vous pouvez également utiliser ces variables dans les contenus spéciaux de
+        l'éditeur de texte. Par exemple dans le champs URL de la popup qui s'ouvre
+        lorsqu'on clique sur d''ajouter un lien.</br> <b>Une fois le message sauvegardé</b>,
+        vous pouvez cliquer sur les boutons <b>TESTER</b> pour visualiser le rendu
+      infosElements: Informations concernant les e-mails automatiques
       infosElements_description: >-
         <div class="text-and-iframe-container"> <div class="iframe-container-aside"><iframe
-        height="200" sandbox="allow-same-origin allow-scripts"
-        src="https://video.colibris-outilslibres.org/videos/embed/d5d007ec-e5c6-4a50-ab66-572e35e8905a"
-        frameborder="0" allowfullscreen></iframe></div> Ces mails sont envoyés automatiquement
-        aux
-        {elements} lorsque leur fiche est ajoutée, modifiée ou supprimée.</br> Il
-        est possible
-        d''inclure les variables suivantes dans les messages (en conservant les '''{{'}}''
-        ) : </br>
-        <li>'{{ element '}} le nom de {element}</li> <li>'{{ showUrl '}} l''adresse
-        qui renvoie à la
-        visualisation de la fiche</li> <li>'{{ editUrl '}} l''adresse qui renvoie
-        à la modification
-        de la fiche</li> <li>'{{ homeUrl '}} l''adresse de la page d''accueil du site</li>
-        <li>'{{
-        directEditElementUniqueUrl '}} l''adresse unique pour éditer directement l''élément
-        sans
-        être admin</li> <li>'{{ customMessage '}} le message personnel qui a été rédigé
-        par les
-        admins (uniquement lors de la suppression)</li></br> </div> Vous pouvez également
-        utiliser
-        ces variables dans les contenus spéciaux de l''éditeur de texte. Par example
-        dans le champs
-        URL de la popup qui s''ouvre lorsqu''on clique sur d''ajouter un lien.</br>
-        <b>Une fois le
-        mail sauvegardé</b>, vous pouvez cliquer sur les boutons <b>TESTER</b> pour
-        visualiser le
-        rendu
+        height="200" sandbox="allow-same-origin allow-scripts" src="https://video.colibris-outilslibres.org/videos/embed/d5d007ec-e5c6-4a50-ab66-572e35e8905a"
+        frameborder="0" allowfullscreen></iframe></div> Ces messages sont envoyés
+        automatiquement aux {elements} lorsque leur fiche est ajoutée, modifiée ou
+        supprimée.</br> Il est possible d'inclure les variables suivantes dans les
+        messages (en conservant les '''{{'}}'' ) : </br> <li>'{{ element '}} le nom
+        de {element}</li> <li>'{{ showUrl '}} l'adresse qui renvoie à la visualisation
+        de la fiche</li> <li>'{{ editUrl '}} l'adresse qui renvoie à la modification
+        de la fiche</li> <li>'{{ homeUrl '}} l''adresse de la page d'accueil du site</li>
+        <li>'{{ directEditElementUniqueUrl '}} l'adresse unique pour modifier directement
+        l'élément sans être admin</li> <li>'{{ customMessage '}} le message personnel
+        qui a été rédigé par les admins (uniquement lors de la suppression)</li></br>
+        </div> Vous pouvez également utiliser ces variables dans les contenus spéciaux
+        de l'éditeur de texte. Par exemple dans le champs URL de la popup qui s'ouvre
+        lorsqu'on clique sur d''ajouter un lien.</br> <b>Une fois le message sauvegardé</b>,
+        vous pouvez cliquer sur les boutons <b>TESTER</b> pour visualiser le rendu
       infosNewletter: Informations concernant la newsletter
       infosNewletter_description: >-
-        Ce mail est envoyé automatiquement aux utilisateurs y ayant souscrit. Il donne
-        la liste des
-        derniers éléments ajoutés dans une zone géographique determinée et optionnellement
-        des
-        nouvelles</br></br> <b>Il est nécessaire d''inclure la variable <u>'{{ newElements
-        '}}</u>
-        et/ou <u>'{{ pendingElements '}}</u></b> qui seront respectivement remplacées
-        par la liste
-        des nouveaux élements et des nouveaux élements en attente de validation</br></br>
-        Il est
-        possible d''inclure les variables suivantes dans les messages (en conservant
-        les '''{{'}}''
-        ) : </br> <ul> <li>'{{ news '}} la dernière nouvelle publiée</li> <li>'{{
-        user '}} le nom ou
-        l''adresse mail du contributeur</li> <li>'{{ homeUrl '}} l''adresse de la
-        page d''accueil du
-        site</li> <li>'{{ userProfileUrl '}} l''adresse de la page "Mes paramètres"
-        dans l''espace
-        utilisateur</li> <li>'{{ showOnMapBtn '}} un bouton pour renvoyer vers la
-        carte centrée sur
-        la position de l''utilisateur</li> </ul> </br> <b>Une fois le mail sauvegardé</b>,
-        vous
+        Ce message est envoyé automatiquement aux utilisateurs y ayant souscrit. Il
+        donne la liste des derniers éléments ajoutés dans une zone géographique déterminée
+        et optionnellement des nouvelles</br></br> <b>Il est nécessaire d'inclure
+        la variable <u>'{{ newElements '}}</u> et/ou <u>'{{ pendingElements '}}</u></b>
+        qui seront respectivement remplacées par la liste des nouveaux éléments et
+        des nouveaux élements en attente de validation</br></br> Il est possible d'inclure
+        les variables suivantes dans les messages (en conservant les '''{{'}}'' )
+        : </br> <ul> <li>'{{ news '}} la dernière nouvelle publiée</li> <li>'{{ user
+        '}} le nom ou l'adresse électronique du contributeur</li> <li>'{{ homeUrl
+        '}} l'adresse de la page d'accueil du site</li> <li>'{{ userProfileUrl '}}
+        l'adresse de la page « Mes paramètres » dans l'espace utilisateur</li> <li>'{{
+        showOnMapBtn '}} un bouton pour renvoyer vers la carte centrée sur la position
+        de l'utilisateur</li> </ul> </br> <b>Une fois le message sauvegardé</b>, vous
         pouvez cliquer sur le bouton <b>TESTER</b> pour visualiser le rendu
-      mailForContributors: Mails auto pour les contributeurs
-      mailForElements: Mails auto pour les {element}
+      mailForContributors: E-mails auto pour les contributeurs
+      mailForElements: E-mails auto pour les {element}
       newsletter: Newsletter - <a href=''{url}'' target='_blank'>TESTER</a>
       newsletters: Newsletter
       refusal: Lors d'un refus - <a href=''{url}'' target='_blank'>TESTER</a>
@@ -564,19 +543,15 @@ config_infobar:
     system: Champs / Variables fournies par le système
   form:
     groups:
-      automatic_emails: Informations concernant les mails automatiques
+      automatic_emails: Informations concernant les e-mails automatiques
       automatic_emails_description: >-
         <p><b>Les filtres permettent d'appliquer des transformations sur un variable
-        / un
-        champ</b></p> <h3>Les filtres du language nunjucks</h3> <a
-        href='https://mozilla.github.io/nunjucks/fr/templating.html#filtres-int-gr-s'>Voir
-        la
-        documentation en ligne</a> <h3>Les filtres spéciaux de GoGoCarto</h3>
+        / un champ</b></p> <h3>Les filtres du language nunjucks</h3> <a href='https://mozilla.github.io/nunjucks/fr/templating.html#filtres-int-gr-s'>Voir
+        la documentation en ligne</a> <h3>Les filtres spéciaux de GoGoCarto</h3>
 
         <h4>gogo_text</h4> Afficher du texte (avec retour à la ligne avant et après
-        le texte)</br>
-        Vous pouvez utiliser <b>l'option label</b> : '{{ tel|gogo_text(label = "Téléphone")
-        '}}
+        le texte)</br> Vous pouvez utiliser <b>l'option label</b> : '{{ tel|gogo_text(label
+        = "Téléphone") '}}
 
         <h4>gogo_date</h4> <ul>
           <li>Formater une date '{{ event_date | date '}} ou '{{ event_date | gogo_date(label="Date")
@@ -587,30 +562,23 @@ config_infobar:
         </ul>
 
         <h4>gogo_tags</h4> Affiche un tableau sous forme de tags '{{ ["Service", "Blanc"]
-        |
-        gogo_tags '}}
+        | gogo_tags '}}
 
         <h4>gogo_textarea</h4> Afficher des texte longs, il y a plusieurs options
-        <ul><li><b>truncate</b>: tronquer le texte au bout de XX caractères (par défault
-        1000), et
-        mettre un petit bouton "afficher plus"</li> <li><b>tolerance</b>: le troncage
-        essaie de se
-        faire à la fin d'une phrase ou moins d'un mot. La tolerance est le nombre
-        de caractère que
-        l'on donne comme marge à l'agorithme. i.e tronque à 1000 caractères +/- 50</li>
-        <li><b>glossary</b>: un glossaire pour expliquer certains mots. Le mot sera
-        légèrement
-        surligné et au survol s'affichera l'explication</li></ul> <pre>'{{ "Mon beautiful
-        texte
-        supposement très très long"|gogo_textarea(truncate = 15, tolerance = 5, glossary
-        = {
-        "beautiful": "Mot anglais qui veut dire joli"}) '}}</pre>
+        <ul><li><b>truncate</b>: tronquer le texte au bout de XX caractères (par défaut
+        1000), et mettre un petit bouton "afficher plus"</li> <li><b>tolerance</b>:
+        le troncage essaie de se faire à la fin d'une phrase ou moins d'un mot. La
+        tolérance est le nombre de caractère que l'on donne comme marge à l'algorithme.
+        i.e tronque à 1000 caractères +/- 50</li> <li><b>glossary</b>: un glossaire
+        pour expliquer certains mots. Le mot sera légèrement surligné et au survol
+        s'affichera l'explication</li></ul> <pre>'{{ "Mon beautiful texte supposement
+        très très long"|gogo_textarea(truncate = 15, tolerance = 5, glossary = { "beautiful":
+        "Mot anglais qui veut dire joli"}) '}}</pre>
 
 
-        <h3>Débugger des données</h3> Si vous utilisez des données un peu spécifiques
-        de type
-        object, vous pouvez utiliser le filtre "dump" pour afficher leur contenu '{{
-        my_specific_field|dump '}}
+        <h3>Déboguer des données</h3> Si vous utilisez des données un peu spécifiques
+        de type object, vous pouvez utiliser le filtre "dump" pour afficher leur contenu
+        '{{ my_specific_field|dump '}}
       field_list: Liste des champs disponibles (aide)
       filter_list: Liste des filtres disponibles (aide)
       infobar_content: Contenu de la Fiche détail (panneau qui s'affiche lors d'un
@@ -867,7 +835,7 @@ config_users:
       loginWithGoogle: Activer la connexion avec Google
       loginWithLesCommuns: Activer la connexion avec "LesCommuns.org"
       loginWithMonPrintemps: Activer la connexion avec MonPrintemps
-      sendConfirmationEmail: Valider la création avec un email de confirmation
+      sendConfirmationEmail: Valider la création avec un e-mail de confirmation
 
 dashboard:
   _label: GoGoCarto Administration
@@ -881,7 +849,7 @@ dashboard:
     contents: Contenus
     custom: Personnalisation
     data: Données / Import
-    emailing: Mails / Newsletter
+    emailing: E-mails / Newsletter
     other_config: Autre Configuration
     saas: Ferme de Carto
     users: Utilisateurs
@@ -1085,19 +1053,19 @@ elements:
       params:
         comment: >-
           Détail de la modification, raison de la suppression… ce texte remplacera
-          '{{ customMessage '}} dans les mails automatiques
-        dont_send_mail: Ne pas envoyer de mail
-        from: Votre adresse mail
+          '{{ customMessage '}} dans les e-mails automatiques
+        dont_send_mail: Ne pas envoyer d'e-mail
+        from: Votre adresse électronique
         mail_content: Contenu
         mail_subject: Objet
         optionsToAdd: Catégories à ajouter
         optionsToRemove: Catégories à supprimer
-        send_to_element: Envoyer l'email aux éléments
-        send_to_last_contributor: Envoyer l'email aux derniers contributeurs
+        send_to_element: Envoyer l'e-mail aux éléments
+        send_to_last_contributor: Envoyer l'e-mail aux derniers contributeurs
       refusal: Refuser
       resolveReports: Résoudre la modération
       restore: Restaurer
-      sendMail: Envoyer un mail
+      sendMail: Envoyer un e-mail
       softDelete: Supprimer (changement de status)
       validation: Valider
     edit:
@@ -1105,7 +1073,7 @@ elements:
       geocode: Géocoder l'adresse
       havePendingReports: >-
         Détail de la modification, raison de la suppression… ce texte remplacera '{{
-        customMessage '}} dans les mails automatiques
+        customMessage '}} dans les e-mails automatiques
       isPending: Message particulier si refus
       returnToList: Retourner à la liste
       send_mail: Prévenir l'acteur de la modification
@@ -1136,7 +1104,7 @@ elements:
       '5': Restauration
       '6': Résolution modération
     createdAt: Créé le
-    email: Email de l'élément
+    email: E-mail de l'élément
     id: ID
     itemValues_choices:
       '0': L'élément n'existe plus
@@ -1188,10 +1156,10 @@ elements:
       '6': Modifié avec lien direct
       '7': Importé
     updatedAt: 'Mise à jour le '
-    userOwnerEmail: Email de l'utilisateur propriétaire de cette fiche
+    userOwnerEmail: E-mail de l'utilisateur propriétaire de cette fiche
     userRoles_choices:
       '0': Anonyme
-      '1': Anonyme avec mail
+      '1': Anonyme avec e-mail
       '2': Utilisateur identifié
       '3': Admin
       '4': Anonyme avec lien
@@ -1236,10 +1204,10 @@ emails:
   service:
     error: 'Erreur :'
     inactive_config: La configuration {config} est désactivée
-    no_automatic_mail: Le mail automatique {config} n'existe pas
+    no_automatic_mail: L'e-mail automatique {config} n'existe pas
     no_email: Pas de destinataire
     no_specific_message: Pas de message spécifique
-    no_subject_or_content: Pas de sujet ou de contenu pour le mail automatique {config}
+    no_subject_or_content: Pas de sujet ou de contenu pour l'e-mail automatique {config}
     success: Le message a été envoyé
     unknown: Inconnu
     unknown_config: La configuration {config} n'existe pas
@@ -1250,15 +1218,15 @@ emails:
       content: Contenu du message
       subject: Objet du message
   test:
-    _label: Test du rendu du mail {name}
+    _label: Test du rendu de l'e-mail {name}
     custom_message_example: Un customMessage de test
-    done: Le mail a bien été envoyé à {mail}</br>Si vous ne le voyez pas vérifiez
-      dans vos SPAMs
-    email: Entrez une adresse mail
-    missing_element: Vous devez créer un élement dans la base de donnée pour tester
-      l'email
-    missing_email: Aucune adresse mail n'a été renseignée
-    subject: 'Objet du mail : <em>{subject}</em>'
+    done: L'e-mail a bien été envoyé à {mail}</br>Si vous ne le voyez pas vérifiez
+      dans vos indésirables
+    email: Entrez une adresse électronique
+    missing_element: Vous devez créer un élément dans la base de donnée pour tester
+      l'e-mail
+    missing_email: Aucune adresse électronique n'a été renseignée
+    subject: 'Objet du message : <em>{subject}</em>'
     submit: Envoyer un test à cette adresse
 
 files:
@@ -1418,14 +1386,14 @@ js:
     edit_icon: Editer/Masquer
     errorMsg: Msg. Erreur
     errorMsg_placeholder: Oups ce texte est un peu long ! // Veuillez renseigner une
-      adresse email valide // …
+      adresse électronique valide // …
     fields:
       address: Adresse (obligatoire)
       address_help: Ce champ est indispensable
       checkbox: Case à cocher
       elements: Lien vers un autre élément
-      email: Email principal
-      email_help: Ce champ est conseillé (permet d'envoyer des emails)
+      email: E-mail principal
+      email_help: Ce champ est conseillé (permet d'envoyer des e-mails)
       files: Fichiers (upload)
       images: Images (upload)
       openhours: Horaires d'ouvertures
@@ -1458,7 +1426,7 @@ js:
     pattern_placeholder: Expression régulière pour la validation de ce champ
     placeholder: Placeholder
     placeholder_className: classes séparées par des espaces
-    placeholder_email: Saisir votre adresse email
+    placeholder_email: Saisir votre adresse électronique
     placeholder_label: Label
     placeholder_password: Saisir votre mot de passe
     placeholder_placeholder: Placeholder
@@ -1489,7 +1457,7 @@ js:
       textarea: Editeur simple
       url: URL
       wysiwyg: Editeur enrichi
-    text: Texte, Email, Téléphone, URL..
+    text: Texte, e-mail, téléphone, URL.
     textArea: Texte long
     timepicker: Timepicker
     toggle: Toggle
@@ -1501,7 +1469,7 @@ js:
     addressLocality: 'Adresse : ville'
     categories: Catégories (plusieurs champs sélectionnable)
     coreData: Champs principaux
-    email: Email de l'élement
+    email: E-mail de l'élément
     files: Fichier(s) sous forme d'URL, en tableau, ou séparées par des virgules
     formData: Champs du formulaire
     fullAddress: Adresse complète
@@ -1520,7 +1488,7 @@ js:
     osm_url: OSM URL (mappé automatiquement)
     osm_version: OSM Version (mappé automatiquement)
     otherData: Autres champs déjà présent dans la base de donnée
-    owner: Email de l'utilisateur propriétaire de la fiche
+    owner: E-mail de l'utilisateur propriétaire de la fiche
     postalCode: 'Adresse: code postal'
     primary: Non éditable
     primary_title: >-
@@ -1689,7 +1657,7 @@ partners:
     logo: Logo
     logo_placeholder: Sélectionnez une image déjà importée, ou ajoutez en une !
     name: Nom
-    websiteUrl: URL du site Internet
+    websiteUrl: URL du site web
 
 projects:
   _label: Liste des Projets
@@ -1699,29 +1667,27 @@ sonata.user.user:
   batch:
     error: 'ERREUR : {message}'
     mailError: Vous devez renseigner un objet et un contenu. Veuillez recommencer
-    sendmails: '{count, plural, =1 {# mail a bien été envoyé} other {# mails ont bien
-      été envoyés} }'
+    sendmails: '{count, plural, =1 {# e-mail a bien été envoyé} other {# e-mails ont
+      bien été envoyés} }'
     tooMany: Trop d'éléments à traiter ! Seulement {limit} ont été traités
     usersWithoutEmail: >-
-      {count, plural =1 {# mail n'a pas pu être envoyé car aucune adresse mail n'était
-      renseignée}
-      other {# mails n'ont pas pu être envoyé car aucune adresse mail n'était renseignée}
-      }
+      {count, plural =1 {# e-mail n'a pas pu être envoyé car aucune adresse électronique
+      n'était renseignée} other {# e-mails n'ont pas pu être envoyé car aucune adresse
+      électronique n'était renseignée} }
   facebook_warning: >-
-    ATTENTION ! Si votre mail est privé sur Facebook, vous ne serez pas informé de
-    l'évolution de
-    vos contributions
+    ATTENTION ! Si votre adresse électronique est privée sur Facebook, vous ne serez
+    pas informé(e) de l'évolution de vos contributions
   fields:
     content: Message
     contributionsCount: Contributions
     createdAt: Créé le
-    email: Mail
+    email: E-mail
     gamification: Interactions
     groups: Groupes
     impersonating:
     object: Titre
     reportsCount: Signalements
-    sendMail: Envoyer un mail
+    sendMail: Envoyer un e-mail
     username: Nom
     votesCount: Votes
   forgottedPassword: Mot de passe oublié
@@ -1739,7 +1705,7 @@ sonata.user.user:
     locked: Verrouillée
     main-roles: Rôles Principaux
     plainPassword: Mot de passe
-    watchModeration: Être notifié par email lorsque des éléments sont à modérer
+    watchModeration: Être notifié(e) par e-mail lorsque des éléments sont à modérer
     watchModerationOnlyWithOptions: Seulement pour les éléments ayant une des catégories
       suivante
     watchModerationOnlyWithPostCodes: Seulement pour les éléments avec code postal
