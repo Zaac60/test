@@ -723,16 +723,16 @@ news:
       list_header: Create news items to be included in the newsletter
 dynamic_imports:
   fields:
-    needToHaveOptionsOtherThanTheOnesAddedToEachElements_help: Sans prendre en compte
-      les catégories ajoutés via le champs "Catégories à ajouter à chaque élément
-      importé", si les éléments importés n'ont pas de catégories, ils seront marqués
-      comme "Modération aucune catégorie renseignée"
+    needToHaveOptionsOtherThanTheOnesAddedToEachElements_help: 'Without taking into
+      account the categories added via the ‘Categories to be added to each imported
+      element’ field, if the imported elements do not have categories, they will be
+      marked as ‘Moderation: no category filled in’.'
     needToHaveOptionsOtherThanTheOnesAddedToEachElements: Imported items without a
-      category (other than those manually added above) will be marked as "to be moderated"
-    moderateElements_help: The imported elements will have the status "pending validation"
+      category (other than those manually added above) will be marked as ‘To be moderated’
+    moderateElements_help: The imported elements will have the status ‘pending validation’
       and will have to be manually validated. Same for updates of existing elements
       (modification)
-    moderateElements: Edit the imported elements
+    moderateElements: Moderate the imported elements
     manualRefresh: Manual
     logs: Number of elements
     lastRefresh: Last import
@@ -764,4 +764,12 @@ dynamic_imports:
     deletedCount: '{count} locally deleted'
     customCodeForExport: PHP code that will be executed
     customCode: PHP code that will be executed
+    refreshFrequencyInDays: Frequency of data update in days
+    refreshFrequency: '{days, plural, =1 {Daily} =7 {Weekly} other {Every # days}
+      }'
+    preventImportIfNoCategories: Do not import elements that have no categories
+    parameters: Settings
+    optionsToAddToEachElement: Categories to add to each imported element
+    newTaxonomyToMap: New categories to map
+    newOntologyToMap: New fields to map
   _label: Dynamic import
