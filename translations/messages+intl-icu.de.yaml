@@ -88,8 +88,11 @@ action:
   create: Erstellen
   continue: Fortsetzen
   cancel: Abbrechen
+  send_stay: Senden und auf dem Formular bleiben
 login:
   register: Sie benötigen ein Konto? <a href="{url}">Registrieren</a>
+  login_with: Anmelden mit {provider}
+  _label: Anmelden
 element.form:
   create_user: Passwort zum Erstellen Ihres Kontos
   controller:
@@ -145,6 +148,27 @@ home:
 my_contributions:
   edit: Bearbeiten
   me: Ich
+  type: Typ
+  status: Status
+  show: Ansehen
+  owner: Eigentümer
+  none: Sie haben noch keinen Beitrag geleistet
+  name: Name
+  my_votes: Meine Stimmen
+  my_reports: Meine Meldungen
+  my_elements: Meine Datensätze
+  history: Verlauf meiner Beiträge
+  element_contributed: Andere Datensätze, zu denen ich beigetragen habe
+  element: Datensatz
+  date: Datum
+  confirmation_hint: Um Eigentümer eines Datensatzes zu werden, müssen Sie bescheinigen,
+    dass Sie an der Verwaltung dieser Struktur beteiligt sind
+  confirmation_cancel: Abbrechen
+  confirmation_button: Ich bestätige
+  confirmation: Bestätigung
+  become_owner: Eigentümer werden
+  action: Aktion
+  _label: Meine Beiträge
 api_ui:
   json: JSON
   include_external: Externe Quellen in die Datenbank einbinden
@@ -162,6 +186,24 @@ load_configuration:
   AppBaseline: Erstellen Sie Karten in rauen Mengen
   AddElementHintText: Helfen Sie, die Datenbank zu vergrößern!
   AboutHeaderTitle: Über
+  ElementFormGeocodingHelp: Verwenden Sie keine Satzzeichen, auch Namen in Großbuchstaben
+    werden nicht erkannt. Wenn die Ortung nicht funktioniert (manchmal werden einige
+    Adressen nicht erkannt), geben Sie den Namen der nächstgelegenen Stadt/des nächstgelegenen
+    Dorfes ein, klicken Sie auf „Lokalisieren“ und setzen Sie den Ortungspunkt manuell.
+    Geben Sie die vollständige Adresse erneut in die Leiste ein und fahren Sie mit
+    dem nächsten Teil des Formulars fort, ohne erneut auf „Lokalisieren“ zu klicken.
+  CollaborativeModerationExplanations: ' <p> Wenn ein Element hinzugefügt oder geändert
+    wird, erfolgt die Aktualisierung der Daten nicht sofort. Das Element erscheint
+    zunächst grau dargestellten auf der Karte, und es ist dann für alle registrierten
+    Benutzer möglich, einmal und nur einmal für diesen Punkt abzustimmen. Diese Abstimmung
+    ist keine Meinung, sondern ein Wissensaustausch. Wenn Sie dieses Element kennen,
+    oder wissen, dass es dieses Element nicht gibt, dann sind wir an Ihrem Wissen
+    interessiert! </p> <p> Nach einer bestimmten Anzahl von Stimmen kann das Element
+    dann automatisch validiert oder abgelehnt werden. Im Falle von Streitigkeiten
+    (sowohl positive als auch negative Stimmen) wird ein Moderator so schnell wie
+    möglich eingreifen. Wir zählen auf Sie! </p>'
+  SeeMoreButtonText: Mehr erfahren
+  PartnerPageTitle: Partner
 js:
   login:
     wrong_id: Die Anmeldedaten sind nicht korrekt
@@ -199,6 +241,7 @@ vote:
   admin:
     positive: '{element} ist validiert worden'
     negative: '{element} ist abgelehnt worden'
+  vote_modified: 'Danke {user}: Ihre Stimme ist geändert worden!'
 reports:
   status: Status
   reportValues:
@@ -223,3 +266,31 @@ projects:
   form:
     project_name: Projektname
     message: Ihr Projekt wird erstellt, bitte warten …
+    domaine_name: Domainname
+    data-error: Hoppla, dieser Name ist zu lang!
+    contribOptions:
+      open: Offen
+      intermediate: Zwischengeschaltet
+      inherit: Standard
+      closed: Geschlossen
+    contribHints:
+      open: Alle Benutzer können frei hinzufügen/bearbeiten/löschen
+      intermediate: Alle Benutzer können Beiträge leisten, aber die Beiträge müssen
+        von Administratoren moderiert werden
+      inherit: '{base_url}-Standardeinstellungen verwenden'
+      closed: Nur Administratoren können beitragen
+    contrib: Offen für öffentliche Beiträge
+    cgu: Nutzungsbedingungen
+    accept_cgu: Ich akzeptiere die allgemeinen Nutzungsbedingungen
+    _label: Projekt erstellen
+  pitch: Erstellen Sie Karten in rauen Mengen!
+pending-contributions:
+  form: Datensatz
+  empty_section: Sie haben keine ausstehenden Beiträge. Sie können gerne einen Datensatz
+    <a href="{url}">hinzufügen</a>!
+  _label: Meine ausstehenden Beiträge
+my_parameters:
+  unit: Kilometer
+  range: 'Suchradius:'
+  input_location: Ihre Adresse oder Stadt
+  _label: Meine Einstellungen
