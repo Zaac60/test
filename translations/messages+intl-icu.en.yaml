@@ -272,10 +272,10 @@ load_configuration:
     ‘Localize’ and put the localization point manually. Re-enter the complete address
     into the text area, skip the ‘Localize’ button and continue to fill in the form.
   CollaborativeModerationExplanations: " <p> When an element is added or modified,\
-    \ the data is not updated immediately. The element will first appear greyed out\
+    \ the data is not updated immediately. The element will first appear ‘greyed out’\
     \ on the map and it becomes possible for all logged users to vote once and once\
     \ only about the change. This vote is not an opinion but knowledge sharing. If\
-    \ you know this element, or know that the element doesn’t exist, then we want\
+    \ you know this element, or know that the element does not exist, then we want\
     \ your knowledge! </p> <p> After a number of votes, the element can then be automatically\
     \ validated or rejected. In case of dispute (presence of positive and negative\
     \ votes), a moderator will check it out as soon as possible. We count on you!\
