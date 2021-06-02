@@ -25,6 +25,97 @@ config_infobar:
     example:
       categories: "'{% if \"my category\" in categories '%} … '{% endif '%}"
       createdAt: "Created on: '{{ createdAt '}}"
+      updatedAt: "Last update: '{{ updatedAt'}}"
+      status: "'{% if status == 2 '%} … '{% endif '%}"
+      sourceKey: "'{% if sourceKey == \"Fablab\" '%}Référencé par http://fablabs.io'{%\
+        \ endif '%}"
+      originalAddress: "'{{ originalAddress.streetAddress ~ '' - '' ~ originalAddress.addressLocality\
+        \ ~ '' - '' ~ originalAddress.postalCode ~ '' - '' ~ originalAddress.addressCountry\
+        \ }}"
+      isPending: "'{% if isPending '%} … '{% endif '%}"
+      isDeleted: "'{% if isDeleted '%} … '{% endif '%}"
+      images: Images are displayed by default in the detail form and you don't need
+        to include this field. But you can always use this variable according to your
+        needs
+      distance: "'{% if distance is defined '%} <span>'{{ distance '}}</span> '{%\
+        \ endif '%}"
+      colorOptionId: "&lt;div class=\"gogo-color-as\" option-id=\"'{{colorOptionId'}}\"\
+        >Text of the main category color&lt;/div></br> &lt;div class=\"gogo-bg-color-as\"\
+        \ option-id=\"'{{colorOptionId'}}\">Background of the main category color&lt;\
+        \ /div></br> &lt;div class=\"gogo-border-color-as\" option-id=\"'{{colorOptionId'}}\"\
+        >Border of the main category color&lt;div></br> You can also use the \"gogo-soft-color-as\"\
+        \ and \"gogo-soft-bg-bolor-as\" classes   "
+      categoriesFull: "'{% for category in categoriesFull'%}\n  <div>Id: '{{category.id'}}</div>\n\
+        \  <div>Name: '{{category.name'}}</div>\n  <div>Description: '{{category.description'}}</div>\
+        \ <div>Position: '{{category.description'}}.\n  <div>Position: '{{category.index'}}</div>\
+        \ <div>Position: '{{category.index'}}</div>\n'{% endfor '%}"
+    usage: Use
+    type: Type
+    name: Name field
+    infobar:
+      width: 'Width of the detail (in pixels, default: 540)'
+      headerTemplateUseMarkdown: Use markdown syntax for the header (otherwise only
+        Nunjucks syntax)
+      headerTemplate: Header
+      bodyTemplateUseMarkdown: Use markdown syntax for the body (otherwise only Nunjucks
+        syntax)
+      bodyTemplate: Body of the form
+    exemple: Example of a filter to be used
+  form:
+    groups:
+      infobar_param: Other Settings
+      infobar_content_description: "<div class=\"text-and-iframe-container\"><div\
+        \ class=\"iframe-container-aside\" style=\"margin-top: 0\"><iframe height=\"\
+        200\" sandbox=\"allow-same-origin allow-scripts\" src=\"https://video.colibris-outilslibres.org/videos/embed/354086c4-e826-44ad-b44a-475e517c3af6\"\
+        \ frameborder=\"0\" allowfullscreen></iframe></div> <p style=\"margin-top:\
+        \ 10px\">You can use <a href=\"https://guides. github.com/features/mastering-markdown/#syntax\"\
+        >the mardown syntax</a> and <a href=\"https://mozilla.github.io/nunjucks/\"\
+        >the nunjucks syntax (for advanced uses)</a></p> <p>To display the value of\
+        \ a field in your form (see list of fields below) use a double brace <b>'{{my_field_name'}}</b>.\
+        \ You can also choose to format your field with a filter by using the <b>|</b>\
+        \ symbol followed by the filter name. For example, to display a field in uppercase\
+        \ you could do <b>'{{my_field_name|upper'}}</b>. Special filters for gogocarto\
+        \ have been created, they allow to simply display certain type of field. For\
+        \ example, for a long description field, we could use <b>'{{my_field_name_long_description|gogo_textarea(truncate\
+        \ = 300) }}</b>. This will trim the description to around 300 characters and\
+        \ display a small button to show the entire description.</p> <p>Check out\
+        \ the list of <a href=\"https://mozilla.github.io/nunjucks/templating.html#builtin-filters\"\
+        >nunjucks filters here</a>. Gogocarto''s list of filters is not yet documented</p></div>\n\
+        <h2 style=\"margin: 0 0 25px 0\">\n  Content of the detail form\n  <span class=\"\
+        btn btn-primary\" id=\"generate-body-template\" onclick=\"generateBodyTemplate()\"\
+        >Generate automatically the content of the detail form</span> </h2>"
+      infobar_content: Contents of the Detail file (panel that is displayed when a
+        marker is clicked)
+      filter_list: List of available filters (help)
+      field_list: List of available fields (help)
+      automatic_emails_description: "<p><b>Filters allow you to apply transformations\
+        \ to a variable/field</b></p> <h3>Nunjucks language filters</h3> <a href='https://mozilla.github.io/nunjucks/fr/templating.html#filtres-int-gr-s'>See\
+        \ online documentation</a> <h3>GoGoGoCarto special filters</h3>\n<h4>gogo_text</h4>\
+        \ Display text (with line breaks before and after the text)</br> You can use\
+        \ <b>the label option</b>: '{{ tel|gogo_text(label = \"Phone\")'}}\n<h4>gogo_date</h4>\
+        \ <ul>\n<li>Format a date '{{ event_date | date '}} or '{{ event_date | gogo_date(label=\"\
+        Date\")\n'}}</li>\n  <li>Or if you want to use a particular format '{{ event_date|date(\"\
+        DD/MM/YYYY\")\n'}} or '{{ event_date | gogo_date(label=\"Date\", format=\"\
+        DD/MM/YYYY\") '}}. <a href='https://momentjs.com/docs/#/displaying/format/'>See\
+        \ possible choices</a></li> </ul>\n<h4>gogo_tags</h4> Displays an array as\
+        \ tags '{{ [\"Service\", \"White\"] | gogo_tags '}}\n<h4>gogo_textarea</h4>\
+        \ Display long text, there are several options <ul><li><b>truncate</b>: truncate\
+        \ the text after XX characters (default 1000), and put a little \"show more\"\
+        </li> <li><b>tolerance</b>: truncate tries to be at the end of a sentence\
+        \ or less than a word. The tolerance is the number of characters we give as\
+        \ a margin to the algorithm. i.e truncates to 1000 characters +/- 50</li>\
+        \ <li><b>glossary</b>: a glossary to explain certain words. The word will\
+        \ be slightly highlighted and on hovering will display the explanation</li></ul>\
+        \ <pre>'{{\"My beautiful text supposedly very very long\"|gogo_textarea(truncate\
+        \ = 15, tolerance = 5, glossary = { \"beautiful\": \"English word that means\
+        \ pretty\"}) '}}</pre>\n\n<h3>Debugging data</h3> If you are using somewhat\
+        \ specific object data, you can use the \"dump\" filter to display its contents\
+        \ '{{ my_specific_field|dump'}}"
+      automatic_emails: Information about automatic e-mails
+  fields_list:
+    system: Fields / Variables provided by the system
+    other: All other fields in your data are also available
+    form: List of fields available via the form
 abouts:
   _label: Popups
   fields:
@@ -69,6 +160,20 @@ js:
     streetAddress: 'Address: street'
     specificData: Specific fields
     source: Origin of the item (source)
+    primary: Non-editable
+    postalCode: 'Address: postal code'
+    owner: E-mail of the user who owns the file
+    otherData: Other fields already present in the database
+    osm_version: OSM Version (automatically mapped)
+    osm_url: OSM URL (automatically mapped)
+    osm_timestamp: OSM Timestamp (automatically mapped)
+    osm_source: Data source OpenStreetMap
+    osm_opening_hours: Opening hours (OSM format)
+    openHours: Opening hours (GoGoCarto format)
+    name: File title
+    primary_title: This field is currently not present in the public form. It will
+      only be editable from the administrator interface. You can modify the public
+      form to make this field editable by all
 categories:
   list:
     multiple: Multiple
@@ -183,6 +288,7 @@ projects:
   initialize:
     plainPassword-1: Password
     email: E-mail address
+  _label: Project list
 partners:
   form:
     websiteUrl: Website's URL
@@ -197,6 +303,10 @@ sonata.user.user:
     usersWithoutEmail: '{count, plural =1 {# e-mail could not be sent, because no
       e-mail address was given} other {# e-mails could not be sent, because no e-mail
       address was given} }'
+    tooMany: Too many items to process! Only {limit} have been processed
+    sendmails: '{count, plural, =1 {# e-mail was sent} other {# e-mails were sent}
+      }'
+    mailError: You must fill in a subject and a content. Please start again
   fields:
     content: Message
     gamification: Interactions
@@ -206,6 +316,9 @@ sonata.user.user:
     object: Title
     votesCount: Votes
     username: Name
+    groups: Groups
+    createdAt: Created on
+    contributionsCount: Contributions
   facebook_warning: 'WARNING: If your e-mail is private on Facebook, you will not
     be informed of the evolution of your contributions'
   form:
@@ -222,8 +335,21 @@ sonata.user.user:
     expired: Expired
     enabled: Activated
     allowedStamps: Authorized labels
+    watchModerationOnlyWithPostCodes_placeholder: 40*, 47*, 48500
+    watchModerationOnlyWithPostCodes_help: 'Separated by commas. You can use the *
+      symbol to select a whole department, for example : 40*, 47*, 48500'
+    watchModerationOnlyWithPostCodes: Only for items with postal code
+    watchModerationOnlyWithOptions: Only for items with one of the following categories
   _label: Users
   forgottedPassword: Forgot your password
+  role:
+    ROLE_SUPER_ADMIN: SUPER ADMIN (all powers)
+    ROLE_SONATA_ADMIN: ADMIN INTERFACE
+    ROLE_DIRECTMODERATION_EDIT_OWN_CONTRIB: CONTRIBUTOR + (can edit the elements to
+      which he has contributed, even without being the owner)
+    ROLE_DIRECTMODERATION_ADD: CONTRIBUTOR + (can add elements as an Admin from the
+      site)
+    ROLE_ADMIN: MODERATOR (Access to moderation functions, to be detailed in DataModel/WhoCanContribute)
 config_emails:
   form:
     groups:
@@ -291,6 +417,8 @@ wrappers:
     textColor: Text colour
     backgroundColor: Background colour
     rawContent: Raw HTML content (optional)
+    content: Content of the banner
+  _label: Home page banners
 options:
   fields:
     useColorForMarker_help: If an item has several categories that give the colour,
@@ -338,6 +466,10 @@ options:
     unexpandable: Cannot reduce this category
     textHelper_help: It will be displayed in the menu and in the form
     textHelper: Help message to quickly describe this category
+    useIconForMarker_help: The marker will display all icons of each category that
+      have this option enabled. The icons will be sorted in order of category selection
+      in the form
+    useIconForMarker: Use the icon of this category for the marker
   _label: Option
   form:
     groups:
@@ -517,6 +649,8 @@ dashboard:
   confirm: This action cannot be undone. You will delete your entire project. Are
     you sure you want to continue?
   _label: GoGoCarto Admin
+  messages: '{count, plural, =1 {# message} other {# messages} }'
+  errors: '{count, plural, =1 {# error} other {# errors} }'
 config_users:
   fields:
     user:
@@ -585,6 +719,30 @@ config_menu:
       of duplicates
     searchExcludingWords: Words to exclude from the search, separated by commas
     searchElementsFeature: Search for an element
+    searchCategoriesFeature: Search in categories
+    menu:
+      width_placeholder: '290'
+      width: Menu width
+      smallWidthStyle_help: Decrease the font size and margins a little. Useful when
+        the name of the categories are long and you want to gain in width
+      smallWidthStyle: Use a compressed style
+      showOnePanePerMainOption: Display a sub-menu for each main category
+      showCheckboxForSubFilterPane_help: Valid only if "display a sub-menu for each
+        main category" is checked
+      showCheckboxForSubFilterPane: Display checkboxes in sub-panels
+      showCheckboxForMainFilterPane: Show checkboxes in main panel
+      displayNumberOfElementRoundResults_help: Valid only if "display number of items
+        per category" is checked
+      displayNumberOfElementRoundResults: Round the results (display 300+ instead
+        of 326)
+      displayNumberOfElementForEachCategory: For each category, display the number
+        of items having this category
+    box_description: To choose the search fields, go to the form, edit one of the
+      fields and you will see the option "Search in this field".<br/> You can also
+      assign different weights on each field, the weights will be used to sort the
+      results by relevance.
+    box: Fields to be used to search in the elements
+  _label: Menu / Filters / Search
 config_home:
   fields:
     home:
@@ -772,4 +930,135 @@ dynamic_imports:
     optionsToAddToEachElement: Categories to add to each imported element
     newTaxonomyToMap: New categories to map
     newOntologyToMap: New fields to map
+    url: Or URL to a JSON API
+    submessage: (You have to fill in some credentials in Other configuration -> OpenStreetMap)
+    sourceType: Type of source
+    sourceName: Source name
+    refreshFrequencyInDays_help: (leave empty to never update automatically
+    preventImportIfNoCategories_help: When you want to import only part of the elements
+      of a database, it can be convenient to map only the categories you want to import.
+      But all other elements will be imported as well but without their categories.
+      By checking this option, only the items with a mapped category will be imported
+    usersToNotify: Users to be notified in case of errors, or when new fields/categories
+      are to be matched
   _label: Dynamic import
+  list:
+    refreshFrequencyInDays: Update
+    idsToIgnore: Info
+  form:
+    groups:
+      taxonomyMapping2: Match categories
+      taxonomyMapping: Category mapping table {suffix}
+      staticList: List of "hard" imports (the imported data will be managed by this
+        site)
+      otherOptions: Other options
+      ontologyMappingTab: Transform the data to be imported {suffix}
+      ontologyMappingPanel: Correspondence table of fields
+      newFields: New fields
+      newCategories: New categories
+      historic: History
+      general: General
+      customCodeForExportTab: Convert data for export
+      customCodeForExportPanel_description: "The <b>$element</b> variable represents\
+        \ the element in GoGoCarto, the <b>$gogoFeature</b> variable represents the\
+        \ OSM data reconstructed from the GoGoCarto element</br> <pre>Some examples\
+        \ of simple transformations: </pre> If the element contains the category \"\
+        Bulk\", we add an OSM tag <pre>if (in_array(''Bulk'', $element->getCategoriesNames())\
+        \ '{\n    $gogoFeature[''tags''][''bulk_purchase''] = ''yes'';\n'}</pre> If\
+        \ the element contains category number 12, we add an OSM tag<br/> This method\
+        \ is to be preferred because if we change the category name the code will\
+        \ still work<br/> The ID of a category is noted in parenthesis after its name\
+        \ in Customization / Categories <pre> if (in_array(12, $element->getCategoriesIds())\
+        \ '{\n    $gogoFeature[''tags''][''bulk_purchase''] = ''yes'';\n'}</pre> If\
+        \ the element has a specific value for a field defined in the form <pre> if\
+        \ ($element->getProperty(''bulk'') == ''yes'') '{\n    $gogoFeature[''tags''][''bulk_purchase'']\
+        \ = ''yes'';\n'}</pre> We add a tag for all elements <pre> $gogoFeature[''tags''][''bulk_purchase'']\
+        \ = ''yes''; </pre>"
+      customCodeForExportPanel: Enter code that will be executed during export, before
+        sending them for synchronization
+      customCode: Modify data by running code
+      code_description: "The <b>$data</b> variable represents the PHP array created\
+        \ from the CSV or JSON data. </br> <pre>Some examples of simple transformations:</pre>\
+        \ If the elements to import are in a sub-property called ''elements'' <pre>&lt;?php</br>$data\
+        \ = $data[''elements''];</pre> Add a ''source'' attribute to all elements,\
+        \ with the value ''MySource'' <pre>&lt;?php</br>foreach($data as $key => $row)\
+        \ '{\n   $data[$key][''source''] = ''MySource'';\n'}</pre> Add an attribute\
+        \ using the value of another attribute <pre>&lt;?php</br>foreach($data as\
+        \ $key => $row) '{\n    $data[$key][''latitude''] = $row[''geo''][''latitude'']);\n\
+        \    $data[$key][''longitude''] = $row[''geo''][''longitude'']);\n'}</pre>\
+        \ Transform an attribute <pre>&lt;?php</br>foreach($data as $key => $row)\
+        \ '{\n    $data[$key][''categories''] = array_map(function($cat) { return\
+        \ $cat[0];\n}, $row[''categories'']); '}</pre>"
+      code: Enter code that will be executed when the data is received, before it
+        is processed by GoGoCarto
+      Historic: History
+elements:
+  action:
+    batch:
+      params:
+        dont_send_mail: Do not send e-mail
+        comment: Details of the change, reason for deletion... this text will replace
+          '{{ customMessage'}} in automatic emails
+      editOptions: Edit categories
+      delete: Delete permanently
+  _label: Items
+config_marker:
+  form:
+    groups:
+      popup_description: For the configuration of the template, refer to the instructions
+        given in Data Model / Detail file
+      popup: Popup (content that is displayed by default when hovering over a marker)
+      cluster_description: Without using clusters, from 1000 markers displayed on
+        the screen it can cause slowdowns for the user
+      cluster: Clusters (group markers when they are close to each other)
+  fields:
+    marker.useClusters: Activate clusters
+    marker.popupTemplateUseMarkdown: Use markdown syntax for this template (otherwise
+      only Nunjucks syntax)
+    marker.popupTemplate: Popup content
+    marker.popupAlwaysVisible: Always display the popup (by default it is only displayed
+      when hovering over the marker)
+    marker.displayPopup: Display the popup
+  _label: Marker / Popup
+config_map:
+  form:
+    groups:
+      stampFeature: Label the items
+      shareFeature: Share URL
+      reportFeature: Report an error
+      pendingFeature: Display of items awaiting validation
+      params: Map settings
+      messages: Personalized message
+      message_config: Personalized message to appear in a corner of the map
+      mapDefaultViewFeature: Return to default view
+      map: The Map
+      listModeFeature: List Mode
+      layersFeature: Choice of background map
+      features: Features
+      favoriteFeature: Favorites
+      exportIframeFeature: Export iframe
+      directionsFeature: Route planner
+      cookies: Cookies
+  fields:
+    viewport_picker: Default map view (draw a rectangle on the map)
+    saveViewportInCookies: Save the current map position in cookies
+    saveTileLayerInCookies: Save the user's choice of background map in cookies
+    defaultTileLayer: Default map background (save to see the selected background
+      on the map below)
+    customPopupText: 'Text to display (Example: "This site is still in beta version!")'
+    customPopupShowOnlyOnce: Show the popup only once (if the user closes it, the
+      user will not see it again until you change the version number)
+    customPopupId: Version number of the popup (to change when you modify the text)
+  _label: Map / Features
+webhooks:
+  fields:
+    url: URL
+    format: Format
+  _label: Webhooks
+tile_layers:
+  _label: Map backgrounds
+stamps:
+  fields:
+    name: Name
+    isPublic: Public (anyone can assign it)
+  _label: Labels
