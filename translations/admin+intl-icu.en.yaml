@@ -61,6 +61,7 @@ config_infobar:
         syntax)
       bodyTemplate: Body of the form
     exemple: Example of a filter to be used
+    label: Label
   form:
     groups:
       infobar_param: Other Settings
@@ -174,6 +175,12 @@ js:
     primary_title: This field is currently not present in the public form. It will
       only be editable from the administrator interface. You can modify the public
       form to make this field editable by all
+  filters_builder:
+    date_views:
+      range: Range
+    step: Step
+  form_builder:
+    errorMsg: Error Message
 categories:
   list:
     multiple: Multiple
@@ -251,7 +258,7 @@ categories:
   _label: Categories
 config_style:
   fields:
-    searchBarColor: Search bar colour
+    searchBarColor: Search bar color
     textLightSoftColor: Softened light text colour
     textLightColor: Clear text colour
     textDarkSoftColor: Softened dark text colour
@@ -639,7 +646,7 @@ dashboard:
     gogo_directory: The Map
   menu:
     users: Users
-    saas: Close Carto
+    saas: GoGo Farm
     other_config: Other Settings
     emailing: E-mails / Newsletter
     data: Data / Import
@@ -1062,3 +1069,13 @@ stamps:
     name: Name
     isPublic: Public (anyone can assign it)
   _label: Labels
+imports:
+  fields:
+    refreshFrequency: ''
+  form:
+    groups:
+      customCodeForExportPanel_description: ''
+      code_description: ''
+files:
+  form:
+    fileName_placeholder: new_name.png
