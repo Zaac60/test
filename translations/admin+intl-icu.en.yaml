@@ -141,7 +141,7 @@ bulk:
     {error}'
   duplicateKept: Duplicate kept
   duplicateDeleted: Duplicate deleted
-  done: All the elements have been successfully considered
+  done: All the elements have been successfully processed
   detectDuplicatesAction: Duplicate detection
   deleteElement: '{count, plural,  =0 {No element has been deleted} =1 {# element
     has been deleted} other {# elements have been deleted} }'
