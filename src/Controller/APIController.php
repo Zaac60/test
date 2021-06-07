@@ -240,7 +240,7 @@ class APIController extends GoGoController
             }
         }
         if (!$imageData) {
-            $imgUrl = $request->getUriForPath('/img/default-icon.png');
+            $imgUrl = $request->getUriForPath('/img/gogo-bot.png');
             if ('dev' == $this->getParameter('kernel.environment')) {
                 $imgUrl = str_replace('index.php/', '', $imgUrl);
             }

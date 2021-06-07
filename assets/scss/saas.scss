@@ -10,9 +10,18 @@ body
   @include flexbox();
 }
 
+.btn.btn-primary-neutral:hover {
+  opacity: 1 !important;
+}
+
 #page-container
 {
   width: 100%;
+
+  .btn {
+    border-radius: 10px !important;
+    line-height: 2rem;
+  }
 
   #page-content
   {
@@ -47,7 +56,6 @@ body
       background-color: white;
       padding: 2rem;
       border-radius: 5px;
-      margin-bottom: 2rem;
     }
 
     .overlay {

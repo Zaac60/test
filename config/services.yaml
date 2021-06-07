@@ -440,5 +440,5 @@ services:
         arguments: [~, App\Document\Configuration, 'App\Controller\Admin\ConfigurationAdminController']
         calls: [ [ setGoGoTranslator, ['@translator'] ] ]
         tags:
-            - { name: sonata.admin, manager_type: doctrine_mongodb, group: saas, label: config_saas.config }
+            - { name: sonata.admin, manager_type: doctrine_mongodb, group: saas, label: config_saas._label }
     

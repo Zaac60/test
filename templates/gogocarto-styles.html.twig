@@ -56,6 +56,13 @@
   .gogo-load-css .btn.btn-neutral { background-color: {{ textSoft }}; }
   .gogo-load-css .btn.btn-neutral:hover { background-color: {{ textSoft }}; }
 
+  .gogo-load-css .btn.btn-outline-neutral { 
+    background-color: white; 
+    color: {{ text }};
+    border: 2px solid {{ text }};
+  }
+  {# .gogo-load-css .btn.btn-neutral:hover { background-color: {{ textSoft }}; } #}
+
   .gogo-load-css a { color: {{ primary }}; }
   .gogo-load-css .modal.page-modal { background-color: {{ text }} !important; }
 
@@ -176,7 +183,15 @@
   {# ------------------ #}
   {#  SAAS / PROJECT    #}
   {# ------------------ #}
-
+  .btn.btn-primary-neutral { 
+    font-family: {{ config.titleFont }}; 
+    background-color: {{ text }}; 
+    color: white;     
+  }
+  .saas-layout .home h2 {
+    font-family: {{ config.titleFont }};
+  }
+  .btn.new-project:hover { background-color: {{ primary }}; }
   .project-create ul li, .project-create .error-label { color: {{ error }}; }
   .project-create .contrib-option .hint { color: {{ disable }}; }
   .project-create .overlay { background-color: {{ text }}; opacity: .9; }

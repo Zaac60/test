@@ -123,3 +123,18 @@
   src: local('Nunito ExtraBold'), local('Nunito-ExtraBold'),
        url('../fonts/Nunito-ExtraBold.ttf');
 }
+
+@font-face {
+  font-family: 'Amatic';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Amatic Regular'), local('Amatic-Regular'),
+       url('../fonts/AmaticSC-Regular.ttf');
+}
+@font-face {
+  font-family: 'Amatic';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Amatic Bold'), local('Amatic-Bold'),
+       url('../fonts/AmaticSC-Bold.ttf');
+}

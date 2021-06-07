@@ -189,7 +189,7 @@ class WebhookService
         /** @var ConfImage $img */
         $img = $this->getConfig()->getFavicon() ? $this->getConfig()->getFavicon() : $this->getConfig()->getLogo();
 
-        return $img ? $img->getImageUrl() : $this->urlService->getAssetUrl('/img/default-icon.png');
+        return $img ? $img->getImageUrl() : $this->urlService->getAssetUrl('/img/gogo-bot.png');
     }
 
     private function formatData($format, $data)
