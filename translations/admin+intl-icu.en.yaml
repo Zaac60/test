@@ -999,7 +999,7 @@ mapping-taxonomy:
   alert: First, select the field corresponding to the categories in the 'Field mapping
     table' tab and click on 'Read data'
   original: Categories read from the original file
-  moreInfos: " Values : \n{values}"
+  moreInfos: " Values: \n\n{values}"
   mapped: Site categories
   create-missing-categories: Create all missing categories
   collectedPercent: Present in {percent}% of imported items.
@@ -1559,7 +1559,7 @@ images:
     externalImageUrl: Link to an external image
   _label: Upload an image
 help:
-  doc: "A problem, a question ? It's here : "
+  doc: "A problem, a question? It's here: "
   _label: Help
 emails:
   test:
