@@ -275,7 +275,7 @@ projects:
     project_name: Nom du projet
   initialize:
     _label: Créer un compte administrateur
-    email: Adresse e-mail
+    email: Adresse électronique
     plainPassword-1: Mot de passe
     plainPassword-2: Retapez votre mot de passe
     username: Nom d'utilisateur
