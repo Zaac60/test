@@ -114,17 +114,16 @@ function checkRequiredFields()
 
 		var valuePresent = false;
 		if ($(this).hasClass('checkbox-radio-group')) valuePresent = ($(this).find('input:checked').length > 0);
-		else if ($(this).hasClass('select-input') || $(this).hasClass('select-elements-input')) valuePresent = ($(this).find('option:selected:not(:disabled)').length > 0);
+		else if ($(this).hasClass('ace-editor') && CKEDITOR) {
+			valuePresent = CKEDITOR.instances[$(this).attr('id')].getData().length > 0
+		} else if ($(this).hasClass('select-input') || $(this).hasClass('select-elements-input')) valuePresent = ($(this).find('option:selected:not(:disabled)').length > 0);
 		else valuePresent = $(this).val();
 
-		if(!valuePresent)
-		{
+		if (!valuePresent) {
 			$(this).addClass('invalid invalid-required');
-		}
-		else
-		{
+		} else {
 			$(this).removeClass('invalid-required');
-			if ($(this).hasClass('select-input') || $(this).hasClass('select-elements-input') || $(this).hasClass('checkbox-radio-group')) $(this).removeClass('invalid').removeClass('error');
+			if ($(this).hasClass('select-input') || $(this).hasClass('select-elements-input') || $(this).hasClass('checkbox-radio-group') || $(this).hasClass('ace-editor')) $(this).removeClass('invalid').removeClass('error');
 		}
 	});
 }
