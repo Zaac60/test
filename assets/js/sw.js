@@ -1,8 +1,6 @@
 importScripts('https://storage.googleapis.com/workbox-cdn/releases/6.1.5/workbox-sw.js');
 importScripts('https://cdn.jsdelivr.net/npm/idb@4.0.5/build/iife/index-min.js');
 
-workbox.loadModule('workbox-strategies');
-
 const TILES_DOMAIN_NAMES = [
     'global.ssl.fastly.net',
     'tile.openstreetmap.se',
@@ -19,6 +17,27 @@ const SYMFONY_ROUTES = [
     '/api/manifest',
     '/api/gogocartojs-conf.json'
 ];
+
+const cacheCompactElements = async (db, response) => {
+    const json = await response.json();
+
+    const tx = await db.transaction('compact-elements', 'readwrite');
+
+    // Insert all elements in one transaction
+    // We use "put" instead of "add" so that we update the element if it already exists
+    // See https://github.com/jakearchibald/idb#article-store
+    await Promise.all([
+        ...json.data.map(element => tx.store.put({
+            id: element[0],
+            lat: element[2],
+            lng: element[3],
+            data: element
+        })),
+        tx.done
+    ]);
+
+    console.log(`Cached ${json.data.length} compact elements`);
+};
 
 const UsePrecachePlugin = precache => ({
     cacheKeyWillBeUsed: async ({ request }) => {
@@ -62,27 +81,6 @@ workbox.routing.registerRoute(
         ]
     })
 );
-
-const cacheCompactElements = async (db, response) => {
-    const json = await response.json();
-
-    const tx = await db.transaction('compact-elements', 'readwrite');
-
-    // Insert all elements in one transaction
-    // We use "put" instead of "add" so that we update the element if it already exists
-    // See https://github.com/jakearchibald/idb#article-store
-    await Promise.all([
-        ...json.data.map(element => tx.store.put({
-            id: element[0],
-            lat: element[2],
-            lng: element[3],
-            data: element
-        })),
-        tx.done
-    ]);
-
-    console.log(`Cached ${json.data.length} compact elements`);
-}
 
 // Compact elements cache
 workbox.routing.registerRoute(
