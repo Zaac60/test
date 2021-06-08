@@ -126,7 +126,7 @@ class ProjectController extends Controller
 
         $projects = $dm->query('Project')
                         ->field('published')->equals(true)
-                        ->field('dataSize')->gte(10)
+                        // ->field('dataSize')->gte(10)
                         ->sort('publishedAt', 'desc')
                         ->execute();
         $pinnedProjects = $repository->findBy(['pinned' => true]);

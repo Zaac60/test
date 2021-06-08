@@ -3,11 +3,17 @@
 @import 'sass/home';
 @import 'sass/create';
 
-body
+body.saas-layout
 {
   height: auto;
   min-height: 100%;
   @include flexbox();
+
+  &:not(.home) {
+    background-image: url("../img/background2.jpg");
+    background-size: contain;
+    background-attachment: fixed;
+  }  
 }
 
 .btn.btn-primary-neutral:hover {
@@ -18,9 +24,23 @@ body
 {
   width: 100%;
 
+  &:not(.home) {
+    #page-content {
+      background-color: white;
+      padding-top: 1px;
+      padding-bottom: 1rem;
+    }
+  }
+
   .btn {
     border-radius: 10px !important;
     line-height: 2rem;
+
+    &[type="submit"] {
+      font-size: 1.7rem;
+      font-weight: bold;
+      padding: 0 4rem;
+    }
   }
 
   #page-content
@@ -36,6 +56,7 @@ body
     h1 {
       text-align: center;
       margin-bottom: 35px;
+      font-weight: bold;
 
       @media screen and (max-width: 900px)
       {
@@ -45,7 +66,7 @@ body
 
     @media screen and (min-width: 900px)
     {
-       margin-top: 30px;
+       margin: 60px auto;
        max-width: 900px;
        width:80%;
     }

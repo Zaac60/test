@@ -188,7 +188,10 @@
     background-color: {{ text }}; 
     color: white;     
   }
-  .saas-layout .home h2 {
+  .saas-layout #page-container:not(.home) h2 {
+    font-family: {{ config.mainFont }};
+  }
+  .saas-layout #page-container.home h2, .saas-layout [type="submit"] {
     font-family: {{ config.titleFont }};
   }
   .btn.new-project:hover { background-color: {{ primary }}; }

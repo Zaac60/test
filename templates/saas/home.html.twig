@@ -36,16 +36,20 @@
     </div>
   </section>
 
-  <section class="pinned-projects-container projects">
-    {% if pinnedProjects|length > 0 %}
-      <h2>Projets mis en avant</h2> {# TODO translation #}
-      <div class="pinned-projects projects-container">
-        {% for project in pinnedProjects %}
-          {% include 'saas/projects/project.html.twig' with {'project' : project } %}
-        {% endfor %}
-      </div>
-    {% endif %}
-  </section>
+  {% if pinnedProjects|length > 0 %}   
+    <div class="pinned-projects-container">
+      <img class="img-hand before" src="{{ asset('img/hand.png') }}"/>
+      <img class="img-hand after" src="{{ asset('img/hand-2.png') }}"/>
+      <section class=" projects">
+        <h2>Projets mis en avant</h2> {# TODO translation #}
+        <div class="pinned-projects projects-container">
+          {% for project in pinnedProjects %}
+            {% include 'saas/projects/project.html.twig' with {'project' : project } %}
+          {% endfor %}
+        </div>      
+      </section>
+    </div>
+  {% endif %}
 
   <div class="all-projects-container">
     <section class="projects">
@@ -81,5 +85,8 @@
     }]
   });
   userList.sort('published-at-int', { order: 'desc'});
+  $('section.title').on('click', function() {
+    $(this).toggleClass('reduced')
+  })
   </script>
 {% endblock %}

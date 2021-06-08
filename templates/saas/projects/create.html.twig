@@ -1,7 +1,9 @@
 {% extends "saas/sass-layout.html.twig" %}
 
+{% set pageName = 'project-create' %}
+
 {% block body %}
-  <h1>{{ 'projects.form._label'|trans }}</h1>
+  <h1><img src="{{ asset('img/plane.png') }}"/>{{ 'projects.form._label'|trans }}</h1>
 
   <div class="top-form-message">
     {{ config.saas.newProjectInstructions|raw }}
@@ -65,7 +67,7 @@
       {% endif %}
     </div>
 
-    <button class="btn" type="submit" onclick="performSubmit(event);">{{ 'action.create'|trans }}</button>
+    <button class="btn btn-primary-neutral" type="submit" onclick="performSubmit(event);">{{ 'action.create'|trans }}</button>
 
     <div class="overlay">
       <div class="overlay-content">

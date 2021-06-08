@@ -1,12 +1,21 @@
 .top-form-message {
   text-align: center;
-  font-style: italic;
   margin-bottom: 30px;
-  opacity: .6;
-  font-weight: bold;
+  max-width: 500px;
+  margin: 0 auto;
 }
 
 .project-create {
+  h1 {
+    position: relative;
+    margin-top: 6rem;
+    img {
+      position: absolute;
+      width: 15rem;
+      top: -4rem;
+      transform: translateX(-80%);
+    }
+  }
   h2 {
     font-size: 1.5rem;
   }
