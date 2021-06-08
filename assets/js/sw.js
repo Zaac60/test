@@ -47,118 +47,104 @@ workbox.routing.registerRoute(
 );
 
 // Full elements cache
-// workbox.routing.registerRoute(
-//     new RegExp('/api/elements/'),
-//     new workbox.strategies.NetworkFirst({
-//         networkTimeoutSeconds: 5,
-//         cacheName: 'full-elements',
-//         plugins: [
-//             new workbox.expiration.ExpirationPlugin({
-//                 maxEntries: 100,
-//                 maxAgeSeconds: 7 * 24 * 60 * 60,
-//                 purgeOnQuotaError: true
-//             }),
-//             new workbox.cacheableResponse.CacheableResponsePlugin({ statuses: [0, 200] })
-//         ]
-//     })
-// );
+workbox.routing.registerRoute(
+    ({ url }) => url.pathname.startsWith('/api/elements/'),
+    new workbox.strategies.NetworkFirst({
+        networkTimeoutSeconds: 5,
+        cacheName: 'full-elements',
+        plugins: [
+            new workbox.expiration.ExpirationPlugin({
+                maxEntries: 100,
+                maxAgeSeconds: 7 * 24 * 60 * 60,
+                purgeOnQuotaError: true
+            }),
+            new workbox.cacheableResponse.CacheableResponsePlugin({ statuses: [0, 200] })
+        ]
+    })
+);
 
-// https://github.com/jakearchibald/idb
-// https://developers.google.com/web/ilt/pwa/live-data-in-the-service-worker
-// https://medium.com/jspoint/indexeddb-your-second-step-towards-progressive-web-apps-pwa-dcbcd6cc2076
-// https://developer.mozilla.org/fr/docs/Web/API/IDBKeyRange
-// https://localforage.github.io/localForage/#data-api-iterate
-class BoundsCacheStrategy extends workbox.strategies.Strategy {
-    async _handle(request, handler) {
+const cacheCompactElements = async (db, response) => {
+    const json = await response.json();
+
+    const tx = await db.transaction('compact-elements', 'readwrite');
+
+    // Insert all elements in one transaction
+    // We use "put" instead of "add" so that we update the element if it already exists
+    // See https://github.com/jakearchibald/idb#article-store
+    await Promise.all([
+        ...json.data.map(element => tx.store.put({
+            id: element[0],
+            lat: element[2],
+            lng: element[3],
+            data: element
+        })),
+        tx.done
+    ]);
+
+    console.log(`Cached ${json.data.length} compact elements`);
+}
+
+// Compact elements cache
+workbox.routing.registerRoute(
+    ({ url }) => url.pathname === '/api/elements',
+    async ({ url, request }) => {
         const db = await idb.openDB('gogocarto', 1, {
             upgrade(db) {
-                // Create a store of objects
-                const store = db.createObjectStore('compact-elements', {
-                    keyPath: 'id'
-                });
-                // Create an index on the 'date' property of the objects.
+                const store = db.createObjectStore('compact-elements', { keyPath: 'id' });
                 store.createIndex('lat', 'lat', { unique: false });
                 store.createIndex('lng', 'lng', { unique: false });
-            },
+            }
         });
 
-
-
         try {
-            const response = await handler.fetch(request);
+            const response = await fetch(request);
 
-            if (response.ok) {
-                const json = await response.clone().json();
-                console.log('json', json);
-
-                // for( const element of json.data ) {
-                //     await db.add('compact-elements', {
-                //         id: element[0],
-                //         lat: element[2],
-                //         lng: element[3],
-                //         data: element
-                //     });
-                // }
-
-                const tx = await db.transaction('compact-elements', 'readwrite');
-
-                // Add all elements in one transaction
-                // See https://github.com/jakearchibald/idb#article-store
-                await Promise.all([
-                    ...json.data.map(element => tx.store.add({
-                        id: element[0],
-                        lat: element[2],
-                        lng: element[3],
-                        data: element
-                    })),
-                    tx.done
-                ]);
-            }
+            // We don't need to await the elements to be cached before returning the response
+            if (response.ok) cacheCompactElements(db, response.clone());
 
             return response;
         } catch(e) {
-            console.error(e);
-            const requestUrl = new URL(request.url);
-            const boundsJson = JSON.parse(requestUrl.searchParams.get('boundsJson'))[0];
-            console.log('boundsJson lat', boundsJson._southWest.lat, boundsJson._northEast.lat);
-            console.log('boundsJson lng', boundsJson._southWest.lng, boundsJson._northEast.lng);
+            const requestUrl = new URL(url);
+            const boundsJson = requestUrl.searchParams.has('boundsJson') && JSON.parse(requestUrl.searchParams.get('boundsJson'));
 
-            let data = [];
+            if( boundsJson && boundsJson.length > 0 ) {
+                let matchingElements = [];
+                let latitudeIndex = db.transaction('compact-elements').store.index('lat');
 
-            // TODO see if we can improve performances with this solution: https://stackoverflow.com/a/32976384/7900695
-            let cursor = await db.transaction('compact-elements').store.index('lat').openCursor(IDBKeyRange.bound(boundsJson._southWest.lat, boundsJson._northEast.lat));
-            while (cursor) {
-                if( cursor.value.lng >= boundsJson._southWest.lng && cursor.value.lng <= boundsJson._northEast.lng) {
-                    data.push(cursor.value.data);
+                // TODO see if we can improve performances with this solution: https://stackoverflow.com/a/32976384/7900695
+                for( let bounds of boundsJson ) {
+                    // Match bounding box latitude
+                    let cursor = await latitudeIndex.openCursor(IDBKeyRange.bound(bounds._southWest.lat, bounds._northEast.lat));
+                    while (cursor) {
+                        // Match bounding box longitude
+                        if (cursor.value.lng >= bounds._southWest.lng && cursor.value.lng <= bounds._northEast.lng) {
+                            matchingElements.push(cursor.value.data);
+                        }
+                        cursor = await cursor.continue();
+                    }
                 }
-                cursor = await cursor.continue();
+
+                console.log(`Retrieved ${matchingElements.length} compact elements from cache`);
+
+                // Returns a response that matches the usual API response
+                return new Response(
+                    JSON.stringify({
+                        data: matchingElements,
+                        licence: "https://opendatacommons.org/licenses/odbl/summary/",
+                        mapping: ["id", ["name"], "latitude", "longitude", "status", "moderationState"],
+                        ontology: "gogocompact"
+                    }),
+                    {
+                        status: 200,
+                        headers: new Headers({ 'Content-Type': 'application/json' })
+                    }
+                );
+            } else {
+                // If we could not get the bounds, rethrow the error
+                throw e;
             }
-
-            const returnData = {
-                data,
-                licence: "https://opendatacommons.org/licenses/odbl/summary/",
-                mapping: ["id", ["name"], "latitude", "longitude", "status", "moderationState"],
-                ontology: "gogocompact"
-            };
-
-            console.log('returnData', returnData);
-
-            return new Response(
-                JSON.stringify(returnData),
-            {
-                status: 200,
-                headers: new Headers({ 'Content-Type': 'application/json' })
-            });
         }
     }
-}
-
-// Partial elements cache
-workbox.routing.registerRoute(
-    new RegExp('/api/elements'),
-    new BoundsCacheStrategy({
-        cacheName: 'partial-elements'
-    })
 );
 
 // Tiles cache
@@ -176,7 +162,9 @@ workbox.routing.registerRoute(
         ]
     })
 );
+
 workbox.precaching.precacheAndRoute([]);
+
 // Following code not working, so using simple preCacheAndRoute (see above)
 // workbox.precaching.precacheAndRoute(
 //     self.__WB_MANIFEST,
