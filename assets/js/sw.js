@@ -1,5 +1,5 @@
 importScripts('https://storage.googleapis.com/workbox-cdn/releases/6.1.5/workbox-sw.js');
-importScripts('https://cdn.jsdelivr.net/npm/idb@4.0.5/build/iife/with-async-ittr-min.js');
+importScripts('https://cdn.jsdelivr.net/npm/idb@4.0.5/build/iife/index-min.js');
 
 workbox.loadModule('workbox-strategies');
 
