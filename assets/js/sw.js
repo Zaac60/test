@@ -18,14 +18,33 @@ const SYMFONY_ROUTES = [
     '/api/gogocartojs-conf.json'
 ];
 
+const DEFAULT_MAPPING = ['id', ['name'], 'latitude', 'longitude', 'status', 'moderationState'];
+
+const GOGOCARTO_DB_NAME = 'gogocarto';
+const GOGOCARTO_DB_VERSION = 2; // This must be changed whenever we do changes to do the database model
+
 const cacheCompactElements = async (db, response) => {
     const json = await response.json();
 
-    const tx = await db.transaction('compact-elements', 'readwrite');
+    // Write mapping in settings store if it is not set yet, or if it has changed
+    // If it has changed, all the compact elements will be deleted from cache
+    let tx = await db.transaction(['settings', 'compact-elements'], 'readwrite');
+    const currentMapping = await tx.objectStore('settings').get('mapping');
+    if( !currentMapping || JSON.stringify(currentMapping) !== JSON.stringify(json.mapping) ) {
+        await Promise.all([
+            tx.objectStore('settings').put({
+                id: 'mapping',
+                value: json.mapping
+            }),
+            tx.objectStore('compact-elements').clear(),
+            tx.done
+        ]);
+    }
 
     // Insert all elements in one transaction
     // We use "put" instead of "add" so that we update the element if it already exists
     // See https://github.com/jakearchibald/idb#article-store
+    tx = await db.transaction('compact-elements', 'readwrite');
     await Promise.all([
         ...json.data.map(element => tx.store.put({
             id: element[0],
@@ -86,11 +105,15 @@ workbox.routing.registerRoute(
 workbox.routing.registerRoute(
     ({ url }) => url.pathname === '/api/elements',
     async ({ url, request }) => {
-        const db = await idb.openDB('gogocarto', 1, {
-            upgrade(db) {
-                const store = db.createObjectStore('compact-elements', { keyPath: 'id' });
-                store.createIndex('lat', 'lat', { unique: false });
-                store.createIndex('lng', 'lng', { unique: false });
+        const db = await idb.openDB(GOGOCARTO_DB_NAME, GOGOCARTO_DB_VERSION, {
+            upgrade(db, oldVersion) {
+                // If this is a first install of the database
+                if( oldVersion === 0 ) {
+                    const store = db.createObjectStore('compact-elements', { keyPath: 'id' });
+                    store.createIndex('lat', 'lat', { unique: false });
+                    store.createIndex('lng', 'lng', { unique: false });
+                }
+                db.createObjectStore('settings', { keyPath: 'id' })
             }
         });
 
@@ -106,7 +129,7 @@ workbox.routing.registerRoute(
             const boundsJson = requestUrl.searchParams.has('boundsJson') && JSON.parse(requestUrl.searchParams.get('boundsJson'));
 
             if( boundsJson && boundsJson.length > 0 ) {
-                let matchingElements = [];
+                let matchingElements = [], mapping;
                 let latitudeIndex = db.transaction('compact-elements').store.index('lat');
 
                 // TODO see if we can improve performances with this solution: https://stackoverflow.com/a/32976384/7900695
@@ -124,13 +147,23 @@ workbox.routing.registerRoute(
 
                 console.log(`Retrieved ${matchingElements.length} compact elements from cache`);
 
+                // Retrieve mapping from settings
+                try {
+                    const setting = await db.get('settings', 'mapping');
+                    mapping = setting.value;
+                    console.log(`Using mapping from settings: ${JSON.stringify(mapping)}`);
+                } catch(e) {
+                    mapping = DEFAULT_MAPPING;
+                    console.log(`Failed retrieving mapping from settings. Using default mapping: ${JSON.stringify(mapping)}`);
+                }
+
                 // Returns a response that matches the usual API response
                 return new Response(
                     JSON.stringify({
                         data: matchingElements,
-                        licence: "https://opendatacommons.org/licenses/odbl/summary/",
-                        mapping: ["id", ["name"], "latitude", "longitude", "status", "moderationState"],
-                        ontology: "gogocompact"
+                        licence: 'https://opendatacommons.org/licenses/odbl/summary/',
+                        mapping,
+                        ontology: 'gogocompact'
                     }),
                     {
                         status: 200,
