@@ -56,33 +56,32 @@ class MigrationCommand extends Command
       'app:elements:updateJson all',
     ];
 
-    // TODO Translation : write those messages in different languages? or all in English?
     public static $messages = [
         // v2.3.0
-        'Un champ <b>Image (url)</b> est maintenant disponible dans la configuration du formulaire !', 
-        "Vous pouvez désormais customizer la popup qui s'affiche au survol d'un marqueur. Allez dans Personnalisation -> Marqueur / Popup", 
-        "Nouvelle option pour le menu (Personnalisation -> La Carte -> onglet Menu) : afficher à côté de chaque catégories le nombre d'élements disponible pour cette catégorie", 
+        'A <b>Image (url)</b> field is now available in the form configuration!',
+        "You can now customize the popup that is displayed when hovering over a marker. Go to Customize -> Marker / Popup",
+        "New option for the menu (Customize -> The Map -> Menu tab): display next to each category the number of elements available for this category",
         // v2.3.1
-        'Vous pouvez maintenant renseigner la licence qui protège vos données dans Personnalisation -> Configuration Générale', 
+        'You can now set the license that protects your data in Customization -> General Setup',
         // v2.3.4
-        "Amélioration du <b>système d'import</b>: vous pouvez maintenant faire correspondre les champs et les catégories avant d'importer. Des vidéos tutoriels ont été réalisés. <u>Merci de parcourir vos imports dynamiques pour les mettre à jour avec le nouveau système</u>", 
-        "<b>La gestion des permissions des utilisateurs fait peau neuve !</b> <u>Votre ancienne configuration ne sera peut être plus valide</u>. Veuillez vous rendre dans le <b>menu Utilisateurs pour mettre à jour les roles des utilisateurs et des groupes</b> d'utilisateurs.", 
-        'Vous pouvez maintenant configurer des mot clés à exclure dans la recherche des éléments. Rendez-vous dans Personnalisation -> La Carte -> Onglet Recherche', 
+        "Improvement of the <b>importing system</b>: you can now match fields and categories before importing them. We have made tutorial videos. <u>Please browse your dynamic imports to update them with the new system.</u>",
+        "<b>User permissions management gets a makeover!</b> <u>Your old configuration may no longer be valid</u>. Please go to the <b>Users menu to update the roles of users and user groups.</b>",
+        'You can now configure keywords to exclude in the search for items. Go to Customize -> The Map -> Search Tab',
         // v2.5
-        "Il est maintenant possible de <b>téléverser des images et des fichiers</b> depuis le formulaire d'ajout d'un élément ! Paramétrez ces nouveaux champs dans Modèle de Données -> Formulaire", 
+        "It is now possible to <b>upload images and files</b> from the add item form! Set up these new fields in Data Model -> Form",
         // v3.0
-        "Vous pouvez maintenant écrire des actualités qui seront incluses dans la newsletter automatique! Allez dans Mails/Newsletter -> Actualités", 
-        "L'export des éléments depuis la page Données -> Elements fonctionne de nouveau et inclus cette fois correctement tous les champs personnalisés (y compris fichiers et images)", 
-        "Depuis le site, la recherche par élément peut maintenant fonctionenr sur plusieurs champs. Dans Modèle de Données -> Formulaire, editez un champ pour voir apparaitre la configuration liée à la recherche. Vous pouvez aussi donner des poids différents à chaque champs, par exemple la recherche sur le titre avec un poids de 3 et la recherche dans la description avec un poids de 1", 
-        "Nouveau moteur de recherche ! Sur la carte, lorsqu'on tape une recherche des suggestions apparaissent pour les éléments et les catégories (bientôt aussi pour les recherchent géographiques)", 
+        "Now you can write news items that will be included in the automatic newsletter! Go to Mails/Newsletter -> News",
+        "The exporting of elements from the page Data -> Elements page works again and this time correctly includes all custom fields (including files and images).",
+        "From the site, the search by item now works on several fields. In Data Model -> Form, edit a field to see the configuration related to your search. You can also give different weights to each field, for example, the title search has a weight of 3 and the description search has a weight of 1.",
+        "New search engine ! On the map, when you type a search, suggestions appear for items and categories (coming soon for geographical searches).",
         // v3.2
-        "Vous pouvez maintenant configurer l'url de votre carte si vous possédez un nom de domaine (ou un sous domaine). Allez dans Personnalisation -> Configuration Générale et suivez les instructions !", 
-        "La connexion via un compte tiers (Google, Facebook, LesCommuns.org) est maintenant possible ! Changez la configuration dans Utilisateurs -> Configuration", 
+        "You can now configure the URL of your map if you have a domain name (or a subdomain). Go to Customize -> General Setup and follow the instructions!",
+        "Login through a third party account (Google, Facebook, LesCommuns.org) is now possible! Change the configuration in Users -> Configuration",
         // 3.2.3
-        "Notifications : vous pouvez maintenant être alerté si un import a des problèmes (à configurer dans chaque Import) ou si des éléments sont à modérer (à configurer dans Utilisateurs)", 
+        "Notifications: you can now be alerted if an import has problems (to be configured in each Import) or if items are to be moderated (to be configured in Users)",
         // 3.3.0
-        "La lecture et l'écriture de donnée dans OpenStreetMap est maintenant possible via les import dynamiques",
-        "GoGoCarto est maintenant traductible dans différente langue. Si vous voulez contribuer aux traductions rendez-vous sur <a href=\"https://hosted.weblate.org/projects/gogocarto/\">l'outil en ligne Weblate</a>"
+        "Reading and writing data in OpenStreetMap is now possible through dynamic imports.",
+        "GoGoCarto is now translated into different languages. If you want to contribute to the translation go to <a href=\"https://hosted.weblate.org/projects/gogocarto/\">the Weblate online tool</a>"
     ];
 
     public function __construct(DocumentManagerFactory $dmFactory, LoggerInterface $commandsLogger,

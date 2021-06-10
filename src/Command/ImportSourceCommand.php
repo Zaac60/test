@@ -46,8 +46,8 @@ class ImportSourceCommand extends GoGoAbstractCommand
                 $import = $dm->get('Import')->findOneBy(['sourceName' => $sourceNameOrId]);
             }
             if (!$import) {
-                $message = "ERREUR pendant l'import : Aucune source avec pour nom ou id ".$input->getArgument('sourceNameOrImportId'); // TODO translate
-                $this->error($message);
+                $message = $this->t('importService.error_no_source', ['source' => $input->getArgument('sourceNameOrImportId')], 'admin');
+                $this->error($message); 
                 return;
             }
             $this->log("Updating source {$import->getSourceName()} begins..."); // 

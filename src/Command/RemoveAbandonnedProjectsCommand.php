@@ -57,15 +57,13 @@ final class RemoveAbandonnedProjectsCommand extends GoGoAbstractCommand
             $this->log('Project warned count : '. $projectsToWarn->count());
 
         foreach ($projectsToWarn as $project) {
-            $subject = "Votre carte créée sur $this->baseUrl peut elle être effacée?"; // TODO translate
+            $subject = $this->t('projects.warnings.abandonned_map',[ 'baseUrl' => $this->baseUrl ], 'admin');
             $adminUrl = $this->urlService->generateUrlFor($project, 'sonata_admin_dashboard');
-            $content = "Bonjour !</br></br> Vous êtes administrateur.ice de la carte {$project->getName()} sur {$this->baseUrl}. Nous avons noté qu'aucun utilisateur ne s'est logué sur cette carte depuis plusieurs mois. Votre projet est-il abandonné?</br>
-                Le nombre de carte sur $this->baseUrl ne cesse de grandir, et cela utilise pas mal de ressources sur notre serveur. </br>
-                <b>Si votre projet n'a plus lieu d'être merci de vous connecter à votre <a href='{$adminUrl}'>espace d'administration</a> et de cliquer sur \"Supprimer mon projet\" en bas du menu de gauche.</b></br>
-                Si au contraire vous souhaitez conserver votre projet, merci de vous loguer sur votre carte.</br>
-                <b>Si votre inactivité persiste dans les prochains mois, nous nous réservons le droit de supprimer votre carte</b></br></br>
-                Bien cordialement,</br>
-                L'équipe de {$this->baseUrl}"; // TODO translate
+            $content = $this->t('projects.warnings.message', [
+              'projectName' => $project->getName(),
+              'baseUrl' => $this->baseUrl,
+              'adminUrl' => $adminUrl
+            ], 'admin');
             foreach ($project->getAdminEmailsArray() as $email) {
                 $this->mailService->sendMail($email, $subject, $content);
             }

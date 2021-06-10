@@ -154,7 +154,7 @@ class ChartBlockService extends AbstractBlockService
         $contribsResolvedPie = new Highchart();
         $contribsResolvedPie->chart->renderTo($name);
         $contribsResolvedPie->title->text($title);
-        $contribsResolvedPie->subtitle->text('Nombre Total (depuis le début): <b>'.$totalContribs.'</b>'); // TODO translate
+        $contribsResolvedPie->subtitle->text($this->trans('charts.contribsResolved.total').': <b>'.$totalContribs.'</b>'); // TODO translate
         $contribsResolvedPie->plotOptions->pie([
             'allowPointSelect' => true,
             'cursor' => 'pointer',

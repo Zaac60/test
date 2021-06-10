@@ -148,6 +148,7 @@ charts:
     added: Ajouts résolus
     edited: Modifications résolues
     resolved: Résolution des contributions
+    total: Nombre Total (depuis le début)
   empty: Aucun élement trouvé
   showAll: Afficher tous
   userInteract:
@@ -1313,7 +1314,7 @@ importService:
   x: 'Calcul des liens pour le champ ''{linkField}'' : {i}/{size} éléments traitées'
   duplicate: "Détection des doublons : {i}/{size} éléments traitées"
   auto_added_category: Automatiquement ajoutée (categorie parente d'une categorie importée)
-
+  error_no_source: "ERREUR pendant l'import : Aucune source avec pour nom ou id {source}"
 imports:
   _label: Import
   dynamic: Import Dynamique, pour afficher des données gérées par quelqu'un d'autre
@@ -1745,6 +1746,14 @@ partners:
 
 projects:
   _label: Liste des Projets
+  warnings:
+    abandonned_map: Votre carte créée sur {baseUrl} peut elle être effacée ?
+    message: >-
+      Bonjour !</br></br> Vous êtes administrateur.ice de la carte {projectName} sur {baseUrl}. Nous avons noté qu'aucun utilisateur ne s'est logué sur cette carte depuis plusieurs mois. Votre projet est-il abandonné?</br> Le nombre de carte sur {baseUrl} ne cesse de grandir, et cela utilise pas mal de ressources sur notre serveur. </br>
+      <b>Si votre projet n'a plus lieu d'être merci de vous connecter à votre <a href='{adminUrl}'>espace d'administration</a> et de cliquer sur "Supprimer mon projet" en bas du menu de gauche.</b></br> Si au contraire vous souhaitez conserver votre projet, merci de vous loguer sur votre carte.</br>
+      <b>Si votre inactivité persiste dans les prochains mois, nous nous réservons le droit de supprimer votre carte.</b></br></br>
+      Bien cordialement,</br>
+      L'équipe de {baseUrl}.
 
 sonata.user.user:
   _label: Utilisateurs

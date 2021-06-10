@@ -468,6 +468,14 @@ projects:
     plainPassword-1: Password
     email: E-mail address
   _label: Project list
+  warnings:
+    abandonned_map: Your map created on {baseUrl} may be deleted?
+    message: >-
+      Hello!</br></br> You are the admin for the map  {projectName} on {baseUrl}. We have noticed that no one has been using this map for several months. Has your project been abandoned or changed?</br> Or you are recieveing this message because {baseUrl} keeps growing, and using lots of ressources on our server. </br>
+      <b>If your project is no longer active please connect to your account at <a href="{adminUrl}">admin space</a> and click on "Delete my project" on the bottom of the left menu.</b></br> If you want to keep your project, please login to your map.</br>
+      <b>If your map remains inactive in the next few months we reserve the right to delete it.</b></br></br>
+      Best regards,</br>
+      Team of {baseUrl}.
 partners:
   form:
     websiteUrl: Website's URL
@@ -785,6 +793,7 @@ charts:
     resolved: Contributions' resolution
     edited: Resolved changes
     added: Resolved additions
+    total: Total Number (from the beginning)
   collabValidated: Latest collaborative validations
 config_custom_js_css:
   form:
@@ -1639,7 +1648,7 @@ importService:
   automaticMergesCount: '{count, plural, =1 {# merged} other {# merged} } with an
     already existing element'
   auto_added_category: Automatically added (parent category of an imported category)
-
+  error_no_source: "An error occured during the import : no source for name or id {source}"
 images_partner:
   placeholder: Select an already imported image, or add one!
   fields:
