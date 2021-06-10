@@ -26,36 +26,38 @@ const GOGOCARTO_DB_VERSION = 2; // This must be changed whenever we do changes t
 const cacheCompactElements = async (db, response) => {
     const json = await response.json();
 
-    // Write mapping in settings store if it is not set yet, or if it has changed
-    // If it has changed, all the compact elements will be deleted from cache
-    let tx = await db.transaction(['settings', 'compact-elements'], 'readwrite');
-    const currentMapping = await tx.objectStore('settings').get('mapping');
-    if( !currentMapping || JSON.stringify(currentMapping) !== JSON.stringify(json.mapping) ) {
+    if( json.ontology === 'gogocompact' ) {
+        // Write mapping in settings store if it is not set yet, or if it has changed
+        // If it has changed, all the compact elements will be deleted from cache
+        let tx = await db.transaction(['settings', 'compact-elements'], 'readwrite');
+        const currentMapping = await tx.objectStore('settings').get('mapping');
+        if (!currentMapping || JSON.stringify(currentMapping) !== JSON.stringify(json.mapping)) {
+            await Promise.all([
+                tx.objectStore('settings').put({
+                    id: 'mapping',
+                    value: json.mapping
+                }),
+                tx.objectStore('compact-elements').clear(),
+                tx.done
+            ]);
+        }
+
+        // Insert all elements in one transaction
+        // We use "put" instead of "add" so that we update the element if it already exists
+        // See https://github.com/jakearchibald/idb#article-store
+        tx = await db.transaction('compact-elements', 'readwrite');
         await Promise.all([
-            tx.objectStore('settings').put({
-                id: 'mapping',
-                value: json.mapping
-            }),
-            tx.objectStore('compact-elements').clear(),
+            ...json.data.map(element => tx.store.put({
+                id: element[0],
+                lat: element[2],
+                lng: element[3],
+                data: element
+            })),
             tx.done
         ]);
+
+        console.log(`Cached ${json.data.length} compact elements`);
     }
-
-    // Insert all elements in one transaction
-    // We use "put" instead of "add" so that we update the element if it already exists
-    // See https://github.com/jakearchibald/idb#article-store
-    tx = await db.transaction('compact-elements', 'readwrite');
-    await Promise.all([
-        ...json.data.map(element => tx.store.put({
-            id: element[0],
-            lat: element[2],
-            lng: element[3],
-            data: element
-        })),
-        tx.done
-    ]);
-
-    console.log(`Cached ${json.data.length} compact elements`);
 };
 
 const UsePrecachePlugin = precache => ({
@@ -161,7 +163,6 @@ workbox.routing.registerRoute(
                 return new Response(
                     JSON.stringify({
                         data: matchingElements,
-                        licence: 'https://opendatacommons.org/licenses/odbl/summary/',
                         mapping,
                         ontology: 'gogocompact'
                     }),
