@@ -1,5 +1,5 @@
 abouts:
-  _label: ''
+  _label: 'Popups'
   fields:
     content: 'Inhalt'
     name: 'Name'
@@ -34,13 +34,15 @@ categories:
     descriptionLabel: 'Label für Beschreibungsfeld'
     displayInForm: 'Im Formular'
     displayInForm_help: 'Weder die Gruppe noch die Kategorien werden im Formular angezeigt'
-    displayInInfoBar: ''
+    displayInInfoBar: 'In der Detailansicht'
     displayInInfoBar_help: 'Kategorien werden angezeigt, der Name der Gruppe nicht'
     displayInMenu: 'Im Menu'
     displayInMenu_help: 'Kategorien werden angezeigt, der Name der Gruppe nicht'
     displaySuboptionsInline: 'Unterkategorien in einer Zeile anzeigen'
     enableDescription: 'Beschreibung der Kategorien aktivieren'
-    enableDescription_help: >
+    enableDescription_help: >-
+      Ermöglicht, der Kategorie eine Beschreibung hinzuzufügen, beispielsweise der
+      Kategorie Landwirtschaft ein "Gärtnerei, SoLaWi, ..."
     index: 'Position'
     isMandatory: 'Pflichtfeld'
     isMandatory_help: 'Eine Kategorie dieser Gruppe muss ausgewählt werden'
@@ -59,88 +61,94 @@ categories:
     pickingOptionText: 'Text zur Anzeige im Formular: Auswählen…'
     showExpanded: ''
     singleOption: ''
-    singleOption_help: ''
-    unexpandable: ''
-    unexpandable_help: ''
+    singleOption_help: 'Nur eine Kategorie kann gleichzeitig gewählt werden'
+    unexpandable: 'Diese Kategoriengruppe nicht ausklappbar machen'
+    unexpandable_help: 'In diesem Menu sollen die Kategorien dieser Gruppe immer angezeigt
+      werden'
   form:
     groups:
-      categories: ''
-      display: ''
-      primary: ''
-      secondary: ''
+      categories: 'Kategorien dieser Gruppe'
+      display: 'Diese Gruppe anzeigen'
+      primary: 'Haupteinstellungen'
+      secondary: 'Zweitrangige Anzeigeeinstellungen'
   list:
-    addCategories: ''
-    addCategory: ''
-    categoriesDescription: ''
-    empty: >
-    help: ''
+    addCategories: 'Kategoriengruppe hinzufügen'
+    addCategory: 'Kategorie hinzufügen'
+    categoriesDescription: 'Kategorienbeschreibung'
+    empty: >-
+      Kein Kategorien vorhanden. Erstelle eine neue Kategoriengruppe und die dazugehörigen
+      Kategorien. Kategorien sind ein wesentliches Element in GoGoCarto. Deine Karte
+      funktioniert möglicherweise nicht richtig ohne verfügbare Kategorien
+    help: 'Einige hilfreiche Hinweise'
     help_description: >
-    multiple: ''
-    title: ''
-    unique: ''
+    multiple: 'Mehrere'
+    title: 'Liste der Kategorien'
+    unique: 'Einmalig'
 
 charts:
-  collabRefused: ''
+  collabRefused: 'Letzte kollaborativen Ablehnungen'
   collabResolve:
-    axisTitle: ''
-    refused: ''
-    title: ''
-    validate: ''
-  collabValidated: ''
+    axisTitle: 'kollaborative Validierungen/Ablehnungen'
+    refused: 'kollaborative Ablehnungen'
+    title: 'kollaborative Validierungen/Ablehnungen'
+    validate: 'kollaborative Validierungen'
+  collabValidated: 'Letzte kollaborative Validierungen'
   contribsResolved:
-    added: ''
-    edited: ''
-    resolved: ''
-  empty: ''
-  showAll: ''
+    added: 'Gelöste Neueinträge'
+    edited: 'Gelöste Änderungen'
+    resolved: 'Erledigte Beiträge'
+  empty: 'Kein Element gefunden'
+  showAll: 'Alle anzeigen'
   userInteract:
-    added: ''
-    modified: ''
-    reported: ''
-    subtitle: ''
-    title: ''
-    voted: ''
+    added: 'Neue Beiträge'
+    modified: 'Änderungen'
+    reported: 'Gemeldete Elemente'
+    subtitle: 'Klicken & Ziehen um eine Periode zu fokussieren'
+    title: 'Nutzungsstatistiken'
+    voted: 'Stimmen'
 
 commons:
-  actual_file: ''
-  anonymous: ''
-  btn_update_and_edit: ''
-  default: ''
+  actual_file: 'Aktuelle Datei:'
+  anonymous: 'Anonym'
+  btn_update_and_edit: 'Aktualisieren'
+  default: 'Standard'
   date_format: ''
   date_time_format: ''
-  send: ''
+  send: 'Abschicken'
 
 config_api:
-  _label: ''
-  config: ''
-  elements: ''
+  _label: 'APIs'
+  config: 'Konfiguration'
+  elements: 'Elemente'
   fields:
-    api.publicApiPrivateProperties: ''
+    api.publicApiPrivateProperties: 'Liste der privaten Felder, die ihr nicht teilen
+      wollt'
     apilist:
-    gogo_api_configuration: ''
-    gogo_api_element_get: ''
-    gogo_api_elements_from_text: ''
-    gogo_api_gogocartojs_configuration: ''
-    gogo_api_semanatic_taxonomy: ''
-    gogo_api_taxonomy: ''
-    gogo_api_taxonomy_mapping: ''
-    gogo_api_taxonomy_show: ''
-    gogo_api_ui: ''
-    gogo_element_import_available_options: ''
-    text: ''
+    gogo_api_configuration: 'GoGoCarto Konfiguration'
+    gogo_api_element_get: 'Ein Element (ID mit der id des Elements ersetzen)'
+    gogo_api_elements_from_text: 'Element suchen'
+    gogo_api_gogocartojs_configuration: 'GoGoCartoJs Konfiguration'
+    gogo_api_semanatic_taxonomy: 'Semantische Taxonomie'
+    gogo_api_taxonomy: 'Taxonomie'
+    gogo_api_taxonomy_mapping: 'Liste der Optionen mit korrespondierender ID'
+    gogo_api_taxonomy_show: 'Eine Kategorie (ID mit der id der Kategorie ersetzen)'
+    gogo_api_ui: 'GUI zur API-Konstruktion'
+    gogo_element_import_available_options: 'Liste der Optionen'
+    text: 'ihre_sucheingabe'
   form:
     groups:
-      apis: ''
-      config: ''
+      apis: 'Liste der verfügbaren APIs'
+      config: 'Konfiguration'
       config_description: >
-  taxonomy: ''
+  taxonomy: 'Taxonomie / Kategorien'
 
 config_contributions:
-  _label: ''
+  _label: 'Wer kann beitragen?'
   fields:
-    collaborativeModerationExplanations: ''
-    maxDaysLeavingAnElementPending: ''
-    maxOppositeVoteTolerated: ''
+    collaborativeModerationExplanations: 'Erklärungen zur kollaborativen Moderation'
+    maxDaysLeavingAnElementPending: 'Zahl der Tage, bevor ein noch nicht validiertes
+      Element als moderierungsbedürftig markiert wird'
+    maxOppositeVoteTolerated: 'Zahl der erlaubten Gegenstimmen'
     minDayBetweenContributionAndCollaborativeValidation: ''
     minVoteToChangeStatus: ''
     minVoteToForceChangeStatus: ''
@@ -175,7 +183,7 @@ config_duplicates:
       detectAfterImport_help: >
       fieldsToBeUsedForComparaison: ''
       fieldsToBeUsedForComparaison_help: >
-      rangeInMeters: ''
+      rangeInMeters: 'Maximale Distanz (in Metern) zwischen zwei Dubletten'
       sourcePriorityInAutomaticMerge: ''
       sourcesToDetectFrom: >
       sourcesToDetectWith: ''
