@@ -112,8 +112,8 @@ commons:
   anonymous: 'Anonym'
   btn_update_and_edit: 'Aktualisieren'
   default: 'Standard'
-  date_format: ''
-  date_time_format: ''
+  date_format: 'd.m.Y'
+  date_time_format: 'd.m.Y à H:i'
   send: 'Abschicken'
 
 config_api:
@@ -127,12 +127,12 @@ config_api:
     gogo_api_configuration: 'GoGoCarto Konfiguration'
     gogo_api_element_get: 'Ein Element (ID mit der id des Elements ersetzen)'
     gogo_api_elements_from_text: 'Element suchen'
-    gogo_api_gogocartojs_configuration: 'GoGoCartoJs Konfiguration'
+    gogo_api_gogocartojs_configuration: 'GoGoCartoJs-Konfiguration'
     gogo_api_semanatic_taxonomy: 'Semantische Taxonomie'
     gogo_api_taxonomy: 'Taxonomie'
     gogo_api_taxonomy_mapping: 'Liste der Optionen mit korrespondierender ID'
     gogo_api_taxonomy_show: 'Eine Kategorie (ID mit der id der Kategorie ersetzen)'
-    gogo_api_ui: 'GUI zur API-Konstruktion'
+    gogo_api_ui: 'Grafische Schnittstelle zur Erstellung einer API'
     gogo_element_import_available_options: 'Liste der Optionen'
     text: 'ihre_sucheingabe'
   form:
