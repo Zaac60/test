@@ -168,7 +168,7 @@ commons:
   send: Envoyer
 
 config_api:
-  _label: APIs
+  _label: API
   config: Configuration
   elements: Éléments
   fields:
@@ -176,18 +176,18 @@ config_api:
     apilist:
     gogo_api_configuration: Configuration GoGoCarto
     gogo_api_element_get: Un Element (remplacer ID par l'id de l'élement)
-    gogo_api_elements_from_text: Rechercher un élement
+    gogo_api_elements_from_text: Rechercher un élément
     gogo_api_gogocartojs_configuration: Configuration GoGoCartoJs
     gogo_api_semanatic_taxonomy: Taxonomie sémantique
     gogo_api_taxonomy: Taxonomie
-    gogo_api_taxonomy_mapping: Liste des options avec correspondance id
+    gogo_api_taxonomy_mapping: Liste des options avec correspondance ID
     gogo_api_taxonomy_show: Une Catégorie (remplacer ID par l'id de la catégorie)
-    gogo_api_ui: Interface graphique pour construire une api
+    gogo_api_ui: Interface graphique pour construire une API
     gogo_element_import_available_options: Liste des options
     text: votre_texte_de_recherche
   form:
     groups:
-      apis: Liste des APIs disponibles
+      apis: Liste des API disponibles
       config: Configuration
       config_description: >-
         <div class="iframe-container"><iframe height="200" sandbox="allow-same-origin
@@ -197,7 +197,7 @@ config_api:
   taxonomy: Taxonomie / Catégories
 
 config_contributions:
-  _label: Qui peut Contribuer ?
+  _label: Qui peut contribuer ?
   fields:
     collaborativeModerationExplanations: Explications au sujet de la modération collaborative
     maxDaysLeavingAnElementPending: Nombre de jours au bout desquels un élément toujours
