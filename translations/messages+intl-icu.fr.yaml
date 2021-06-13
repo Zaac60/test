@@ -204,7 +204,7 @@ load_configuration:
   SeeMoreButtonText: En savoir plus
 
 login:
-  _label: Connexion
+  _label: Se connecter
   login_with: Se connecter avec {provider}
   register: Besoin d'un compte ? <a href="{url}">S'inscrire</a>
 
@@ -314,7 +314,7 @@ vote:
   user_vote_for_him: >-
     Voyons voyons, vous ne comptiez quand même pas voter pour votre propre contribution
     si ? Laissez-en un peu pour les autres !</br> Attention les petits malins, si
-    vous utilisez une autre de vos adresse perso on le verra aussi ! 
+    vous utilisez une autre de vos adresses perso on le verra aussi ! 
   vote_added: Merci de votre contribution !
   vote_modified: 'Merci {user} : votre vote a bien été modifié !'
 
