@@ -1,1717 +1,1768 @@
-config_infobar:
-  _label: Info Bar
-  fields:
-    description:
-      colorOptionId: The category ID that gives its main colour to this element
-      _label: Description
-      updatedAt: Date of last update
-      status: "<ul>\n  <li>-6: Duplicate</li>\n  <li>-4: Deleted </li>\n  <li>-3:\
-        \ Rejected (votes) </li>\n  <li>-2: Rejected (admin) </li>\n  <li>-1: Pending\
-        \ (changes) </li>\n  <li> 0: Pending (added)</li>\n  <li> 1: Validated (admin)</li>\n\
-        \  <li> 2: Validated (votes)</li>\n  <li> 3: Added by admin</li>\n  <li> 4:\
-        \ Edited by admin</li>\n  <li> 5: Edited by owner</li>\n  <li> 6: Edited with\
-        \ direct link</li>\n  <li> 7: Imported</li>\n</ul>"
-      sourceKey: Name of the source of this element (can be empty)
-      originalAddress: The detailed address with the postal code, the city etc…
-      createdAt: Creation date in the database
-      categoriesFull: Complete list of categories, including id, name, description
-        and position
-      categories: List of category names of the element
-      isDeleted: Shortcut for status = Denied or Deleted
-      images: URLs table of the different images
-      distance: If an address has been entered, distance between the point and the
-        address
-      isPending: Shortcut for status == Pending (changes or addition)
-    example:
-      categories: "'{% if \"my category\" in categories '%} … '{% endif '%}"
-      createdAt: "Created on: '{{ createdAt '}}"
-      updatedAt: "Last update: '{{ updatedAt'}}"
-      status: "'{% if status == 2 '%} … '{% endif '%}"
-      sourceKey: "'{% if sourceKey == \"Fablab\" '%}Referenced by http://fablabs.io'{%\
-        \ endif '%}"
-      originalAddress: "'{{ originalAddress.streetAddress ~ '' - '' ~ originalAddress.addressLocality\
-        \ ~ '' - '' ~ originalAddress.postalCode ~ '' - '' ~ originalAddress.addressCountry\
-        \ }}"
-      isPending: "'{% if isPending '%} … '{% endif '%}"
-      isDeleted: "'{% if isDeleted '%} … '{% endif '%}"
-      images: Images are displayed by default in the detail form and you don't need
-        to include this field. But you can always use this variable according to your
-        needs
-      distance: "'{% if distance is defined '%} <span>'{{ distance '}}</span> '{%\
-        \ endif '%}"
-      colorOptionId: "&lt;div class=\"gogo-color-as\" option-id=\"'{{colorOptionId'}}\"\
-        >Text of the main category color&lt;/div></br> &lt;div class=\"gogo-bg-color-as\"\
-        \ option-id=\"'{{colorOptionId'}}\">Background of the main category color&lt;\
-        \ /div></br> &lt;div class=\"gogo-border-color-as\" option-id=\"'{{colorOptionId'}}\"\
-        >Border of the main category color&lt;div></br> You can also use the \"gogo-soft-color-as\"\
-        \ and \"gogo-soft-bg-bolor-as\" classes   "
-      categoriesFull: "'{% for category in categoriesFull'%}\n  <div>Id: '{{category.id'}}</div>\n\
-        \  <div>Name: '{{category.name'}}</div>\n  <div>Description: '{{category.description'}}</div>\
-        \ <div>Position: '{{category.description'}}.\n  <div>Position: '{{category.index'}}</div>\
-        \ <div>Position: '{{category.index'}}</div>\n'{% endfor '%}"
-    usage: Use
-    type: Type
-    name: Name field
-    infobar:
-      width: 'Width of the detail (in pixels, default: 540)'
-      headerTemplateUseMarkdown: Use markdown syntax for the header (otherwise only
-        Nunjucks syntax)
-      headerTemplate: Header
-      bodyTemplateUseMarkdown: Use markdown syntax for the body (otherwise only Nunjucks
-        syntax)
-      bodyTemplate: Body of the form
-    exemple: Example of a filter to be used
-    label: Label
-  form:
-    groups:
-      infobar_param: Other Settings
-      infobar_content_description: "<div class=\"text-and-iframe-container\"><div\
-        \ class=\"iframe-container-aside\" style=\"margin-top: 0\"><iframe height=\"\
-        200\" sandbox=\"allow-same-origin allow-scripts\" src=\"https://video.colibris-outilslibres.org/videos/embed/354086c4-e826-44ad-b44a-475e517c3af6\"\
-        \ frameborder=\"0\" allowfullscreen></iframe></div> <p style=\"margin-top:\
-        \ 10px\">You can use <a href=\"https://guides. github.com/features/mastering-markdown/#syntax\"\
-        >the mardown syntax</a> and <a href=\"https://mozilla.github.io/nunjucks/\"\
-        >the nunjucks syntax (for advanced uses)</a></p> <p>To display the value of\
-        \ a field in your form (see list of fields below) use a double brace <b>'{{my_field_name'}}</b>.\
-        \ You can also choose to format your field with a filter by using the <b>|</b>\
-        \ symbol followed by the filter name. For example, to display a field in uppercase\
-        \ you could do <b>'{{my_field_name|upper'}}</b>. Special filters for gogocarto\
-        \ have been created, they allow to simply display certain type of field. For\
-        \ example, for a long description field, we could use <b>'{{my_field_name_long_description|gogo_textarea(truncate\
-        \ = 300) }}</b>. This will trim the description to around 300 characters and\
-        \ display a small button to show the entire description.</p> <p>Check out\
-        \ the list of <a href=\"https://mozilla.github.io/nunjucks/templating.html#builtin-filters\"\
-        >nunjucks filters here</a>. Gogocarto''s list of filters is not yet documented</p></div>\n\
-        <h2 style=\"margin: 0 0 25px 0\">\n  Content of the detail form\n  <span class=\"\
-        btn btn-primary\" id=\"generate-body-template\" onclick=\"generateBodyTemplate()\"\
-        >Generate automatically the content of the detail form</span> </h2>"
-      infobar_content: Contents of the Detail file (panel that is displayed when a
-        marker is clicked)
-      filter_list: List of available filters (help)
-      field_list: List of available fields (help)
-      automatic_emails_description: "<p><b>Filters allow you to apply transformations\
-        \ to a variable/field</b></p> <h3>Nunjucks language filters</h3> <a href='https://mozilla.github.io/nunjucks/fr/templating.html#filtres-int-gr-s'>See\
-        \ online documentation</a> <h3>GoGoGoCarto special filters</h3>\n<h4>gogo_text</h4>\
-        \ Display text (with line breaks before and after the text)</br> You can use\
-        \ <b>the label option</b>: '{{ tel|gogo_text(label = \"Phone\")'}}\n<h4>gogo_date</h4>\
-        \ <ul>\n<li>Format a date '{{ event_date | date '}} or '{{ event_date | gogo_date(label=\"\
-        Date\")\n'}}</li>\n  <li>Or if you want to use a particular format '{{ event_date|date(\"\
-        DD/MM/YYYY\")\n'}} or '{{ event_date | gogo_date(label=\"Date\", format=\"\
-        DD/MM/YYYY\") '}}. <a href='https://momentjs.com/docs/#/displaying/format/'>See\
-        \ possible choices</a></li> </ul>\n<h4>gogo_tags</h4> Displays an array as\
-        \ tags '{{ [\"Service\", \"White\"] | gogo_tags '}}\n<h4>gogo_textarea</h4>\
-        \ Display long text, there are several options <ul><li><b>truncate</b>: truncate\
-        \ the text after XX characters (default 1000), and put a little \"show more\"\
-        </li> <li><b>tolerance</b>: truncate tries to be at the end of a sentence\
-        \ or less than a word. The tolerance is the number of characters we give as\
-        \ a margin to the algorithm. i.e truncates to 1000 characters +/- 50</li>\
-        \ <li><b>glossary</b>: a glossary to explain certain words. The word will\
-        \ be slightly highlighted and on hovering will display the explanation</li></ul>\
-        \ <pre>'{{\"My beautiful text supposedly very very long\"|gogo_textarea(truncate\
-        \ = 15, tolerance = 5, glossary = { \"beautiful\": \"English word that means\
-        \ pretty\"}) '}}</pre>\n\n<h3>Debugging data</h3> If you are using somewhat\
-        \ specific object data, you can use the \"dump\" filter to display its contents\
-        \ '{{ my_specific_field|dump'}}"
-      automatic_emails: Information about automatic e-mails
-  fields_list:
-    system: Fields / Variables provided by the system
-    other: All other fields in your data are also available
-    form: List of fields available via the form
 abouts:
   _label: Popups
   fields:
+    content: Content
     name: Name
-    content: Content
-bulk:
-  delete: Delete the reported elements
-  continue: Continue ({count} remaining)
-  batchDone: All of the elements have been handled successfully
-  automaticMerge: Automatic merge
-  analyse: Analyzing the elements from {first} to {last}
-  _label: Bulk action
-  update_gamification: Update the scores (vote numbers, and total score per user)
-  updateUser: '{count, plural, =0 {no updated user} =1 {# updated user} other {# updated
-    users} }'
-  return: Back to duplicates handling
-  results: Results
-  manualMerge: Potential duplicates detected
-  managed: Handle the detected duplicates
-  isDuplicateAction: Duplicate detection
-  errorElement: 'Error while considering the {id} element: FILE {file}, LINE {line}:
-    {error}'
-  duplicateKept: Duplicate kept
-  duplicateDeleted: Duplicate deleted
-  done: All the elements have been successfully processed
-  detectDuplicatesAction: Duplicate detection
-  deleteElement: '{count, plural,  =0 {No element has been deleted} =1 {# element
-    has been deleted} other {# elements have been deleted} }'
 
-js:
-  element_form:
-    geocoded_marker_text: Move me to specify the position</br>(in the centre of the
-      building)
-    geocode_error: Error when geolocating "{address}"
-  mapping_taxonomy:
-    selectCategory: Select an existing category or enter the name of a new category
-      to create
-    createTerm: '{term} (Will be created when saving)'
-  mapping_ontology:
-    streetNumber: 'Address: street number'
-    streetAddress: 'Address: street'
-    specificData: Specific fields
-    source: Origin of the item (source)
-    primary: Non-editable
-    postalCode: 'Address: postal code'
-    owner: E-mail of the user who owns the file
-    otherData: Other fields already present in the database
-    osm_version: OSM Version (automatically mapped)
-    osm_url: OSM URL (automatically mapped)
-    osm_timestamp: OSM Timestamp (automatically mapped)
-    osm_source: Data source OpenStreetMap
-    osm_opening_hours: Opening hours (OSM format)
-    openHours: Opening hours (GoGoCarto format)
-    name: File title
-    primary_title: This field is currently not present in the public form. It will
-      only be editable from the administrator interface. You can modify the public
-      form to make this field editable by all
-    longitude: Longitude
-    files: File(s) as URL, in array, or separated by commas
-    email: Element email
-    latitude: Latitude
-    info_title: This field will be editable in the public form
-    info: Editable
-    importedData: Original import fields
-    images: Image(s) as URL, in table, or separated by commas
-    id: Unique identifier (in the old database)
-    fullAddress: Full address
-    formData: Form Fields
-    coreData: Main fields
-    categories: Categories (several fields selectable)
-    addressLocality: 'Address: city'
-    addressCountry: 'Address: country'
-  filters_builder:
-    date_views:
-      range: Range
-      year: Year
-      week: Week
-      month: Month
-      day: Day
-    step: Step
-    used_field: 'Field used : {field}'
-    type: Type
-    taxonomy: Filter Categories
-    select_views: Views (Ctrl + Click)
-    options:
-      value: Value
-      slider: Slider
-    multiday: Multiple days selectable
-    min: Minimum
-    max: Maximum
-    gogo_number: Filter number
-    gogo_date: Filter date
-    field_name: Name of field to be used
-    field_end: End date field (optional)
-    default_view: Default display
-    customize_field: Customize this filter in the category menu
-    contracted_field: Filter collapsed by default
-    choose_field: Please select the field to use
-  form_builder:
-    errorMsg: Error Message
-    propNameOptions: Choose an existing field or enter a new field
-    fields:
-      title: Title of the form (required)
-      taxonomy: Categories (required)
-      address_help: required field
-      title_help: This field is mandatory
-      separator: Section separator
-      openhours_help: Block containing a schedule selector
-      openhours: Opening hours
-      images: Images(upload)
-      files: Files(upload)
-      email_help: This field is recommended (allows to send emails)
-      email: Main email
-      elements: Link to another item
-      checkbox: check box
-      address: Address (required)
-    value: Value
-    toggle: Toggle
-    timepicker: Timepicker
-    textArea: Long text
-    text: Text, email, phone, URL.
-    subtype_options:
-      wysiwyg: Enhanced editor
-      url: URL
-      textarea: Simple editor
-      text: Text
-      tel: Telephone
-      email: email
-    subtype: Type
-    style: Style of the boxes
-    selectOptions: Options
-    select: Select
-    searchWeigh: Weight of research
-    search: Search in this field
-    roles_admin: Administrator
-    roles: Access
-    richText: Text editor
-    reversedBy_placeholder: The name of another field of type "link to another element"
-    reversedBy: Reversed by
-    required: Required
-    remove_icon: Delete
-    range: Interval of dates
-    radioGroup: Radio Button Group
-    radio: Radio button
-    placeholder_value: Value
-    placeholder_textarea: Enter a long text
-    placeholder_text: Enter Text
-    placeholder_placeholder: Placeholder
-    placeholder_password: Enter your password
-    placeholder_label: Label
-    placeholder_email: Enter your email address
-    placeholder_className: classes separated by spaces
-    placeholder: Placeholder
-    pattern_placeholder: Regular expression for the validation of this field
-    pattern: Validation pattern
-    paragraph: Paragraph
-    options:
-      'yes': Checked
-      normal: Normal
-      'no': Not checked
-      filled: Full
-    optional: optional
-    optionValuePlaceholder: Value
-    optionLabelPlaceholder: Label
-    option: Option
-    number: Number
-    name: Field name
-    multiple: Several choices
-    maxlength: Max. length.
-    mandatory: Mandatory
-    limitRole: Visible only to admins
-    label: Label
-    icon_placeholder: Choose an icon
-    icon: Icon
-    header: Title
-    errorMsg_placeholder: Oops this text is a bit long ! // Please fill in a valid
-      email address //…
-    edit_icon: Edit/Hide
-    description: Text Help
-    defaultvalue: Initial value
-    dateField: Date field
-    copy_icon: Duplicate
-    content: Content
-    close: Close
-    class: Class
-    checked_value: Field value if checked
-    checkboxGroup: Group of checkboxes
-    checkbox: Check box
-    addOption: Add an Option
-    accept_placeholder: .pdf audio/* .mp3 (separated by spaces)
-    accept: Accepted files
-  import:
-    source_this_map: This Map
-  charts:
-    title_visitors: Visitor statistics
-    reload: Reload
-    period:
-      year: Year
-      week: Week
-      month: Month
-      day: Day
-    last: The latest
-    field:
-      nb_visits: Number of visits
-      avg_time_on_page: Average time on page (seconds)
-    display: Display
-  api:
-    placeholder: Select one or more categories
-  bounds_picker:
-    title: Geographic zone of the request
-    search_by_address: Search by address
-    draw_rectangle: Draw a rectangle on the map
-    search_placeholder: A city, region, country ...
-    search_button: Search
-    nomatch: No match found for {address}
-  osm_query_builder:
-    title: List of queries in the OpenStreetMap database
-    or_add_manually: Or add a query manually
-    add_condition: Add a condition
-    auto_generated: Automatically generated code for the OpenStreetMap query (via OverPass)
-    condition:
-      title: Condition...
-      search: Search a key
-      exists: Exists
-      dont_exist: Don't exist
-      equal_to: Is equal to
-      different_from: Is different from
-      one_of: Is one of the values
-      none_of: Is none of the values
-    tagsearch:
-      search_placeholder: Quick search in OpenStreetMap (restaurant, organic, second hand...)
-    wikilink:
-      link_to: Link to the wiki page of {key}
+bulk:
+  _label: Bulk action
+  analyse: Analyzing the elements from {first} to {last}
+  automaticMerge: Automatic merge
+  batchDone: All of the elements have been handled successfully
+  continue: Continue ({count} remaining)
+  delete: Delete the reported elements
+  deleteElement: >-
+    {count, plural,  =0 {No element has been deleted} =1 {# element has been deleted} other {#
+    elements have been deleted} }
+  detectDuplicatesAction: Duplicate detection
+  done: All the elements have been successfully processed
+  duplicateDeleted: Duplicate deleted
+  duplicateKept: Duplicate kept
+  errorElement: 'Error while considering the {id} element: FILE {file}, LINE {line}: {error}'
+  isDuplicateAction: Duplicate detection
+  managed: Handle the detected duplicates
+  manualMerge: Potential duplicates detected
+  results: Results
+  return: Back to duplicates handling
+  updateUser: '{count, plural, =0 {no updated user} =1 {# updated user} other {# updated users} }'
+  update_gamification: Update the scores (vote numbers, and total score per user)
 
 categories:
-  list:
-    multiple: Multiple
-    help_description: "<div style=\"float: left;margin-right: 30px;\"><iframe height=\"\
-      200\" sandbox=\"allow-same-origin allow-scripts\" src=\"https://video.colibris-outilslibres.org/videos/embed/4a5b7593-aedb-4983-b562-3cab03bb1691\"\
-      \ frameborder=\"0\" allowfullscreen></iframe></div>\n<div style=\"\"><iframe\
-      \ height=\"200\" sandbox=\"allow-same-origin allow-scripts\" src=\"https://video.colibris-outilslibres.org/videos/embed/6ff39dd4-0db8-435b-a3bd-e87307e7e5d1\"\
-      \ frameborder=\"0\" allowfullscreen></iframe></div> </br>Categories are always\
-      \ grouped within <b>categories groups</b></br> In order to add categories to\
-      \ a group, the simplest thing is to edit the category group. You will then see\
-      \ at the bottom of the page the list of group's categories. You can the edit\
-      \ them or add new ones.</br></br>\nYou can have multiple groups of categories\
-      \ in parallel. To do that, create a new group, save it and add categories to\
-      \ it</br></br>\nA category can itself contain a subgroup containing subcategories\
-      \ inside it. When editing a category at the bottom of the page, you can add\
-      \ a subgroup to it and then populate it with new categories.</br></br> <b>(Group)\
-      \ CATEGORY GROUP 1</b> <ul>\n  <li>Category 1</li>\n  <li>Category 2</li>\n\
-      </ul> <b>(Group) CATEGORY GROUP 2</b> <ul>\n  <li>Category 1</li>\n  <li>Category\
-      \ 2</li>\n  <li>Category 3</li>\n</ul> <ul>\n  <b>(Group) SUBCATEGORY GROUP\
-      \ 1</b>\n  <ul>\n    <li>subcategory 1</li>\n    <li>subcategory 2</li>\n  </ul>\n\
-      </ul>"
-    help: Some help
-    empty: No available categories. Please create a new group of categories and fill
-      in categories inside it. Categories are an essential element of GoGoCarto. Your
-      map may not work at all without available categories
-    categoriesDescription: Describe the categories
-    addCategory: Add a category
-    addCategories: Add a group of categories
-    unique: Unique
-    title: List of categories
-    sort_alpha: Sort categories by alphabetical order
+  _label: Categories
+  fields:
+    customId: Custom ID
+    descriptionLabel: Description area label
+    displayInForm: In the form
+    displayInForm_help: Neither the group nor the categories will be displayed in the form
+    displayInInfoBar: In the information bar
+    displayInInfoBar_help: The group name will not be displayed, but the categories will
+    displayInMenu: In the menu
+    displayInMenu_help: The group name won't be displayed, but the categories will
+    displaySuboptionsInline: Display the sub-categories in one line
+    enableDescription: Activate the categories description
+    enableDescription_help: >-
+      Allows to write a description for each categories. For example the Agriculture category could
+      be associated with "Market gardening, processed goods, ..."
+    index: Position
+    isMandatory: Mandatory choice
+    isMandatory_help: A category from this group must be selected
+    name: Group name
+    nameShort: Name (shortened)
+    nameShort_help: The short version is used in the menu as we are often short on space
+    option:
+      color: Color
+      icon: Icon
+      id: More options
+      index: Position
+      name: Name
+    parent: Parent category
+    parent_placeholder: Root
+    pickingOptionText: 'Text to display in the form: Choose…'
+    showExpanded: >-
+      Display the categories in the initial position (or else one will have to click to display
+      them)
+    singleOption: Single option
+    singleOption_help: Only one category at a time can be selected
+    unexpandable: Make this group of categories nonexpendable
+    unexpandable_help: In this menu, this group categories will always be displayed
   form:
     groups:
+      categories: Categories of this group
+      display: Display this group
       primary: Main settings
       secondary: Secondary display options
-      display: Display this group
-      categories: Categories of this group
-  fields:
-    unexpandable_help: In this menu, this group categories will always be displayed
-    unexpandable: Make this group of categories nonexpendable
-    singleOption_help: Only one category at a time can be selected
-    singleOption: Single option
-    showExpanded: Display the categories in the initial position (or else one will
-      have to click to display them)
-    pickingOptionText: 'Text to display in the form: Choose…'
-    parent_placeholder: Root
-    parent: Parent category
-    option:
-      name: Name
-      index: Position
-      id: More options
-      icon: Icon
-      color: Color
-    nameShort_help: The short version is used in the menu as we are often short on
-      space
-    name: Group name
-    isMandatory_help: A category from this group must be selected
-    isMandatory: Mandatory choice
-    index: Position
-    enableDescription_help: Allows to write a description for each categories. For
-      example the Agriculture category could be associated with "Market gardening,
-      processed goods, ..."
-    enableDescription: Activate the categories description
-    displaySuboptionsInline: Display the sub-categories in one line
-    displayInMenu_help: The group name won't be displayed, but the categories will
-    displayInMenu: In the menu
-    displayInInfoBar_help: The group name will not be displayed, but the categories
-      will
-    displayInInfoBar: In the information bar
-    displayInForm_help: Neither the group nor the categories will be displayed in
-      the form
-    displayInForm: In the form
-    descriptionLabel: Description area label
-    customId: Custom ID
-    nameShort: Name (shortened)
-  _label: Categories
-config_style:
-  fields:
-    searchBarColor: Search bar color
-    textLightSoftColor: Softened light text colour
-    textLightColor: Clear text colour
-    textDarkSoftColor: Softened dark text colour
-    textDarkColor: Dark text colour
-    textColor: Text colour
-    secondaryColor: Secondary colour
-    primaryColor: Primary colour
-    pendingColor: Colour pending validation
-    interactiveSectionColor: Colour section to vote in detail sheet
-    homeBackgroundColor: Home page background colour
-    headerTextColor: Header text colour
-    headerHoverColor: Header hover text colour
-    headerColor: Header background colour
-    errorColor: Error colour
-    disableColor: Colour disabled
-    contentBackgroundElementBodyColor: Background colour of detail sheet content
-    contentBackgroundColor: Background colour of page content
-    choose_color: Click to choose a colour
-    backgroundColor: Page background colour
-    titleFont: Title font
-    theme: Theme
-    mainFont: Main font
-    iconImport: Link for the icons CDN (by default, FontAwesome icons are loaded)
-    fontImport: Link to the font CDN
-    select_font_placeholder: Select a font or use a custom one
-  form:
-    groups:
-      secondaryColor: Other colours
-      primaryColors: Main colours
-      advancedColor: Advanced colours
-      theme: Theme and fonts
-      fontImport: Load other fonts and icons
-  _label: Style / Colors / Icons
-projects:
-  initialize:
-    plainPassword-1: Password
-    email: E-mail address
-  _label: Project list
-  warnings:
-    abandonned_map: Your map created on {baseUrl} may be deleted?
-    message: >-
-      Hello!</br></br> You are the admin for the map  {projectName} on {baseUrl}. We have noticed that no one has been using this map for several months. Has your project been abandoned or changed?</br> Or you are recieveing this message because {baseUrl} keeps growing, and using lots of ressources on our server. </br>
-      <b>If your project is no longer active please connect to your account at <a href="{adminUrl}">admin space</a> and click on "Delete my project" on the bottom of the left menu.</b></br> If you want to keep your project, please login to your map.</br>
-      <b>If your map remains inactive in the next few months we reserve the right to delete it.</b></br></br>
-      Best regards,</br>
-      Team of {baseUrl}.
-partners:
-  form:
-    websiteUrl: Website's URL
-    name: Name
-    logo_placeholder: Select an already imported image, or add one!
-    logo: Logo
-    content: Content
-  _label: Partners
-sonata.user.user:
-  batch:
-    error: 'ERROR: {message}'
-    usersWithoutEmail: '{count, plural =1 {# e-mail could not be sent, because no
-      e-mail address was given} other {# e-mails could not be sent, because no e-mail
-      address was given} }'
-    tooMany: Too many items to process! Only {limit} have been processed
-    sendmails: '{count, plural, =1 {# e-mail was sent} other {# e-mails were sent}
-      }'
-    mailError: You must fill in a subject and a content. Please start again
-  fields:
-    content: Message
-    gamification: Interactions
-    email: E-mail
-    sendMail: Send e-mail
-    reportsCount: Reports
-    object: Title
-    votesCount: Votes
-    votes: Votes
-    username: Name
-    groups: Groups
-    createdAt: Created on
-    contributionsCount: Contributions
-    permissions_warning: >-
-      For users who have access to the admin dashboard, you have to
-      <b>configure permissions on each item</b><br>
-      (Note: SUPER_ADMIN users already have access to every items, no need to configure anything for them)
-    check_uncheck: Check/uncheck all
-  facebook_warning: 'WARNING: If your e-mail is private on Facebook, you will not
-    be informed of the evolution of your contributions'
-  form:
-    plainPassword: Password
-    main-roles: Main roles
-    watchModeration: Send notification e-mail when items are to be moderated
-    locked: Locked
-    groups:
-      user: User
-      status: Status
-      security: Security
-      roles: Roles
-      general: General
-    expired: Expired
-    enabled: Activated
-    allowedStamps: Authorized labels
-    watchModerationOnlyWithPostCodes_placeholder: 40*, 47*, 48500
-    watchModerationOnlyWithPostCodes_help: 'Separated by commas. You can use the *
-      symbol to select a whole department, for example : 40*, 47*, 48500'
-    watchModerationOnlyWithPostCodes: Only for items with postal code
-    watchModerationOnlyWithOptions: Only for items with one of the following categories
-  _label: Users
-  forgottedPassword: Forgot your password
-  role:
-    ROLE_SUPER_ADMIN: SUPER ADMIN (all powers)
-    ROLE_SONATA_ADMIN: ADMIN INTERFACE
-    ROLE_DIRECTMODERATION_EDIT_OWN_CONTRIB: CONTRIBUTOR + (can edit the elements to
-      which he has contributed, even without being the owner)
-    ROLE_DIRECTMODERATION_ADD: CONTRIBUTOR + (can add elements as an Admin from the
-      site)
-    ROLE_ADMIN: MODERATOR (Access to moderation functions, to be detailed in DataModel/WhoCanContribute)
-config_emails:
-  form:
-    groups:
-      mailForElements: Automatic e-mails for {element}
-      mailForContributors: Automatic e-mails for contributors
-      infosNewletter: Information about the newsletter
-      infosElements: Information about automatic e-mails
-      infosContributors: Information about automatic e-mails
-      edit: During an update - <a href=''{url}'' target='_blank'>TEST</a>
-      delete: During a deletion - <a href=''{url}'' target='_blank'>TEST</a>
-      add: During an addition - <a href=''{url}'' target='_blank'>TEST</a>
-      validation: During validation- <a href=''{url}'' target='_blank'>TEST</a>
-      newsletter: Newsletter - <a href=''{url}'' target='_blank'>TEST</a>
-      report: When a report is taken into account - <a href=''{url}'' target='_blank'>TEST</a>
-      refusal: In case of refusal - <a href=''{url}'' target='_blank'>TEST</a>
-      newsletters: Newsletter
-      infosContributors_description: >-
-        These emails are automatically sent to contributors
-        when their contributions are accepted, refused etc...</br>It is possible
-        to include the following variables in the messages (keeping the '''{{'}}''):
-        </br> <li>'{{ element '}} the name of {element}</li> <li>'{{ user '}} the
-        name or email address of the contributor</li> <li>'{{ showUrl '}} the address
-        which refers to the visualization of the file</li> <li>'{{ editUrl '}} the
-        address that refers to the modification of the file</li> <li>'{{ homeUrl
-        '}} the address of the home page of the site</li> <li>'{{ userContributionsUrl
-        '}} the address of the "My contributions" page</li> <li>'{{ customMessage
-        '}} the personal message that has been written by the admins (only in case
-        of a refusal)</li></br> You can also use these variables in the special
-        contents of the text editor. For example in the URL field of the popup that
-        opens when you click on 'add link'.</br> <b>Once the email is saved</b>,
-        you can click on the buttons <b>TESTER</b> to see the rendering.
-      infosElements_description: >-
-        <div class="text-and-iframe-container"> <div class="iframe-container-aside">
-        <iframe height="200" sandbox="allow-same-origin allow-scripts" 
-        src="https://video.colibris-outilslibres.org/videos/embed/d5d007ec-e5c6-4a50-ab66-572e35e8905a"
-        frameborder=\"0\" allowfullscreen></iframe></div> These emails are automatically
-        sent to {elements} when their entry is added, modified or deleted.</br>
-        It is possible to include the following variables in messages (keeping the
-        '''{{'}}''): </br> <li>'{{ element '}} the name of {element}</li> <li>'{{
-        showUrl '}} the address that refers to the visualization of the file</li>
-        <li>'{{ editUrl '}} the address that refers to the modification of the record</li>
-        <li>'{{ homeUrl '}} the address of the home page of the site</li> <li>'{{
-        directEditElementUniqueUrl '}} the unique address to edit the element directly
-        without being admin</li> <li>'{{ customMessage '}} the personal message
-        that has been written by the admins (only when deleting)</li></br> </div>
-        You can also use these variables in the special contents of the text editor.
-        For example in the URL field of the popup that opens when you click on "add link".
-        </br> <b>Once the email is saved</b>, you can click on the <b>TEST</b>
-        buttons to view the rendering.
-      infosNewletter_description: >-
-        This email is automatically sent to users who have
-        subscribed. It gives the list of the latest additions in a determined geographical
-        area and optionally pieces of news.</br></br> <b>It is necessary to include
-        the variable <u>'{{ newElements'}}</u> and/or <u>'{{ pendingElements'}}</u></b>
-        which will be respectively replaced by the list of the newly added elements
-        and the list of elements pending validation</br></br> It is also possible
-        to include the following variables in the messages (keep the '''{{'}}''):
-        </br> <ul> <li>'{{ news '}} which will be replaced by the latest published
-        news</li> <li>'{{ user '}} replaced by the contributor's name or email address</li>
-        <li>'{{ homeUrl '}} replaced by the URL of the site''s home page</li> <li>'{{
-        userProfileUrl'}} replaced by the URL of the "My Settings" page.</li>
-        <li>'{{ showOnMapBtn '}} replaced by a button allowing the user to return
-        to the map centered on her position</li> </ul> </br> <b>Once the email is
-        saved</b>, you can click on the <b>TEST</b> button to preview an email.
-  _label: E-mails / newsletter
-wrappers:
-  fields:
-    textColor: Text colour
-    backgroundColor: Background colour
-    rawContent: Raw HTML content (optional)
-    content: Content of the banner
-  _label: Home page banners
-options:
-  fields:
-    useColorForMarker_help: If an item has several categories that give the colour,
-      the lowest level category is used
-    useColorForMarker: Use the colour of this category for the marker
-    softColor_help: Some colours suit the marker (a bit flashy) but don't really suit
-      the header of the detail sheet. In this case, the ‘softened’ version is used
-      if it has been filled in
-    softColor: Softened colour
-    color: Colour
-    add_a_tag: Add a tag
-    displayInForm: In the form
-    displayChildrenInMenu: In the menu
-    displayChildrenInInfoBar: In the detail file
-    displayChildrenInForm: In the form
-    descriptionLabel: Label for additional field
-    customId_help: When importing items, we will compare the category name of the
-      imported item with the category name of your map. We will also compare with
-      the custom Ids
-    customId: Custom Id
-    nameShort: Name (shortened)
-    name: Name
-    index: Position (to sort categories)
-    icon: Icon
-    enableDescription_help: You can fill in a text to describe this category. For
-      example, for a category "Other" you can specify the value. If you want to activate
-      this field for all categories, activate the "category description" parameter
-      in the Category Group
-    enableDescription: Add a text field to this category
-    displayInMenu: In the menu
-    displayInInfoBar: In the detail file
-    showExpanded: In the initial position, display the subgroups of this category
-    return_to_list: Back to the list
-    pickingOptionText: 'Text to be displayed in the form: Choose…'
-    parent: Parent Category Group
-    osmTags_help: When exporting OSM, each element that has this category will be
-      assigned the corresponding OSM tag
-    osmTags: OSM tags list
-    nameShort_help: The short version is used in the menu, because we often lack space
-    url_help: In the detail file, a small icon will appear next to the category with
-      a link to the external URL. This can be for example an age of a wiki describing
-      the category
-    url: URL to an external page
-    unexpandable_help: The subgroups and subcategories will always be displayed
-    unexpandable: Cannot reduce this category
-    textHelper_help: It will be displayed in the menu and in the form
-    textHelper: Help message to quickly describe this category
-    useIconForMarker_help: The marker will display all icons of each category that
-      have this option enabled. The icons will be sorted in order of category selection
-      in the form
-    useIconForMarker: Use the icon of this category for the marker
-  _label: Option
-  form:
-    groups:
-      display: Show category
-      description: Text fields adjacent to the category
-      advanced: Advanced setup
-      subcategories: Sub-groups
-      secondary: Secondary parameters
-      primary: Main parameters
-      osm_help: When exporting OSM, each element that has this category will be assigned
-        the corresponding OSM tag
-      osm: Link to OpenStreetMap
-      main: Primary
-      displayChildren: Show subgroups and subcategories
-config_contributions:
-  fields:
-    maxOppositeVoteTolerated: Number of allowed opposite votes
-    minVoteToForceChangeStatus: Number of votes to validate / reject automatically
-      regardless of the voting time
-    minVoteToChangeStatus: Number of votes for an automatic validation / rejection
-    minDayBetweenContributionAndCollaborativeValidation: Number of days before a collaborative
-      validation / rejection
-    maxDaysLeavingAnElementPending: Number of days before an element still pending
-      validation will appear as needing to be moderated
-    collaborativeModerationExplanations: Explanations about collaborative moderation
-  form:
-    groups:
-      text: Text
-      editFeature: Ability to edit an element
-      directModerationFeature: Direct moderation
-      deleteFeature: Ability to delete an element
-      collaborativeModerationParameters: Collaborative moderation options
-      collaborativeModerationFeature: Collective moderation (ability to vote)
-      addFeature: Be allowed to add an element
-  _label: Who can contribute?
-config_duplicates:
-  form:
-    groups:
-      manualDetection: Limit the manual detection (optional)
-      fusion: Merge duplicates
-      configuration: Configuration
-  fields:
-    gogo_duplicates_index: Handle the detected duplicates
-    gogo_bulk_actions_detect_duplicates: Detect duplicates
-    duplicates:
-      useGlobalSearch_help: The global search is configured in the form personalization
-        (configuration of the searched fields, by default only the title of the file
-        will be scanned). In case of soft search, close values will be considered
-        as a match ("A tEsT" will match "test"). A perfect match will only happen
-        for very similar values "test" and "A tEsT" won't mach while "test" and "tEsT"
-        will
-      useGlobalSearch: Use the global search to look for duplicates (soft search in
-        {fields})
-      sourcesToDetectWith: And the sources (leave empty to search through the entire
-        database)
-      sourcesToDetectFrom: Look for duplicates between the given sources (leave the
-        field empty too search through the entire database)
-      sourcePriorityInAutomaticMerge: During a merge, which source would you mainly
-        like to keep ?
-      rangeInMeters: Max distance (in meters) between duplicates
-      fieldsToBeUsedForComparaison_help: Only perfectly matching values will be detected.
-        A match between any of these fields will be interpreted as a perfect match
-        between the two elements
-      fieldsToBeUsedForComparaison: Other fields uses for duplicate detection (pure
-        search)
-      detectAfterImport_help: For every new element added during the import, a full
-        scan of the database will be done to find potential duplicates
-      detectAfterImport: Look for duplicates after every import
-      automaticMergeIfPerfectMatch: Merge in case of perfect match
-  _label: Duplicates handling
+  list:
+    addCategories: Add a group of categories
+    addCategory: Add a category
+    categoriesDescription: Describe the categories
+    empty: >-
+      No available categories. Please create a new group of categories and fill in categories inside
+      it. Categories are an essential element of GoGoCarto. Your map may not work at all without
+      available categories
+    help: Some help
+    help_description: >-
+      <div style="float: left;margin-right: 30px;"><iframe height="200" sandbox="allow-same-origin
+      allow-scripts"
+      src="https://video.colibris-outilslibres.org/videos/embed/4a5b7593-aedb-4983-b562-3cab03bb1691"
+      frameborder="0" allowfullscreen></iframe></div>
+
+      <div style=""><iframe height="200" sandbox="allow-same-origin allow-scripts"
+      src="https://video.colibris-outilslibres.org/videos/embed/6ff39dd4-0db8-435b-a3bd-e87307e7e5d1"
+      frameborder="0" allowfullscreen></iframe></div> </br>Categories are always grouped within
+      <b>categories groups</b></br> In order to add categories to a group, the simplest thing is to
+      edit the category group. You will then see at the bottom of the page the list of group's
+      categories. You can the edit them or add new ones.</br></br>
+
+      You can have multiple groups of categories in parallel. To do that, create a new group, save
+      it and add categories to it</br></br>
+
+      A category can itself contain a subgroup containing subcategories inside it. When editing a
+      category at the bottom of the page, you can add a subgroup to it and then populate it with new
+      categories.</br></br> <b>(Group) CATEGORY GROUP 1</b> <ul>
+        <li>Category 1</li>
+        <li>Category 2</li>
+      </ul> <b>(Group) CATEGORY GROUP 2</b> <ul>
+        <li>Category 1</li>
+        <li>Category 2</li>
+        <li>Category 3</li>
+      </ul> <ul>
+        <b>(Group) SUBCATEGORY GROUP 1</b>
+        <ul>
+          <li>subcategory 1</li>
+          <li>subcategory 2</li>
+        </ul>
+      </ul>
+    multiple: Multiple
+    sort_alpha: Sort categories by alphabetical order
+    title: List of categories
+    unique: Unique
+
+charts:
+  collabRefused: Latest collaborative refusals
+  collabResolve:
+    axisTitle: Collaborative Validations/Refusals
+    refused: Collaborative refusals
+    title: Collaborative Validations/Refusals
+    validate: Collaborative Validations
+  collabValidated: Latest collaborative validations
+  contribsResolved:
+    added: Resolved additions
+    edited: Resolved changes
+    resolved: Contributions' resolution
+    total: Total Number (from the beginning)
+  empty: No found elements
+  showAll: Show all
+  userInteract:
+    added: Additions
+    modified: Changes
+    reported: Reported elements
+    subtitle: Click & drag to focus on a period
+    title: User interactions metrics
+    voted: Votes
+
+commons:
+  actual_file: 'Current file:'
+  anonymous: Anonymous
+  btn_update_and_edit: Update
+  date_format: m/d/Y
+  date_time_format: m/d/Y at H:i
+  default: Default
+  more_options: More options
+  send: Send
+
 config_api:
+  _label: APIs
+  config: Configuration
+  elements: Elements
+  fields:
+    api.publicApiPrivateProperties: List of private properties that you don't want to share
+    gogo_api_configuration: GoGoCarto configuration
+    gogo_api_element_get: An element (change ID by the element id)
+    gogo_api_elements_from_text: Search element
+    gogo_api_gogocartojs_configuration: GoGoCartoJs Configuration
+    gogo_api_semanatic_taxonomy: Semantic taxonomy
+    gogo_api_taxonomy: Taxonomy
+    gogo_api_taxonomy_mapping: List of options with their corresponding ID
+    gogo_api_taxonomy_show: A Category (replace ID par by the category id)
+    gogo_api_ui: Graphical interface to build an API
+    gogo_element_import_available_options: Available options
+    text: your_searched_text
   form:
     groups:
       apis: List of available APIs
-      config_description: <div class="iframe-container"><iframe height="200" sandbox="allow-same-origin
-        allow-scripts" src="https://video.colibris-outilslibres.org/videos/embed/aa05a654-a5d6-472a-bb12-108e0f6ce18e"
-        frameborder="0" allowfullscreen></iframe></div>
       config: Configuration
-  fields:
-    gogo_element_import_available_options: Available options
-    gogo_api_ui: Graphical interface to build an API
-    gogo_api_semanatic_taxonomy: Semantic taxonomy
-    gogo_api_gogocartojs_configuration: GoGoCartoJs Configuration
-    gogo_api_elements_from_text: Search element
-    gogo_api_element_get: An element (change ID by the element id)
-    text: your_searched_text
-    gogo_api_taxonomy_show: A Category (replace ID par by the category id)
-    gogo_api_taxonomy_mapping: List of options with their corresponding ID
-    gogo_api_taxonomy: Taxonomy
-    gogo_api_configuration: GoGoCarto configuration
-    api.publicApiPrivateProperties: List of private properties that you don't want
-      to share
+      config_description: >-
+        <div class="iframe-container"><iframe height="200" sandbox="allow-same-origin allow-scripts"
+        src="https://video.colibris-outilslibres.org/videos/embed/aa05a654-a5d6-472a-bb12-108e0f6ce18e"
+        frameborder="0" allowfullscreen></iframe></div>
   taxonomy: Taxonomy / Categories
-  elements: Elements
-  config: Configuration
-  _label: APIs
 
-commons:
-  send: Send
-  date_time_format: m/d/Y at H:i
-  date_format: m/d/Y
-  default: Default
-  btn_update_and_edit: Update
-  anonymous: Anonymous
-  actual_file: 'Current file:'
-  more_options: More options
-
-charts:
-  collabResolve:
-    title: Collaborative Validations/Refusals
-    refused: Collaborative refusals
-    axisTitle: Collaborative Validations/Refusals
-    validate: Collaborative Validations
-  collabRefused: Latest collaborative refusals
-  userInteract:
-    voted: Votes
-    title: User interactions metrics
-    subtitle: Click & drag to focus on a period
-    reported: Reported elements
-    modified: Changes
-    added: Additions
-  showAll: Show all
-  empty: No found elements
-  contribsResolved:
-    resolved: Contributions' resolution
-    edited: Resolved changes
-    added: Resolved additions
-    total: Total Number (from the beginning)
-  collabValidated: Latest collaborative validations
-config_custom_js_css:
+config_contributions:
+  _label: Who can contribute?
+  fields:
+    collaborativeModerationExplanations: Explanations about collaborative moderation
+    maxDaysLeavingAnElementPending: >-
+      Number of days before an element still pending validation will appear as needing to be
+      moderated
+    maxOppositeVoteTolerated: Number of allowed opposite votes
+    minDayBetweenContributionAndCollaborativeValidation: Number of days before a collaborative validation / rejection
+    minVoteToChangeStatus: Number of votes for an automatic validation / rejection
+    minVoteToForceChangeStatus: Number of votes to validate / reject automatically regardless of the voting time
   form:
     groups:
-      custom_style_hint: Enter the CSS code that will be loaded in all of the public
-        pages
-      custom_style: Custom style
-      custom_javascript_hint: Enter the Javascript code that will be loaded in all
-        of the public pages
-      custom_javascript: Custom Javascript
+      addFeature: Be allowed to add an element
+      collaborativeModerationFeature: Collective moderation (ability to vote)
+      collaborativeModerationParameters: Collaborative moderation options
+      deleteFeature: Ability to delete an element
+      directModerationFeature: Direct moderation
+      editFeature: Ability to edit an element
+      text: Text
+
+config_custom_js_css:
   _label: Custom CSS / JS
   fields:
     customCSS: Custom CSS
     customJavascript: Custom Javascript
-duplicates:
-  node:
-    address: Address
-    non-duplicates_title: Nothing will happen, GoGoCarto will remember that these
-      two elements are not duplicates and they will not be detected as such anymore
-    non-duplicates: No duplicates
-    merge_title: The elements will be merged. Only the first element will be kept,
-      and the attributes of the second will be merged
-    merge: Merge
-    deleted: This element has been deleted. The merged element will remain in deleted
-      status
-  index:
-    wantMore: I want more! (Only {count} duplicates left to process)
-    title: Duplicate management
-    return: Return to duplicate management
-    none: No duplicates to process!
-    merge: Merge duplicate entries
-    leftDuplicatesToProceedCount: '{count} duplicates are in fact still to be processed,
-      but have been blocked by another user. Wait 10 minutes for them to unblock'
-dashboard:
-  welcome: <b>Welcome to your Administrator space!</b><</br> The adventure is just
-    beginning for you, now you have to start configuring your site :)</br><a target="_blank"
-    href="https://doc.gogocarto.fr/">View the documentation</a> to help you get started!
-    Video tutorials, frequently asked questions…
-  sidebar:
-    gogo_partners: Who we are
-    gogo_homepage: Back to website
-    gogo_element_add: Form
-    gogo_directory: The Map
-  menu:
-    users: Users
-    saas: GoGo Farm
-    other_config: Other Settings
-    emailing: E-mails / Newsletter
-    data: Data / Import
-    custom: Customization
-    contents: Contents
-  delete: Delete this project
-  confirm: This action cannot be undone. You will delete your entire project. Are
-    you sure you want to continue?
-  _label: GoGoCarto Admin
-  messages: '{count, plural, =1 {# message} other {# messages} }'
-  errors: '{count, plural, =1 {# error} other {# errors} }'
-config_users:
-  fields:
-    user:
-      sendConfirmationEmail: Validate the creation with a confirmation email
-      loginWithMonPrintemps: Activate the connection with MonPrintemps
-      loginWithLesCommuns: Activate the connection with "LesCommuns.org"
-      loginWithGoogle: Activate the connection with Google
-      loginWithFacebook: Activate the connection with Facebook
-      enableRegistration: Authorize account creation
-  _label: Configuration
-config_saas:
-  fields:
-    saas:
-      newProjectInstructions: Custom text displayed at the top of the new project
-        creation form
-      endUserLicenceAgreement: Terms and Conditions of Use
-      donationUrl: URL to make a donation (a button will be added on the home page)
-  _label: Configuration
-config_osm:
   form:
     groups:
-      host_description: URL of the OpenStreetMap server on which to send the data
-        edited by GoGoCarto
-      account_description: To enable editing to OpenStreetMap, fill in a user account
-        below. If you do not have an account, you can create one at<a href='https://www.openstreetmap.org/user/new'>OpenStreetMap
-        website</a>.
-      account: Instance account
-  fields.osm:
-    osmUsername: User name
-    osmPassword: Password
-    osmHost: Server URL
-  _label: OpenStreetMap
-  sync:
-    notags: This item has none of the main keys on OpenStreetMap (amenity, shop...)
-    version_mismatch: "Feature versions mismatch: {local_version} on our side, {remote_version} on OSM"
-    no_feature: Feature does not exist on OSM
-    comment_text: "{action}{name}"
-    comments:
-      add: Add
-      edit: Edit
-      delete: Delete
+      custom_javascript: Custom Javascript
+      custom_javascript_hint: Enter the Javascript code that will be loaded in all of the public pages
+      custom_style: Custom style
+      custom_style_hint: Enter the CSS code that will be loaded in all of the public pages
 
+config_duplicates:
+  _label: Duplicates handling
+  fields:
+    duplicates:
+      automaticMergeIfPerfectMatch: Merge in case of perfect match
+      detectAfterImport: Look for duplicates after every import
+      detectAfterImport_help: >-
+        For every new element added during the import, a full scan of the database will be done to
+        find potential duplicates
+      fieldsToBeUsedForComparaison: Other fields uses for duplicate detection (pure search)
+      fieldsToBeUsedForComparaison_help: >-
+        Only perfectly matching values will be detected. A match between any of these fields will be
+        interpreted as a perfect match between the two elements
+      rangeInMeters: Max distance (in meters) between duplicates
+      sourcePriorityInAutomaticMerge: During a merge, which source would you mainly like to keep ?
+      sourcesToDetectFrom: >-
+        Look for duplicates between the given sources (leave the field empty too search through the
+        entire database)
+      sourcesToDetectWith: And the sources (leave empty to search through the entire database)
+      useGlobalSearch: Use the global search to look for duplicates (soft search in {fields})
+      useGlobalSearch_help: >-
+        The global search is configured in the form personalization (configuration of the searched
+        fields, by default only the title of the file will be scanned). In case of soft search,
+        close values will be considered as a match ("A tEsT" will match "test"). A perfect match
+        will only happen for very similar values "test" and "A tEsT" won't mach while "test" and
+        "tEsT" will
+    gogo_bulk_actions_detect_duplicates: Detect duplicates
+    gogo_duplicates_index: Handle the detected duplicates
+  form:
+    groups:
+      configuration: Configuration
+      fusion: Merge duplicates
+      manualDetection: Limit the manual detection (optional)
 
-config_mobile:
+config_emails:
+  _label: E-mails / newsletter
   form:
     groups:
-      trusted_description: This feature is under testing, please wait for future explanations
-      trusted: Real mobile application (Trusted Web Activity)
-      progressive_description: 'Gogocarto is a natively<b>Progressive Web App</b>:
-        when a user visits the site from their cell phone, the user will have the
-        possibility to add a shortcut on his/her home screen. By clicking on this
-        shortcut, the site will open in full screen like a standard mobile application.'
-      progressive: Simulated mobile application (Progressive Web App)
-  fields:
-    sha256CertFingerprints: 'SHA256 certificate fingerprints (if you publish it as
-      TWA).Format: 57:2B:36:…'
-    packageName: 'Domain name of the app (if you publish it as a TWA). Format: fr.gogocarto.macarto'
-    hideHeaderInPwa: Hide the top bar when the map is open in PWA mode
-    appNameShort: Short name of the application (12 characters max.)
-  _label: Mobile App
-config_menu:
-  form:
-    groups:
-      search: Search
-      menu: Menu (contains filters and search bar)
-      general: General
-      custom: Customize the filters in the menu
-  fields:
-    searchPlaceFeature: Search for a location
-    searchGeolocateFeature: Geolocation button
-    searchExcludingWords_title: If you make a directory of local producers, you may
-      want to exclude words like "organic", because this kind of search would give
-      bad results. For example if you search for "Organic Farm of bayou", results
-      that have nothing to do with it such as "Amap Organic" would appear in the results,
-      due to the word "organic". As a general rule, exclude commonly used words in
-      the titles of your files. Note that the search is also used in the detection
-      of duplicates
-    searchExcludingWords: Words to exclude from the search, separated by commas
-    searchElementsFeature: Search for an element
-    searchCategoriesFeature: Search in categories
-    menu:
-      width_placeholder: '290'
-      width: Menu width
-      smallWidthStyle_help: Decrease the font size and margins a little. Useful when
-        the name of the categories are long and you want to gain in width
-      smallWidthStyle: Use a compressed style
-      showOnePanePerMainOption: Display a sub-menu for each main category
-      showCheckboxForSubFilterPane_help: Valid only if "display a sub-menu for each
-        main category" is checked
-      showCheckboxForSubFilterPane: Display checkboxes in sub-panels
-      showCheckboxForMainFilterPane: Show checkboxes in main panel
-      displayNumberOfElementRoundResults_help: Valid only if "display number of items
-        per category" is checked
-      displayNumberOfElementRoundResults: Round the results (display 300+ instead
-        of 326)
-      displayNumberOfElementForEachCategory: For each category, display the number
-        of items having this category
-    box_description: To choose the search fields, go to the form, edit one of the
-      fields and you will see the option "Search in this field".<br/> You can also
-      assign different weights on each field, the weights will be used to sort the
-      results by relevance.
-    box: Fields to be used to search in the elements
-  _label: Menu / Filters / Search
-config_home:
-  fields:
-    home:
-      seeMoreButtonText_placeholder: 'Example: "More information"'
-      seeMoreButtonText: Text to invite scrolling (if home page banners exist)
-      displayCategoriesToPick: Show main categories selectable for searching
-      addElementHintText_placeholder: 'Example: "Help us to enrich the database by
-        adding an element!"'
-      addElementHintText: Text above the "Add Item" button
-    backgroundImage_placeholder: Select an already imported image, or add one!
-    backgroundImage: Background image (file name must not contain spaces or special
-      characters)
-    activateHomePage: Activate the homepage
-  _label: Homepage
-config_general:
-  form:
-    groups:
-      text: Name of the entities listed in the directory
-      pages: Main features
-      main_description: <div class="iframe-container"><iframe height="110" sandbox="allow-same-origin
-        allow-scripts" src="https://video.colibris-outilslibres.org/videos/embed/fc7d3784-7bd1-4f3a-b915-ab6daefdd52d"
-        frameborder="0" allowfullscreen></iframe></div>
-      main: The website
-      images: General images
-  fields:
-    socialShareImage: Image to display when sharing on social networks
-    publishOnSaasPage: Make this project visible on {url}
-    partnerPageTitle: Title of the page 'Partners
-    logoInline: Logo for menu bar
-    logo: Logo
-    locale: Language
-    favicon: Favicon
-    elementDisplayNamePlural: Plural noun
-    elementDisplayNameDefinite: Name with a definite article
-    elementDisplayNameIndefinite: Name with an indefinite article
-    dataLicenseUrl: URL of the licence that protects your data
-    activatePartnersPage: Activate the "Partner" page
-    activateAbouts: Enable 'About' popups
-    aboutHeaderTitle: Title of the 'About' section
-    elementDisplayName: Name
-    customDomain_help: After purchasing the domain name mymap.org, you must first
-      redirect it to the IP address of the GoGoCarto server ({ip}).   Then enter your
-      domain name here, and wait for it to be configured by GoGoCarto (an attempt
-      is made every hour). GoGoCarto gives up after 4 attempts. If after several hours
-      nothing happens, you will have to reset the subdomain configuration,  save,
-      then fill it out again to create a new attempt
-    customDomain: Use a personalized domain name (for example, mymap.org instead of
-      mymap.gogocarto.fr)
-    appTags: Keywords for referencing (separate them by a comma)
-    appName: Site name
-    appBaseline: Site description (baseline)
-  downloadImage: Upload/Download an image
-  cannot_delete: Impossible to delete the configuration, this action is forbidden
-    because it would break your whole map
-  _label: General Setup
-config_form:
-  fields:
-    elementFormValidationText_placeholder: 'Example: I certify that the information
-      provided in this form is correct'
-    elementFormValidationText: Label of the form validation checkbox (leave empty
-      to deactivate)
-    elementFormOwningText_placeholder: 'Example: I am involved in the management of
-      the described structure'
-    elementFormOwningText: Label to ask if the user is the owner of the record (leave
-      empty to disable)
-    elementFormIntroText_placeholder: 'Example: Attention we do not refer to such
-      and such type of elements'
-    elementFormIntroText: Introduction appearing at the top of the form
-    elementFormGeocodingHelp: Geolocation help text
-  _label: Form
-  form:
-    groups:
-      other: Additional texts and options
-      form: Form
-      config_description: <div class='text-and-iframe-container'><div class='iframe-container-aside'><iframe
-        height='200' sandbox='allow-same-origin allow-scripts' src='https://video.colibris-outilslibres.org/videos/embed/2dd4dad3-63fa-4bb4-b48c-e518f8e56d36'
-        frameborder='0' allowfullscreen></iframe></div> <b>The form allows one to
-        add/edit data from the public interface</b></br> If you have imported any
-        data, you can add a field to the form and link it to the imported field using
-        the \"field's name\"</div>
-      config: Form setup
+      add: During an addition - <a href=''{url}'' target='_blank'>TEST</a>
+      delete: During a deletion - <a href=''{url}'' target='_blank'>TEST</a>
+      edit: During an update - <a href=''{url}'' target='_blank'>TEST</a>
+      infosContributors: Information about automatic e-mails
+      infosContributors_description: >-
+        These emails are automatically sent to contributors when their contributions are accepted,
+        refused etc...</br>It is possible to include the following variables in the messages
+        (keeping the '''{{'}}''): </br> <li>'{{ element '}} the name of {element}</li> <li>'{{ user
+        '}} the name or email address of the contributor</li> <li>'{{ showUrl '}} the address which
+        refers to the visualization of the file</li> <li>'{{ editUrl '}} the address that refers to
+        the modification of the file</li> <li>'{{ homeUrl '}} the address of the home page of the
+        site</li> <li>'{{ userContributionsUrl '}} the address of the "My contributions" page</li>
+        <li>'{{ customMessage '}} the personal message that has been written by the admins (only in
+        case of a refusal)</li></br> You can also use these variables in the special contents of the
+        text editor. For example in the URL field of the popup that opens when you click on 'add
+        link'.</br> <b>Once the email is saved</b>, you can click on the buttons <b>TESTER</b> to
+        see the rendering.
+      infosElements: Information about automatic e-mails
+      infosElements_description: >-
+        <div class="text-and-iframe-container"> <div class="iframe-container-aside"> <iframe
+        height="200" sandbox="allow-same-origin allow-scripts" 
+        src="https://video.colibris-outilslibres.org/videos/embed/d5d007ec-e5c6-4a50-ab66-572e35e8905a"
+        frameborder=\"0\" allowfullscreen></iframe></div> These emails are automatically sent to
+        {elements} when their entry is added, modified or deleted.</br> It is possible to include
+        the following variables in messages (keeping the '''{{'}}''): </br> <li>'{{ element '}} the
+        name of {element}</li> <li>'{{ showUrl '}} the address that refers to the visualization of
+        the file</li> <li>'{{ editUrl '}} the address that refers to the modification of the
+        record</li> <li>'{{ homeUrl '}} the address of the home page of the site</li> <li>'{{
+        directEditElementUniqueUrl '}} the unique address to edit the element directly without being
+        admin</li> <li>'{{ customMessage '}} the personal message that has been written by the
+        admins (only when deleting)</li></br> </div> You can also use these variables in the special
+        contents of the text editor. For example in the URL field of the popup that opens when you
+        click on "add link". </br> <b>Once the email is saved</b>, you can click on the <b>TEST</b>
+        buttons to view the rendering.
+      infosNewletter: Information about the newsletter
+      infosNewletter_description: >-
+        This email is automatically sent to users who have subscribed. It gives the list of the
+        latest additions in a determined geographical area and optionally pieces of news.</br></br>
+        <b>It is necessary to include the variable <u>'{{ newElements'}}</u> and/or <u>'{{
+        pendingElements'}}</u></b> which will be respectively replaced by the list of the newly
+        added elements and the list of elements pending validation</br></br> It is also possible to
+        include the following variables in the messages (keep the '''{{'}}''): </br> <ul> <li>'{{
+        news '}} which will be replaced by the latest published news</li> <li>'{{ user '}} replaced
+        by the contributor's name or email address</li> <li>'{{ homeUrl '}} replaced by the URL of
+        the site''s home page</li> <li>'{{ userProfileUrl'}} replaced by the URL of the "My
+        Settings" page.</li> <li>'{{ showOnMapBtn '}} replaced by a button allowing the user to
+        return to the map centered on her position</li> </ul> </br> <b>Once the email is saved</b>,
+        you can click on the <b>TEST</b> button to preview an email.
+      mailForContributors: Automatic e-mails for contributors
+      mailForElements: Automatic e-mails for {element}
+      newsletter: Newsletter - <a href=''{url}'' target='_blank'>TEST</a>
+      newsletters: Newsletter
+      refusal: In case of refusal - <a href=''{url}'' target='_blank'>TEST</a>
+      report: When a report is taken into account - <a href=''{url}'' target='_blank'>TEST</a>
+      validation: During validation- <a href=''{url}'' target='_blank'>TEST</a>
+
 config_features:
   fields:
-    allow_role_user: Allow Users
+    active: Activate
+    activeInIframe: Enabled in an Iframe
     allow_role_admin: Enable Moderators
     allow_role_anonymous: Enable Anonymous
-    activeInIframe: Enabled in an Iframe
-    active: Activate
-mapping-ontology:
-  alert: Please click on the "Read Data" button to load the attributes of the data
-    to be imported
-  original: Original name
-  mapped: "To be transformed into <span style='font-weight: normal'>(empty fields\
-    \ will not be imported)</span>"
-  displayMore: View all fields (fields present in less than {percent}% of items are
-    hidden by default)
-  clearTitle: Do not import this field again
-  arrowTitle: Use the original name
-mapping-taxonomy:
-  arrowTitle: Create a category from the original name
-  alert: First, select the field corresponding to the categories in the 'Field mapping
-    table' tab and click on 'Read data'
-  original: Categories read from the original file
-  moreInfos: " Values: \n\n{values}"
-  mapped: Site categories
-  create-missing-categories: Create all missing categories
-  collectedPercent: Present in {percent}% of imported items.
-  clearTitle: Don't use this category
-  category-group: Group {name}
-monitoring:
-  activeUsersNewsletter: Subscribers to the newsletter
-  error: Errors have occurred recently
-  duplicates: Potential duplicates
-  display_all: Display all
-  display: Display
-  detectDuplicates: Detect duplicates
-  delete: Delete all messages
-  all_elements: All visible elements
-  users: Users
-  title: New on GoGoCarto !
-  pending: Pending validation
-  moderationNeeded: Items to be moderated
-  manageDuplicates: Manage duplicates
-news:
+    allow_role_user: Allow Users
+
+config_form:
+  _label: Form
   fields:
-    publicationDate: Publication date
-    content: Content
-    title: Title
-    status_choices:
-      published: Published
-      draft: Draft (unpublished)
-    status: Status
-  _label: Latest news (newsletter)
+    elementFormGeocodingHelp: Geolocation help text
+    elementFormIntroText: Introduction appearing at the top of the form
+    elementFormIntroText_placeholder: 'Example: Attention we do not refer to such and such type of elements'
+    elementFormOwningText: Label to ask if the user is the owner of the record (leave empty to disable)
+    elementFormOwningText_placeholder: 'Example: I am involved in the management of the described structure'
+    elementFormValidationText: Label of the form validation checkbox (leave empty to deactivate)
+    elementFormValidationText_placeholder: 'Example: I certify that the information provided in this form is correct'
   form:
     groups:
-      list_header: Create news items to be included in the newsletter
-dynamic_imports:
+      config: Form setup
+      config_description: >-
+        <div class='text-and-iframe-container'><div class='iframe-container-aside'><iframe
+        height='200' sandbox='allow-same-origin allow-scripts'
+        src='https://video.colibris-outilslibres.org/videos/embed/2dd4dad3-63fa-4bb4-b48c-e518f8e56d36'
+        frameborder='0' allowfullscreen></iframe></div> <b>The form allows one to add/edit data from
+        the public interface</b></br> If you have imported any data, you can add a field to the form
+        and link it to the imported field using the \"field's name\"</div>
+      form: Form
+      other: Additional texts and options
+
+config_general:
+  _label: General Setup
+  cannot_delete: >-
+    Impossible to delete the configuration, this action is forbidden because it would break your
+    whole map
+  downloadImage: Upload/Download an image
   fields:
-    needToHaveOptionsOtherThanTheOnesAddedToEachElements_help: 'Without taking into
-      account the categories added via the ‘Categories to be added to each imported
-      element’ field, if the imported elements do not have categories, they will be
-      marked as ‘Moderation: no category filled in’'
-    needToHaveOptionsOtherThanTheOnesAddedToEachElements: Imported items without a
-      category (other than those manually added above) will be marked as ‘To be moderated’
-    moderateElements_help: The imported elements will have the status ‘pending validation’
-      and will have to be manually validated. Same for updates of existing elements
-      (modification)
-    moderateElements: Moderate the imported elements
-    manualRefresh: Manual
-    logs: Number of elements
-    lastRefresh: Last import
-    isSynchronized_help: Each change will be sent to OpenStreetMap
-    isSynchronized: Allow data editing {submessage}
-    idsToIgnore_help: To ignore an element, delete it (permanently) and it will never
-      be imported again. If you delete a dynamically imported element just by changing
-      its status (soft delete), the element will still be imported but will keep its
-      deleted status. You can restore this element at any time to display it again
-    idsToIgnore: List of IDs that will be ignored during import
-    geocodeIfNecessary: Geocode elements without latitude or longitude from their
-      address
-    file: CSV file to import (comma separated, UTF8 encoding)
-    fieldToCheckElementHaveBeenUpdated_help: 'When updating a source, some of the
-      elements to be imported already exist in our database. You can fill in a field
-      here that will allow you to compare if the element has been updated in the source
-      since the last import. Example of field: updatedAt, date_maj etc... (leave empty
-      to update the elements each time)'
-    fieldToCheckElementHaveBeenUpdated: Name of the attribute to compare for the update
-    elementsUpdatedCount: '{count} updated'
-    elementsPreventImportedNoTaxo: '{count} not imported because no categories'
-    elementsNothingToDoCount: '{count, plural, =1 {# unchanged} other {# unchanged}
-      } '
-    elementsMissingTaxoCount: '{count} without categories'
-    elementsMissingGeoCount: '{count} without geolocation'
-    elementsErrorsCount: '{count, plural, =1 {# error} other {# errors} } '
-    elementsDeletedCount: -{count}
-    elementsCreatedCount: +{count}
-    deletedCount: '{count} locally deleted'
-    customCodeForExport: PHP code that will be executed
-    customCode: PHP code that will be executed
-    refreshFrequencyInDays: Frequency of data update in days
-    refreshFrequency: '{days, plural, =1 {Daily} =7 {Weekly} other {Every # days}
-      }'
-    preventImportIfNoCategories: Do not import elements that have no categories
-    parameters: Settings
-    optionsToAddToEachElement: Categories to add to each imported element
-    newTaxonomyToMap: New categories to map
-    newOntologyToMap: New fields to map
-    url: Or URL to a JSON API
-    submessage: (You have to fill in some credentials in Other configuration -> OpenStreetMap)
-    sourceType: Type of source
-    sourceName: Source name
-    refreshFrequencyInDays_help: (leave empty to never update automatically
-    preventImportIfNoCategories_help: When you want to import only part of the elements
-      of a database, it can be convenient to map only the categories you want to import.
-      But all other elements will be imported as well but without their categories.
-      By checking this option, only the items with a mapped category will be imported
-    usersToNotify: Users to be notified in case of errors, or when new fields/categories
-      are to be matched
-  _label: Dynamic import
-  list:
-    refreshFrequencyInDays: Update
-    idsToIgnore: Info
+    aboutHeaderTitle: Title of the 'About' section
+    activateAbouts: Enable 'About' popups
+    activatePartnersPage: Activate the "Partner" page
+    appBaseline: Site description (baseline)
+    appName: Site name
+    appTags: Keywords for referencing (separate them by a comma)
+    customDomain: Use a personalized domain name (for example, mymap.org instead of mymap.gogocarto.fr)
+    customDomain_help: >-
+      After purchasing the domain name mymap.org, you must first redirect it to the IP address of
+      the GoGoCarto server ({ip}).   Then enter your domain name here, and wait for it to be
+      configured by GoGoCarto (an attempt is made every hour). GoGoCarto gives up after 4 attempts.
+      If after several hours nothing happens, you will have to reset the subdomain configuration, 
+      save, then fill it out again to create a new attempt
+    dataLicenseUrl: URL of the licence that protects your data
+    elementDisplayName: Name
+    elementDisplayNameDefinite: Name with a definite article
+    elementDisplayNameIndefinite: Name with an indefinite article
+    elementDisplayNamePlural: Plural noun
+    favicon: Favicon
+    locale: Language
+    logo: Logo
+    logoInline: Logo for menu bar
+    partnerPageTitle: Title of the page 'Partners
+    publishOnSaasPage: Make this project visible on {url}
+    socialShareImage: Image to display when sharing on social networks
   form:
     groups:
-      taxonomyMapping2: Match categories
-      taxonomyMapping: Category mapping table {suffix}
-      staticList: List of "hard" imports (the imported data will be managed by this
-        site)
-      otherOptions: Other options
-      ontologyMappingTab: Transform the data to be imported {suffix}
-      ontologyMappingPanel: Fields mapping table
-      newFields: New fields
-      newCategories: New categories
-      historic: History
+      images: General images
+      main: The website
+      main_description: >-
+        <div class="iframe-container"><iframe height="110" sandbox="allow-same-origin allow-scripts"
+        src="https://video.colibris-outilslibres.org/videos/embed/fc7d3784-7bd1-4f3a-b915-ab6daefdd52d"
+        frameborder="0" allowfullscreen></iframe></div>
+      pages: Main features
+      text: Name of the entities listed in the directory
+
+config_home:
+  _label: Homepage
+  fields:
+    activateHomePage: Activate the homepage
+    backgroundImage: Background image (file name must not contain spaces or special characters)
+    backgroundImage_placeholder: Select an already imported image, or add one!
+    home:
+      addElementHintText: Text above the "Add Item" button
+      addElementHintText_placeholder: 'Example: "Help us to enrich the database by adding an element!"'
+      displayCategoriesToPick: Show main categories selectable for searching
+      seeMoreButtonText: Text to invite scrolling (if home page banners exist)
+      seeMoreButtonText_placeholder: 'Example: "More information"'
+
+config_infobar:
+  _label: Info Bar
+  fields:
+    description:
+      _label: Description
+      categories: List of category names of the element
+      categoriesFull: Complete list of categories, including id, name, description and position
+      colorOptionId: The category ID that gives its main colour to this element
+      createdAt: Creation date in the database
+      distance: If an address has been entered, distance between the point and the address
+      images: URLs table of the different images
+      isDeleted: Shortcut for status = Denied or Deleted
+      isPending: Shortcut for status == Pending (changes or addition)
+      originalAddress: The detailed address with the postal code, the city etc…
+      sourceKey: Name of the source of this element (can be empty)
+      status: |-
+        <ul>
+          <li>-6: Duplicate</li>
+          <li>-4: Deleted </li>
+          <li>-3: Rejected (votes) </li>
+          <li>-2: Rejected (admin) </li>
+          <li>-1: Pending (changes) </li>
+          <li> 0: Pending (added)</li>
+          <li> 1: Validated (admin)</li>
+          <li> 2: Validated (votes)</li>
+          <li> 3: Added by admin</li>
+          <li> 4: Edited by admin</li>
+          <li> 5: Edited by owner</li>
+          <li> 6: Edited with direct link</li>
+          <li> 7: Imported</li>
+        </ul>
+      updatedAt: Date of last update
+    example:
+      categories: '''{% if "my category" in categories ''%} … ''{% endif ''%}'
+      categoriesFull: |-
+        '{% for category in categoriesFull'%}
+          <div>Id: '{{category.id'}}</div>
+          <div>Name: '{{category.name'}}</div>
+          <div>Description: '{{category.description'}}</div> <div>Position: '{{category.description'}}.
+          <div>Position: '{{category.index'}}</div> <div>Position: '{{category.index'}}</div>
+        '{% endfor '%}
+      colorOptionId: >-
+        &lt;div class="gogo-color-as" option-id="'{{colorOptionId'}}">Text of the main category
+        color&lt;/div></br> &lt;div class="gogo-bg-color-as"
+        option-id="'{{colorOptionId'}}">Background of the main category color&lt; /div></br> &lt;div
+        class="gogo-border-color-as" option-id="'{{colorOptionId'}}">Border of the main category
+        color&lt;div></br> You can also use the "gogo-soft-color-as" and "gogo-soft-bg-bolor-as"
+        classes   
+      createdAt: 'Created on: ''{{ createdAt ''}}'
+      distance: '''{% if distance is defined ''%} <span>''{{ distance ''}}</span> ''{% endif ''%}'
+      images: >-
+        Images are displayed by default in the detail form and you don't need to include this field.
+        But you can always use this variable according to your needs
+      isDeleted: '''{% if isDeleted ''%} … ''{% endif ''%}'
+      isPending: '''{% if isPending ''%} … ''{% endif ''%}'
+      originalAddress: >-
+        '{{ originalAddress.streetAddress ~ '' - '' ~ originalAddress.addressLocality ~ '' - '' ~
+        originalAddress.postalCode ~ '' - '' ~ originalAddress.addressCountry }}
+      sourceKey: '''{% if sourceKey == "Fablab" ''%}Referenced by http://fablabs.io''{% endif ''%}'
+      status: '''{% if status == 2 ''%} … ''{% endif ''%}'
+      updatedAt: 'Last update: ''{{ updatedAt''}}'
+    exemple: Example of a filter to be used
+    infobar:
+      bodyTemplate: Body of the form
+      bodyTemplateUseMarkdown: Use markdown syntax for the body (otherwise only Nunjucks syntax)
+      headerTemplate: Header
+      headerTemplateUseMarkdown: Use markdown syntax for the header (otherwise only Nunjucks syntax)
+      width: 'Width of the detail (in pixels, default: 540)'
+    label: Label
+    name: Name field
+    type: Type
+    usage: Use
+  fields_list:
+    form: List of fields available via the form
+    other: All other fields in your data are also available
+    system: Fields / Variables provided by the system
+  form:
+    groups:
+      automatic_emails: Information about automatic e-mails
+      automatic_emails_description: >-
+        <p><b>Filters allow you to apply transformations to a variable/field</b></p> <h3>Nunjucks
+        language filters</h3> <a
+        href='https://mozilla.github.io/nunjucks/fr/templating.html#filtres-int-gr-s'>See online
+        documentation</a> <h3>GoGoGoCarto special filters</h3>
+
+        <h4>gogo_text</h4> Display text (with line breaks before and after the text)</br> You can
+        use <b>the label option</b>: '{{ tel|gogo_text(label = "Phone")'}}
+
+        <h4>gogo_date</h4> <ul>
+
+        <li>Format a date '{{ event_date | date '}} or '{{ event_date | gogo_date(label="Date")
+
+        '}}</li>
+          <li>Or if you want to use a particular format '{{ event_date|date("DD/MM/YYYY")
+        '}} or '{{ event_date | gogo_date(label="Date", format="DD/MM/YYYY") '}}. <a
+        href='https://momentjs.com/docs/#/displaying/format/'>See possible choices</a></li> </ul>
+
+        <h4>gogo_tags</h4> Displays an array as tags '{{ ["Service", "White"] | gogo_tags '}}
+
+        <h4>gogo_textarea</h4> Display long text, there are several options <ul><li><b>truncate</b>:
+        truncate the text after XX characters (default 1000), and put a little "show more"</li>
+        <li><b>tolerance</b>: truncate tries to be at the end of a sentence or less than a word. The
+        tolerance is the number of characters we give as a margin to the algorithm. i.e truncates to
+        1000 characters +/- 50</li> <li><b>glossary</b>: a glossary to explain certain words. The
+        word will be slightly highlighted and on hovering will display the explanation</li></ul>
+        <pre>'{{"My beautiful text supposedly very very long"|gogo_textarea(truncate = 15, tolerance
+        = 5, glossary = { "beautiful": "English word that means pretty"}) '}}</pre>
+
+
+        <h3>Debugging data</h3> If you are using somewhat specific object data, you can use the
+        "dump" filter to display its contents '{{ my_specific_field|dump'}}
+      field_list: List of available fields (help)
+      filter_list: List of available filters (help)
+      infobar_content: Contents of the Detail file (panel that is displayed when a marker is clicked)
+      infobar_content_description: >-
+        <div class="text-and-iframe-container"><div class="iframe-container-aside"
+        style="margin-top: 0"><iframe height="200" sandbox="allow-same-origin allow-scripts"
+        src="https://video.colibris-outilslibres.org/videos/embed/354086c4-e826-44ad-b44a-475e517c3af6"
+        frameborder="0" allowfullscreen></iframe></div> <p style="margin-top: 10px">You can use <a
+        href="https://guides. github.com/features/mastering-markdown/#syntax">the mardown syntax</a>
+        and <a href="https://mozilla.github.io/nunjucks/">the nunjucks syntax (for advanced
+        uses)</a></p> <p>To display the value of a field in your form (see list of fields below) use
+        a double brace <b>'{{my_field_name'}}</b>. You can also choose to format your field with a
+        filter by using the <b>|</b> symbol followed by the filter name. For example, to display a
+        field in uppercase you could do <b>'{{my_field_name|upper'}}</b>. Special filters for
+        gogocarto have been created, they allow to simply display certain type of field. For
+        example, for a long description field, we could use
+        <b>'{{my_field_name_long_description|gogo_textarea(truncate = 300) }}</b>. This will trim
+        the description to around 300 characters and display a small button to show the entire
+        description.</p> <p>Check out the list of <a
+        href="https://mozilla.github.io/nunjucks/templating.html#builtin-filters">nunjucks filters
+        here</a>. Gogocarto''s list of filters is not yet documented</p></div>
+
+        <h2 style="margin: 0 0 25px 0">
+          Content of the detail form
+          <span class="btn btn-primary" id="generate-body-template" onclick="generateBodyTemplate()">Generate automatically the content of the detail form</span> </h2>
+      infobar_param: Other Settings
+
+config_map:
+  _label: Map / Features
+  fields:
+    customPopupId: Version number of the popup (to change when you modify the text)
+    customPopupShowOnlyOnce: >-
+      Show the popup only once (if the user closes it, the user will not see it again until you
+      change the version number)
+    customPopupText: 'Text to display (Example: "This site is still in beta version!")'
+    defaultTileLayer: Default map background (save to see the selected background on the map below)
+    saveTileLayerInCookies: Save the user's choice of background map in cookies
+    saveViewportInCookies: Save the current map position in cookies
+    viewport_picker: Default map view (draw a rectangle on the map)
+  form:
+    groups:
+      cookies: Cookies
+      directionsFeature: Route planner
+      exportIframeFeature: Export iframe
+      favoriteFeature: Favorites
+      features: Features
+      layersFeature: Choice of background map
+      listModeFeature: List Mode
+      map: The Map
+      mapDefaultViewFeature: Return to default view
+      message_config: Personalized message to appear in a corner of the map
+      messages: Personalized message
+      params: Map settings
+      pendingFeature: Display of items awaiting validation
+      reportFeature: Report an error
+      shareFeature: Share URL
+      stampFeature: Label the items
+
+config_marker:
+  _label: Marker / Popup
+  fields:
+    marker.displayPopup: Display the popup
+    marker.popupAlwaysVisible: Always display the popup (by default it is only displayed when hovering over the marker)
+    marker.popupTemplate: Popup content
+    marker.popupTemplateUseMarkdown: Use markdown syntax for this template (otherwise only Nunjucks syntax)
+    marker.useClusters: Activate clusters
+  form:
+    groups:
+      cluster: Clusters (group markers when they are close to each other)
+      cluster_description: >-
+        Without using clusters, from 1000 markers displayed on the screen it can cause slowdowns for
+        the user
+      popup: Popup (content that is displayed by default when hovering over a marker)
+      popup_description: >-
+        For the configuration of the template, refer to the instructions given in Data Model /
+        Detail file
+
+config_menu:
+  _label: Menu / Filters / Search
+  fields:
+    box: Fields to be used to search in the elements
+    box_description: >-
+      To choose the search fields, go to the form, edit one of the fields and you will see the
+      option "Search in this field".<br/> You can also assign different weights on each field, the
+      weights will be used to sort the results by relevance.
+    menu:
+      displayNumberOfElementForEachCategory: For each category, display the number of items having this category
+      displayNumberOfElementRoundResults: Round the results (display 300+ instead of 326)
+      displayNumberOfElementRoundResults_help: Valid only if "display number of items per category" is checked
+      showCheckboxForMainFilterPane: Show checkboxes in main panel
+      showCheckboxForSubFilterPane: Display checkboxes in sub-panels
+      showCheckboxForSubFilterPane_help: Valid only if "display a sub-menu for each main category" is checked
+      showOnePanePerMainOption: Display a sub-menu for each main category
+      smallWidthStyle: Use a compressed style
+      smallWidthStyle_help: >-
+        Decrease the font size and margins a little. Useful when the name of the categories are long
+        and you want to gain in width
+      width: Menu width
+      width_placeholder: '290'
+    searchCategoriesFeature: Search in categories
+    searchElementsFeature: Search for an element
+    searchExcludingWords: Words to exclude from the search, separated by commas
+    searchExcludingWords_title: >-
+      If you make a directory of local producers, you may want to exclude words like "organic",
+      because this kind of search would give bad results. For example if you search for "Organic
+      Farm of bayou", results that have nothing to do with it such as "Amap Organic" would appear in
+      the results, due to the word "organic". As a general rule, exclude commonly used words in the
+      titles of your files. Note that the search is also used in the detection of duplicates
+    searchGeolocateFeature: Geolocation button
+    searchPlaceFeature: Search for a location
+  form:
+    groups:
+      custom: Customize the filters in the menu
       general: General
-      customCodeForExportTab: Convert data for export
-      customCodeForExportPanel_description: "The <b>$element</b> variable represents\
-        \ the element in GoGoCarto, the <b>$gogoFeature</b> variable represents the\
-        \ OSM data reconstructed from the GoGoCarto element</br> <pre>Some examples\
-        \ of simple transformations: </pre> If the element contains the category \"\
-        Bulk\", we add an OSM tag <pre>if (in_array(''Bulk'', $element->getCategoriesNames())\
-        \ '{\n    $gogoFeature[''tags''][''bulk_purchase''] = ''yes'';\n'}</pre> If\
-        \ the element contains category number 12, we add an OSM tag<br/> This method\
-        \ is to be preferred because if we change the category name the code will\
-        \ still work<br/> The ID of a category is noted in parenthesis after its name\
-        \ in Customization / Categories <pre> if (in_array(12, $element->getCategoriesIds())\
-        \ '{\n    $gogoFeature[''tags''][''bulk_purchase''] = ''yes'';\n'}</pre> If\
-        \ the element has a specific value for a field defined in the form <pre> if\
-        \ ($element->getProperty(''bulk'') == ''yes'') '{\n    $gogoFeature[''tags''][''bulk_purchase'']\
-        \ = ''yes'';\n'}</pre> We add a tag for all elements <pre> $gogoFeature[''tags''][''bulk_purchase'']\
-        \ = ''yes''; </pre>"
-      customCodeForExportPanel: Enter code that will be executed during export, before
-        sending them for synchronization
-      customCode: Modify data by running code
-      code_description: "The <b>$data</b> variable represents the PHP array created\
-        \ from the CSV or JSON data. </br> <pre>Some examples of simple transformations:</pre>\
-        \ If the elements to import are in a sub-property called ''elements'' <pre>&lt;?php</br>$data\
-        \ = $data[''elements''];</pre> Add a ''source'' attribute to all elements,\
-        \ with the value ''MySource'' <pre>&lt;?php</br>foreach($data as $key => $row)\
-        \ '{\n   $data[$key][''source''] = ''MySource'';\n'}</pre> Add an attribute\
-        \ using the value of another attribute <pre>&lt;?php</br>foreach($data as\
-        \ $key => $row) '{\n    $data[$key][''latitude''] = $row[''geo''][''latitude'']);\n\
-        \    $data[$key][''longitude''] = $row[''geo''][''longitude'']);\n'}</pre>\
-        \ Transform an attribute <pre>&lt;?php</br>foreach($data as $key => $row)\
-        \ '{\n    $data[$key][''categories''] = array_map(function($cat) { return\
-        \ $cat[0];\n}, $row[''categories'']); '}</pre>"
-      code: Enter code that will be executed when the data is received, before it
-        is processed by GoGoCarto
+      menu: Menu (contains filters and search bar)
+      search: Search
+
+config_mobile:
+  _label: Mobile App
+  fields:
+    appNameShort: Short name of the application (12 characters max.)
+    hideHeaderInPwa: Hide the top bar when the map is open in PWA mode
+    packageName: 'Domain name of the app (if you publish it as a TWA). Format: fr.gogocarto.macarto'
+    sha256CertFingerprints: 'SHA256 certificate fingerprints (if you publish it as TWA).Format: 57:2B:36:…'
+  form:
+    groups:
+      progressive: Simulated mobile application (Progressive Web App)
+      progressive_description: >-
+        Gogocarto is a natively<b>Progressive Web App</b>: when a user visits the site from their
+        cell phone, the user will have the possibility to add a shortcut on his/her home screen. By
+        clicking on this shortcut, the site will open in full screen like a standard mobile
+        application.
+      trusted: Real mobile application (Trusted Web Activity)
+      trusted_description: This feature is under testing, please wait for future explanations
+
+config_osm:
+  _label: OpenStreetMap
+  fields.osm:
+    osmHost: Server URL
+    osmPassword: Password
+    osmUsername: User name
+  form:
+    groups:
+      account: Instance account
+      account_description: >-
+        To enable editing to OpenStreetMap, fill in a user account below. If you do not have an
+        account, you can create one at<a href='https://www.openstreetmap.org/user/new'>OpenStreetMap
+        website</a>.
+      host_description: URL of the OpenStreetMap server on which to send the data edited by GoGoCarto
+  sync:
+    comment_text: '{action}{name}'
+    comments:
+      add: Add
+      delete: Delete
+      edit: Edit
+    no_feature: Feature does not exist on OSM
+    notags: This item has none of the main keys on OpenStreetMap (amenity, shop...)
+    version_mismatch: 'Feature versions mismatch: {local_version} on our side, {remote_version} on OSM'
+
+config_saas:
+  _label: Configuration
+  fields:
+    saas:
+      donationUrl: URL to make a donation (a button will be added on the home page)
+      endUserLicenceAgreement: Terms and Conditions of Use
+      newProjectInstructions: Custom text displayed at the top of the new project creation form
+
+config_style:
+  _label: Style / Colors / Icons
+  fields:
+    backgroundColor: Page background colour
+    choose_color: Click to choose a colour
+    contentBackgroundColor: Background colour of page content
+    contentBackgroundElementBodyColor: Background colour of detail sheet content
+    disableColor: Colour disabled
+    errorColor: Error colour
+    fontImport: Link to the font CDN
+    headerColor: Header background colour
+    headerHoverColor: Header hover text colour
+    headerTextColor: Header text colour
+    homeBackgroundColor: Home page background colour
+    iconImport: Link for the icons CDN (by default, FontAwesome icons are loaded)
+    interactiveSectionColor: Colour section to vote in detail sheet
+    mainFont: Main font
+    pendingColor: Colour pending validation
+    primaryColor: Primary colour
+    searchBarColor: Search bar color
+    secondaryColor: Secondary colour
+    select_font_placeholder: Select a font or use a custom one
+    textColor: Text colour
+    textDarkColor: Dark text colour
+    textDarkSoftColor: Softened dark text colour
+    textLightColor: Clear text colour
+    textLightSoftColor: Softened light text colour
+    theme: Theme
+    titleFont: Title font
+  form:
+    groups:
+      advancedColor: Advanced colours
+      fontImport: Load other fonts and icons
+      primaryColors: Main colours
+      secondaryColor: Other colours
+      theme: Theme and fonts
+
+config_users:
+  _label: Configuration
+  fields:
+    user:
+      enableRegistration: Authorize account creation
+      loginWithFacebook: Activate the connection with Facebook
+      loginWithGoogle: Activate the connection with Google
+      loginWithLesCommuns: Activate the connection with "LesCommuns.org"
+      loginWithMonPrintemps: Activate the connection with MonPrintemps
+      sendConfirmationEmail: Validate the creation with a confirmation email
+
+dashboard:
+  _label: GoGoCarto Admin
+  confirm: >-
+    This action cannot be undone. You will delete your entire project. Are you sure you want to
+    continue?
+  delete: Delete this project
+  errors: '{count, plural, =1 {# error} other {# errors} }'
+  menu:
+    contents: Contents
+    custom: Customization
+    data: Data / Import
+    emailing: E-mails / Newsletter
+    other_config: Other Settings
+    saas: GoGo Farm
+    users: Users
+  messages: '{count, plural, =1 {# message} other {# messages} }'
+  sidebar:
+    gogo_directory: The Map
+    gogo_element_add: Form
+    gogo_homepage: Back to website
+    gogo_partners: Who we are
+  welcome: >-
+    <b>Welcome to your Administrator space!</b><</br> The adventure is just beginning for you, now
+    you have to start configuring your site :)</br><a target="_blank"
+    href="https://doc.gogocarto.fr/">View the documentation</a> to help you get started! Video
+    tutorials, frequently asked questions…
+
+duplicates:
+  index:
+    leftDuplicatesToProceedCount: >-
+      {count} duplicates are in fact still to be processed, but have been blocked by another user.
+      Wait 10 minutes for them to unblock
+    merge: Merge duplicate entries
+    none: No duplicates to process!
+    return: Return to duplicate management
+    title: Duplicate management
+    wantMore: I want more! (Only {count} duplicates left to process)
+  node:
+    address: Address
+    deleted: This element has been deleted. The merged element will remain in deleted status
+    merge: Merge
+    merge_title: >-
+      The elements will be merged. Only the first element will be kept, and the attributes of the
+      second will be merged
+    non-duplicates: No duplicates
+    non-duplicates_title: >-
+      Nothing will happen, GoGoCarto will remember that these two elements are not duplicates and
+      they will not be detected as such anymore
+
+dynamic_imports:
+  _label: Dynamic import
+  fields:
+    customCode: PHP code that will be executed
+    customCodeForExport: PHP code that will be executed
+    deletedCount: '{count} locally deleted'
+    elementsCreatedCount: +{count}
+    elementsDeletedCount: '-{count}'
+    elementsErrorsCount: '{count, plural, =1 {# error} other {# errors} } '
+    elementsMissingGeoCount: '{count} without geolocation'
+    elementsMissingTaxoCount: '{count} without categories'
+    elementsNothingToDoCount: '{count, plural, =1 {# unchanged} other {# unchanged} } '
+    elementsPreventImportedNoTaxo: '{count} not imported because no categories'
+    elementsUpdatedCount: '{count} updated'
+    fieldToCheckElementHaveBeenUpdated: Name of the attribute to compare for the update
+    fieldToCheckElementHaveBeenUpdated_help: >-
+      When updating a source, some of the elements to be imported already exist in our database. You
+      can fill in a field here that will allow you to compare if the element has been updated in the
+      source since the last import. Example of field: updatedAt, date_maj etc... (leave empty to
+      update the elements each time)
+    file: CSV file to import (comma separated, UTF8 encoding)
+    geocodeIfNecessary: Geocode elements without latitude or longitude from their address
+    idsToIgnore: List of IDs that will be ignored during import
+    idsToIgnore_help: >-
+      To ignore an element, delete it (permanently) and it will never be imported again. If you
+      delete a dynamically imported element just by changing its status (soft delete), the element
+      will still be imported but will keep its deleted status. You can restore this element at any
+      time to display it again
+    isSynchronized: Allow data editing {submessage}
+    isSynchronized_help: Each change will be sent to OpenStreetMap
+    lastRefresh: Last import
+    logs: Number of elements
+    manualRefresh: Manual
+    moderateElements: Moderate the imported elements
+    moderateElements_help: >-
+      The imported elements will have the status ‘pending validation’ and will have to be manually
+      validated. Same for updates of existing elements (modification)
+    needToHaveOptionsOtherThanTheOnesAddedToEachElements: >-
+      Imported items without a category (other than those manually added above) will be marked as
+      ‘To be moderated’
+    needToHaveOptionsOtherThanTheOnesAddedToEachElements_help: >-
+      Without taking into account the categories added via the ‘Categories to be added to each
+      imported element’ field, if the imported elements do not have categories, they will be marked
+      as ‘Moderation: no category filled in’
+    newOntologyToMap: New fields to map
+    newTaxonomyToMap: New categories to map
+    optionsToAddToEachElement: Categories to add to each imported element
+    parameters: Settings
+    preventImportIfNoCategories: Do not import elements that have no categories
+    preventImportIfNoCategories_help: >-
+      When you want to import only part of the elements of a database, it can be convenient to map
+      only the categories you want to import. But all other elements will be imported as well but
+      without their categories. By checking this option, only the items with a mapped category will
+      be imported
+    refreshFrequency: '{days, plural, =1 {Daily} =7 {Weekly} other {Every # days} }'
+    refreshFrequencyInDays: Frequency of data update in days
+    refreshFrequencyInDays_help: (leave empty to never update automatically
+    sourceName: Source name
+    sourceType: Type of source
+    submessage: (You have to fill in some credentials in Other configuration -> OpenStreetMap)
+    url: Or URL to a JSON API
+    usersToNotify: Users to be notified in case of errors, or when new fields/categories are to be matched
+  form:
+    groups:
       Historic: History
-      dynamicList: List of dynamic imports (the imported data will be read-only because
-        they are managed by another site)
+      code: >-
+        Enter code that will be executed when the data is received, before it is processed by
+        GoGoCarto
+      code_description: >-
+        The <b>$data</b> variable represents the PHP array created from the CSV or JSON data. </br>
+        <pre>Some examples of simple transformations:</pre> If the elements to import are in a
+        sub-property called ''elements'' <pre>&lt;?php</br>$data = $data[''elements''];</pre> Add a
+        ''source'' attribute to all elements, with the value ''MySource''
+        <pre>&lt;?php</br>foreach($data as $key => $row) '{
+           $data[$key][''source''] = ''MySource'';
+        '}</pre> Add an attribute using the value of another attribute
+        <pre>&lt;?php</br>foreach($data as $key => $row) '{
+            $data[$key][''latitude''] = $row[''geo''][''latitude'']);
+            $data[$key][''longitude''] = $row[''geo''][''longitude'']);
+        '}</pre> Transform an attribute <pre>&lt;?php</br>foreach($data as $key => $row) '{
+            $data[$key][''categories''] = array_map(function($cat) { return $cat[0];
+        }, $row[''categories'']); '}</pre>
+      customCode: Modify data by running code
+      customCodeForExportPanel: Enter code that will be executed during export, before sending them for synchronization
+      customCodeForExportPanel_description: >-
+        The <b>$element</b> variable represents the element in GoGoCarto, the <b>$gogoFeature</b>
+        variable represents the OSM data reconstructed from the GoGoCarto element</br> <pre>Some
+        examples of simple transformations: </pre> If the element contains the category "Bulk", we
+        add an OSM tag <pre>if (in_array(''Bulk'', $element->getCategoriesNames()) '{
+            $gogoFeature[''tags''][''bulk_purchase''] = ''yes'';
+        '}</pre> If the element contains category number 12, we add an OSM tag<br/> This method is
+        to be preferred because if we change the category name the code will still work<br/> The ID
+        of a category is noted in parenthesis after its name in Customization / Categories <pre> if
+        (in_array(12, $element->getCategoriesIds()) '{
+            $gogoFeature[''tags''][''bulk_purchase''] = ''yes'';
+        '}</pre> If the element has a specific value for a field defined in the form <pre> if
+        ($element->getProperty(''bulk'') == ''yes'') '{
+            $gogoFeature[''tags''][''bulk_purchase''] = ''yes'';
+        '}</pre> We add a tag for all elements <pre> $gogoFeature[''tags''][''bulk_purchase''] =
+        ''yes''; </pre>
+      customCodeForExportTab: Convert data for export
+      dynamicList: >-
+        List of dynamic imports (the imported data will be read-only because they are managed by
+        another site)
+      general: General
+      historic: History
+      newCategories: New categories
+      newFields: New fields
+      ontologyMappingPanel: Fields mapping table
+      ontologyMappingTab: Transform the data to be imported {suffix}
+      otherOptions: Other options
+      staticList: List of "hard" imports (the imported data will be managed by this site)
+      taxonomyMapping: Category mapping table {suffix}
+      taxonomyMapping2: Match categories
+  list:
+    idsToIgnore: Info
+    refreshFrequencyInDays: Update
+
 elements:
+  _label: Items
   action:
     batch:
-      params:
-        dont_send_mail: Do not send e-mail
-        comment: Details of the change, reason for deletion... this text will replace
-          '{{ customMessage'}} in automatic emails
-        send_to_last_contributor: Send email to last contributors
-        send_to_element: Send email to elements
-        optionsToRemove: Categories to delete
-        optionsToAdd: Categories to add
-        mail_subject: Subject
-        mail_content: Content
-        from: Your email address
-      editOptions: Edit categories
       delete: Delete permanently
-      validation: Validate
-      softDelete: Delete (status change)
-      sendMail: Send an email
-      restore: Restore
-      resolveReports: Solve moderation
+      editOptions: Edit categories
+      params:
+        comment: >-
+          Details of the change, reason for deletion... this text will replace '{{ customMessage'}}
+          in automatic emails
+        dont_send_mail: Do not send e-mail
+        from: Your email address
+        mail_content: Content
+        mail_subject: Subject
+        optionsToAdd: Categories to add
+        optionsToRemove: Categories to delete
+        send_to_element: Send email to elements
+        send_to_last_contributor: Send email to last contributors
       refusal: Refuse
+      resolveReports: Solve moderation
+      restore: Restore
+      sendMail: Send an email
+      softDelete: Delete (status change)
+      validation: Validate
     edit:
-      updateJSON: Update JSON
-      submit_restore: Restore
-      submit_resolve: Save and resolve alerts
-      submit_refuse: Refuse
-      submit_redirect: Save and close
-      submit_delete: Delete
-      submit_accept: Validate
-      submit: Save
-      showOnSite: View on the site
-      showEdit: View/Edit
-      send_mail: Notify the actor of the change
-      returnToList: Return to list
-      isPending: Special message if refused
-      havePendingReports: Details of the change, reason for deletion... this text
-        will replace '{{ customMessage'}} in automatic emails
-      geocode: Geocode the address
       editOnSite: Edit on the site
-  _label: Items
-  recent_elements: Last elements
-  proposedBy: Submitted by <u>{name}</u>
-  proposedAt: '{date}'
-  form:
-    seeDuplicate: view the merged element
-    groups:
-      specialFields: Special fields
-      show_contributions: History of contributions
-      pending: Pending
-      otherInfos: Other info
-      moderation: Moderation
-      localisation: Location
-      general: General information
-      customFields: Custom Fields
-      seeOnOSM: See this item on OpenStreetMap
-    duplicateOf: 'This element has been merged with another one:'
-    addCustomField: Add a custom field
-  filter:
-    valide: Validated
-    sourceKey: Source
-    postalCode: Postal code
-    pending: Pending
-    optionValuesNotIn: Categories (does not include)
-    optionValuesIn: Categories (contains one)
-    optionValuesAll: Categories (includes all)
-    name: Name
-    moderationState: Type of moderation
-    moderationNeeded: Moderation required
-    departementCode: Department(region) number
+      geocode: Geocode the address
+      havePendingReports: >-
+        Details of the change, reason for deletion... this text will replace '{{ customMessage'}} in
+        automatic emails
+      isPending: Special message if refused
+      returnToList: Return to list
+      send_mail: Notify the actor of the change
+      showEdit: View/Edit
+      showOnSite: View on the site
+      submit: Save
+      submit_accept: Validate
+      submit_delete: Delete
+      submit_redirect: Save and close
+      submit_refuse: Refuse
+      submit_resolve: Save and resolve alerts
+      submit_restore: Restore
+      updateJSON: Update JSON
   fields:
-    voteValues_choices:
-      '2': Exists and valid information
-      '1': Exists
-      '0': Exists but bad information
-      '-2': Doesn't respect the charter
-      '-1': Doesn't exist
-    userRoles_choices:
-      '5': GoGoBot
-      '4': Anonymous with link
-      '3': Admin
-      '2': Identified user
-      '1': Anonymous with email
-      '0': Anonymous
-    userOwnerEmail: Email of the user who owns this file
-    updatedAt: 'Updated on '
-    status_choices:
-      '7': Imported
-      '6': Edited by direct link
-      '5': Edited by owner
-      '4': Edited by admin
-      '3': Added by admin
-      '2': Validated (votes)
-      '1': Validated (admin)
-      '0': Pending (added)
-      '-6': Duplicate
-      '-5': Edits pending
-      '-4': Deleted
-      '-3': Refused (votes)
-      '-2': Refused (admin)
-      '-1': Pending (edits)
-      '': Pending
-    status: Status
-    sourceType_choices:
-      json: JSON API
-      csv: CSV file
-      osm: OpenStreetMap
-    sourceTypeJSON: JSON API URL
-    reports: Alerts
-    reportValues_choices:
-      '4': Duplicate
-      '2': Charter
-      '1': Incorrect information
-      '0': No longer exists
-    id: ID
-    sourceKey: Source
-    randomHash: Random Hashing
-    optionsString: Categories
-    optionIds: Categories
-    oldId: Id in imported database
-    newsletterFrequency: Receiving the newsletter
-    name: Name
-    moderationState_choices:
-      '4': Possible duplicate
-      '3': Waiting too long
-      '2': Non-consensual votes
-      '1': Errors reported
-      '0': No moderation required
-      '-2': Geolocation error
-      '-1': No category entered
-    moderationState: Moderating
-    itemValues_choices:
-      '4': The element is referenced several times
-      '2': The element does not respect the charter
-      '1': The information is incorrect
-      '0': The item no longer exists
-    email: Email the element
-    createdAt: Created on
-    contributionType_choices:
-      '6': Moderation resolution
-      '5': Restore
-      '4': Import
-      '3': Report
-      '2': Vote
-      '1': Edit
-      '0': Add
-      '-1': Delete
     address:
-      streetAddress: Street
-      postalCode: Postal code
-      customFormatedAddress: Full address
-      addressLocality: City
       addressCountry: Country
-config_marker:
-  form:
-    groups:
-      popup_description: For the configuration of the template, refer to the instructions
-        given in Data Model / Detail file
-      popup: Popup (content that is displayed by default when hovering over a marker)
-      cluster_description: Without using clusters, from 1000 markers displayed on
-        the screen it can cause slowdowns for the user
-      cluster: Clusters (group markers when they are close to each other)
-  fields:
-    marker.useClusters: Activate clusters
-    marker.popupTemplateUseMarkdown: Use markdown syntax for this template (otherwise
-      only Nunjucks syntax)
-    marker.popupTemplate: Popup content
-    marker.popupAlwaysVisible: Always display the popup (by default it is only displayed
-      when hovering over the marker)
-    marker.displayPopup: Display the popup
-  _label: Marker / Popup
-config_map:
-  form:
-    groups:
-      stampFeature: Label the items
-      shareFeature: Share URL
-      reportFeature: Report an error
-      pendingFeature: Display of items awaiting validation
-      params: Map settings
-      messages: Personalized message
-      message_config: Personalized message to appear in a corner of the map
-      mapDefaultViewFeature: Return to default view
-      map: The Map
-      listModeFeature: List Mode
-      layersFeature: Choice of background map
-      features: Features
-      favoriteFeature: Favorites
-      exportIframeFeature: Export iframe
-      directionsFeature: Route planner
-      cookies: Cookies
-  fields:
-    viewport_picker: Default map view (draw a rectangle on the map)
-    saveViewportInCookies: Save the current map position in cookies
-    saveTileLayerInCookies: Save the user's choice of background map in cookies
-    defaultTileLayer: Default map background (save to see the selected background
-      on the map below)
-    customPopupText: 'Text to display (Example: "This site is still in beta version!")'
-    customPopupShowOnlyOnce: Show the popup only once (if the user closes it, the
-      user will not see it again until you change the version number)
-    customPopupId: Version number of the popup (to change when you modify the text)
-  _label: Map / Features
-
-webhooks:
-  fields:
-    url: URL
-    format: Format
-  _label: Webhooks
-  messages:
-    error_send: Error while sending webhook {url} for the item {element}
-    error_sync: Error while synchronizing item {element}.
-    error_osm_auth: The credentials for your OSM may not be correct.
-    error_msg: "(Attempt n°{attempts}). Error is: {message}"
-  titles:
-    add: ADD
-    edit: EDIT
-    delete: DELETE
-  texts:
-    add: added
-    edit: updated
-    delete: deleted
-
-tile_layers:
-  _label: Map backgrounds
-stamps:
-  fields:
+      addressLocality: City
+      customFormatedAddress: Full address
+      postalCode: Postal code
+      streetAddress: Street
+    contributionType_choices:
+      '-1': Delete
+      '0': Add
+      '1': Edit
+      '2': Vote
+      '3': Report
+      '4': Import
+      '5': Restore
+      '6': Moderation resolution
+    createdAt: Created on
+    email: Email the element
+    id: ID
+    itemValues_choices:
+      '0': The item no longer exists
+      '1': The information is incorrect
+      '2': The element does not respect the charter
+      '4': The element is referenced several times
+    moderationState: Moderating
+    moderationState_choices:
+      '-1': No category entered
+      '-2': Geolocation error
+      '0': No moderation required
+      '1': Errors reported
+      '2': Non-consensual votes
+      '3': Waiting too long
+      '4': Possible duplicate
     name: Name
-    isPublic: Public (anyone can assign it)
-  _label: Labels
-
-imports:
-  fields:
-    refreshFrequency: '{days, plural, =1 {Daily} =7 {Weekly} other {Every # day} }'
-    usersToNotify: Users to be notified in case of errors, or when new fields/categories
-      are to be matched
-    url: Or URL to a JSON API
-    submessage: (You have to fill in some credentials in Other configuration -> OpenStreetMap)
-    sourceType: Source type
-    sourceName: Source name
-    refreshFrequencyInDays_help: (leave empty to never update automatically)
-    refreshFrequencyInDays: Frequency of data update in days
-    preventImportIfNoCategories_help: When you want to import only part of the elements
-      in a database, it can be convenient to map only the categories you want to import.
-      But all other elements will also be imported but without categories. By checking
-      this option, only the items with a mapped category will be imported
-    preventImportIfNoCategories: Do not import items that are missing categories
-    parameters: Settings
-    optionsToAddToEachElement: Categories to add to each imported item
-    newTaxonomyToMap: New categories to map
-    newOntologyToMap: New fields to map
-    needToHaveOptionsOtherThanTheOnesAddedToEachElements_help: Without taking into
-      account the categories added via the field "Categories to add to each imported
-      item", if the imported items have no categories, they will be marked as "Moderation
-      no category entered"
-    needToHaveOptionsOtherThanTheOnesAddedToEachElements: Imported items without a
-      category (other than those manually added above) will be marked as "to be moderated"
-    moderateElements_help: The imported elements will have the status "pending validation"
-      and will have to be manually validated. Same for updates of existing elements
-      (modification)
-    moderateElements: Moderate imported items
-    manualRefresh: Manual
-    logs: Number of elements
-    lastRefresh: last Import
-    isSynchronized_help: Each change will be sent to OpenStreetMap
-    isSynchronized: Allow data editing {submessage}
-    idsToIgnore_help: To ignore an element, delete it (permanently) and it will never
-      be imported again. If you delete a dynamically imported element just by changing
-      its status (soft delete), the element will still be imported but will keep its
-      deleted status. You can restore this element at any time to have it appear again
-    idsToIgnore: List of IDs that will be ignored during import
-    geocodeIfNecessary: Geocode elements without latitude nor longitude from their
-      address
-    file: CSV file to import (comma separated, UTF8 encoding)
-    fieldToCheckElementHaveBeenUpdated_help: 'When updating a source, some of the
-      elements to be imported already exist in our database. You can fill in a field
-      here that will allow you to compare if the element has been updated in the source
-      since the last import. Example field: updatedAt, date_maj etc... (leave empty
-      to update the elements each time)'
-    fieldToCheckElementHaveBeenUpdated: Name of the attribute to compare for the update
-    elementsUpdatedCount: '{count} updated'
-    elementsPreventImportedNoTaxo: '{count} not imported because no categories'
-    elementsNothingToDoCount: '{count, plural, =1 {# unchanged} other {# unchanged}
-      } '
-    elementsMissingTaxoCount: '{count} without categories'
-    elementsMissingGeoCount: '{count} without geolocation'
-    elementsErrorsCount: '{count, plural, =1 {# error} other {# errors} } '
-    elementsDeletedCount: -{count}
-    elementsCreatedCount: +{count}
-    deletedCount: '{count} locally deleted'
-    customCodeForExport: PHP code that will be executed
-    customCode: PHP code that will be executed
+    newsletterFrequency: Receiving the newsletter
+    oldId: Id in imported database
+    optionIds: Categories
+    optionsString: Categories
+    randomHash: Random Hashing
+    reportValues_choices:
+      '0': No longer exists
+      '1': Incorrect information
+      '2': Charter
+      '4': Duplicate
+    reports: Alerts
+    sourceKey: Source
+    sourceTypeJSON: JSON API URL
+    sourceType_choices:
+      csv: CSV file
+      json: JSON API
+      osm: OpenStreetMap
+    status: Status
+    status_choices:
+      '': Pending
+      '-1': Pending (edits)
+      '-2': Refused (admin)
+      '-3': Refused (votes)
+      '-4': Deleted
+      '-5': Edits pending
+      '-6': Duplicate
+      '0': Pending (added)
+      '1': Validated (admin)
+      '2': Validated (votes)
+      '3': Added by admin
+      '4': Edited by admin
+      '5': Edited by owner
+      '6': Edited by direct link
+      '7': Imported
+    updatedAt: 'Updated on '
+    userOwnerEmail: Email of the user who owns this file
+    userRoles_choices:
+      '0': Anonymous
+      '1': Anonymous with email
+      '2': Identified user
+      '3': Admin
+      '4': Anonymous with link
+      '5': GoGoBot
+    voteValues_choices:
+      '-1': Doesn't exist
+      '-2': Doesn't respect the charter
+      '0': Exists but bad information
+      '1': Exists
+      '2': Exists and valid information
+  filter:
+    departementCode: Department(region) number
+    moderationNeeded: Moderation required
+    moderationState: Type of moderation
+    name: Name
+    optionValuesAll: Categories (includes all)
+    optionValuesIn: Categories (contains one)
+    optionValuesNotIn: Categories (does not include)
+    pending: Pending
+    postalCode: Postal code
+    sourceKey: Source
+    valide: Validated
   form:
+    addCustomField: Add a custom field
+    duplicateOf: 'This element has been merged with another one:'
     groups:
-      customCodeForExportPanel_description: "The <b>$element</b> variable represents\
-        \ the element in GoGoCarto, the <b>$gogoFeature</b> variable represents the\
-        \ OSM data reconstructed from the GoGoCarto element</br> <pre>Some examples\
-        \ of simple transformations: </pre> If the element contains the category \"\
-        Bulk\", we add an OSM tag <pre>if (in_array(''Bulk'', $element->getCategoriesNames())\
-        \ '{\n    $gogoFeature[''tags''][''bulk_purchase''] = ''yes'';\n'}</pre> If\
-        \ the element contains category number 12, we add an OSM tag<br/> This method\
-        \ is to be preferred because if we change the category name the code will\
-        \ still work<br/> The ID of a category is noted in parenthesis after its name\
-        \ in Customization / Categories <pre> if (in_array(12, $element->getCategoriesIds())\
-        \ '{\n    $gogoFeature[''tags''][''bulk_purchase''] = ''yes'';\n'}</pre> If\
-        \ the element has a specific value for a field defined in the form <pre> if\
-        \ ($element->getProperty(''bulk'') == ''yes'') '{\n    $gogoFeature[''tags''][''bulk_purchase'']\
-        \ = ''yes'';\n'}</pre> We add a tag for all elements <pre> $gogoFeature[''tags''][''bulk_purchase'']\
-        \ = ''yes''; </pre>"
-      code_description: "The <b>$data</b> variable represents the PHP array created\
-        \ from the CSV or JSON data. </br> <pre>Some examples of simple transformations:</pre>\
-        \ If the elements to import are in a sub-property called ''elements'' <pre>&lt;?php</br>$data\
-        \ = $data[''elements''];</pre> Add a ''source'' attribute to all elements,\
-        \ with the value ''MySource'' <pre>&lt;?php</br>foreach($data as $key => $row)\
-        \ '{\n   $data[$key][''source''] = ''MySource'';\n'}</pre> Add an attribute\
-        \ using the value of another attribute <pre>&lt;?php</br>foreach($data as\
-        \ $key => $row) '{\n    $data[$key][''latitude''] = $row[''geo''][''latitude'']);\n\
-        \    $data[$key][''longitude''] = $row[''geo''][''longitude'']);\n'}</pre>\
-        \ Transform an attribute <pre>&lt;?php</br>foreach($data as $key => $row)\
-        \ '{\n    $data[$key][''categories''] = array_map(function($cat) { return\
-        \ $cat[0];\n}, $row[''categories'']); '}</pre>"
-      ontologyMappingTab: Transform the data to be imported {suffix}
-      ontologyMappingPanel: Fields mapping table
-      newFields: New fields
-      newCategories: New categories
-      historic: History
-      general: General
-      dynamicList: List of dynamic imports (the imported data will be read-only because
-        they are managed by another site)
-      customCodeForExportTab: Convert data for export
-      customCodeForExportPanel: Enter code that will be executed during export, before
-        sending them for synchronization
-      customCode: Modify data by running code
-      code: Enter code that will be executed when the data is received, before it
-        is processed by GoGoCarto
-      Historic: History
-      taxonomyMapping2: Match the categories
-      taxonomyMapping: Category mapping table {suffix}
-      staticList: List of "hard" imports (the imported data will be managed by this
-        site)
-      otherOptions: Other options
-  edit:
-    test_export:
-      see_osm_export: Test what the OSM export of an element will look like
-      no_element: No items found. Please import data first before doing a test
-    submit: Save
-    saving: Saving and reading data in progress…
-    reimport: Import again
-    lastRefresh: 'Last import:'
-    import: Import data
-    delete: Delete the import (and all imported items)
-    confirm: Warning! Duplicate detection will take place during import, and automatic
-      merges may occur. Check your duplicate detection settings (in Data -> Duplicate
-      management) before continuing
-    collect: Read the data
-    clear-elements: Delete all items
-  dynamic: Dynamic Import, to display data managed by someone else
-  _label: Import
-  static: Import hard data, from a CSV file or a JSON API
-  progress:
-    title: Importing {name}
-    return_to_list: Return to the list
-    return_to_import: Return to import
-    inProgress: Pending…
-    reading_from: Reading data from {source}
-  list:
-    refreshFrequencyInDays: Update
-    idsToIgnore: Information
-  import: 'Import- '
-  controller:
-    sonata:
-      error:
-        main: It looks like there was a problem while reading the data.
-        empty: Error while loading data, the result is empty.
-        csv: >-
-          Check that the columns are <b>separated by commas</b>
-          (and not semi-colons nor spaces):
-          <a href='https://help.libreoffice.org/Calc/Importing_and_Exporting_CSV_Files'>
-          Click here to find out how to do</a>. 
-          Also check that <b>encoding is UTF-8</b>.
-        json: >-
-          Check that the <b>data object is at the root of the JSON file</b>.
-          If it's not the case, you can use the tab 'Modify data by running code'
-        need_title: >-
-          Before importing data, you first need to fill the Fields mapping table.
-          At least provide a Title for the item.
-        interlinked_fields: >-
-          The fields {name} and {reverse} are linked between each other,
-          and then can't be both imported at the same time.
-          Only the field {name} is preserved, the field {reverse}
-          will automatically be adjusted at the end of the import.
-      info: 
-        need_title: >-
-          Thanks to fill the Fields mapping table.
-          At least provide a Title for the item.
-      success:
-        main: >-
-          <b>{count} items have been read successfully.<b><br>
-          Here is the result for the first item:
-        see_all: See all data
-        removed: Items related to this import were removed
-    waiting: Waiting...
-    a_category: a category
+      customFields: Custom Fields
+      general: General information
+      localisation: Location
+      moderation: Moderation
+      otherInfos: Other info
+      pending: Pending
+      seeOnOSM: See this item on OpenStreetMap
+      show_contributions: History of contributions
+      specialFields: Special fields
+    seeDuplicate: view the merged element
+  proposedAt: '{date}'
+  proposedBy: Submitted by <u>{name}</u>
+  recent_elements: Last elements
 
-
-files:
-  form:
-    fileName_placeholder: new_name.png
-    fileName: Change file name (optional)
-    customDirectory_placeholder: /fonts
-    customDirectory_help: In some cases, for example when uploading an icon font,
-      you must respect a precise file tree (the CSS file at the root, and the font
-      files in a fonts directory )
-    customDirectory: Change upload directory
-  fields:
-    fileUrl: URL
-    fileName: File name
-    file: File
-  _label: Upload files
-
-importService:
-  processing: Import of data {i}/{size} processed
-  x: "Calculation of links for the field '{linkField}' : {i}/{size} elements processed"
-  duplicate: "Duplication detection : {i}/{size} elements processed"
-  total: 'Total: {count}'
-  potentialDuplicatesCount: '{count, plural, =1 {# potential duplicates detected}
-    other {# potential duplicates detected} }'
-  logMessage: Import of {name} completed
-  logError: ', but with problems!'
-  inProgress: Data download in progress... Please wait…
-  elementsUpdatedCount: '{count} updated'
-  elementsPreventImportedNoTaxo: no {count, plural, =1 {# imported} other {# imported}
-    } because no categories
-  elementsNothingToDoCount: '{count, plural, =1 {# left as is} other {# left as is}
-    } (nothing to update)'
-  elementsMissingTaxoCount: '{count} without category'
-  elementsMissingGeoCount: '{count} without geolocation'
-  elementsErrorsCount: '{count, plural, =1 {# error} other {# errors} } during import'
-  elementsDeletedCount: '{count, plural, =1 {# deleted} other {# deleted} }'
-  elementsCreatedCount: '{count, plural, =1 {# imported} other {# imported} }'
-  dismissLog: No longer display
-  close: Close
-  automaticMergesCount: '{count, plural, =1 {# merged} other {# merged} } with an
-    already existing element'
-  auto_added_category: Automatically added (parent category of an imported category)
-  error_no_source: "An error occured during the import : no source for name or id {source}"
-images_partner:
-  placeholder: Select an already imported image, or add one!
-  fields:
-    file: Import file
-    externalImageUrl: Link to an external image
-  _label: Upload an image
-images_element:
-  placeholder: Select an already imported image, or add one!
-  fields:
-    file: Import file
-    externalImageUrl: Link to an external image
-  _label: Import an image
-images_conf:
-  _label: Upload an image
-  placeholder: Select an already imported image, or add one!
-  fields:
-    file: Import file
-    externalImageUrl: Link to an external image
-images:
-  placeholder: Select an already imported image, or add one!
-  fields:
-    file: Import file
-    externalImageUrl: Link to an external image
-  _label: Upload an image
-help:
-  doc: "A problem, a question? It's here: "
-  _label: Help
 emails:
-  test:
-    submit: Send a test to this address
-    subject: 'Message subject: <em>{subject}</em>'
-    missing_email: No email address has been entered
-    missing_element: You need to create an element in the database to test the email
-    email: Enter an email address
-    done: The email has been sent to {mail}</br>If you don't see it check your junk
-      mail
-    custom_message_example: A test customMessage
-    _label: Test the rendering of the email {name}
-  template:
-    fields:
-      subject: Subject of message
-      content: Message content
-      active: Activated
-  service:
-    unknown_config: The configuration {config} does not exist
-    unknown: Unknown
-    success: The message was sent
-    no_subject_or_content: No subject or content for the automatic email {config}
-    no_specific_message: No specific message
-    no_email: No recipient
-    no_automatic_mail: The automatic email {config} does not exist
-    inactive_config: The {config} configuration is disabled
-    error: 'Error :'
-  show_map: View map near you
   controller:
     error:
-      not_sent: The emails were not sent, there are too many of them at once.
-      error_occured: "An error occured: {msg}"
+      error_occured: 'An error occured: {msg}'
       missing_data: You need to provide a subject and content. Please try again.
-      no_email: "{nb} emails could not be delivered because they don't have an address."
+      no_email: '{nb} emails could not be delivered because they don''t have an address.'
+      not_sent: The emails were not sent, there are too many of them at once.
     info:
       too_many: Too many items to process! Only {nb} were processed.
     success:
-      processed: The {nb} items were properly processed.
-      sent: "{nb} mails were sent."
       categories_updated: The categories of the {nb} items have been updated.
+      processed: The {nb} items were properly processed.
+      sent: '{nb} mails were sent.'
+  service:
+    error: 'Error :'
+    inactive_config: The {config} configuration is disabled
+    no_automatic_mail: The automatic email {config} does not exist
+    no_email: No recipient
+    no_specific_message: No specific message
+    no_subject_or_content: No subject or content for the automatic email {config}
+    success: The message was sent
+    unknown: Unknown
+    unknown_config: The configuration {config} does not exist
+  show_map: View map near you
+  template:
+    fields:
+      active: Activated
+      content: Message content
+      subject: Subject of message
+  test:
+    _label: Test the rendering of the email {name}
+    custom_message_example: A test customMessage
+    done: The email has been sent to {mail}</br>If you don't see it check your junk mail
+    email: Enter an email address
+    missing_element: You need to create an element in the database to test the email
+    missing_email: No email address has been entered
+    subject: 'Message subject: <em>{subject}</em>'
+    submit: Send a test to this address
+
+files:
+  _label: Upload files
+  fields:
+    file: File
+    fileName: File name
+    fileUrl: URL
+  form:
+    customDirectory: Change upload directory
+    customDirectory_help: >-
+      In some cases, for example when uploading an icon font, you must respect a precise file tree
+      (the CSS file at the root, and the font files in a fonts directory )
+    customDirectory_placeholder: /fonts
+    fileName: Change file name (optional)
+    fileName_placeholder: new_name.png
+
+help:
+  _label: Help
+  doc: 'A problem, a question? It''s here: '
+
+images:
+  _label: Upload an image
+  fields:
+    externalImageUrl: Link to an external image
+    file: Import file
+  placeholder: Select an already imported image, or add one!
+
+images_conf:
+  _label: Upload an image
+  fields:
+    externalImageUrl: Link to an external image
+    file: Import file
+  placeholder: Select an already imported image, or add one!
+
+images_element:
+  _label: Import an image
+  fields:
+    externalImageUrl: Link to an external image
+    file: Import file
+  placeholder: Select an already imported image, or add one!
+
+images_partner:
+  _label: Upload an image
+  fields:
+    externalImageUrl: Link to an external image
+    file: Import file
+  placeholder: Select an already imported image, or add one!
+
+importService:
+  auto_added_category: Automatically added (parent category of an imported category)
+  automaticMergesCount: '{count, plural, =1 {# merged} other {# merged} } with an already existing element'
+  close: Close
+  dismissLog: No longer display
+  duplicate: 'Duplication detection : {i}/{size} elements processed'
+  elementsCreatedCount: '{count, plural, =1 {# imported} other {# imported} }'
+  elementsDeletedCount: '{count, plural, =1 {# deleted} other {# deleted} }'
+  elementsErrorsCount: '{count, plural, =1 {# error} other {# errors} } during import'
+  elementsMissingGeoCount: '{count} without geolocation'
+  elementsMissingTaxoCount: '{count} without category'
+  elementsNothingToDoCount: '{count, plural, =1 {# left as is} other {# left as is} } (nothing to update)'
+  elementsPreventImportedNoTaxo: no {count, plural, =1 {# imported} other {# imported} } because no categories
+  elementsUpdatedCount: '{count} updated'
+  error_no_source: 'An error occured during the import : no source for name or id {source}'
+  inProgress: Data download in progress... Please wait…
+  logError: ', but with problems!'
+  logMessage: Import of {name} completed
+  potentialDuplicatesCount: '{count, plural, =1 {# potential duplicates detected} other {# potential duplicates detected} }'
+  processing: Import of data {i}/{size} processed
+  total: 'Total: {count}'
+  x: 'Calculation of links for the field ''{linkField}'' : {i}/{size} elements processed'
+
+imports:
+  _label: Import
+  controller:
+    a_category: a category
+    sonata:
+      error:
+        csv: >-
+          Check that the columns are <b>separated by commas</b> (and not semi-colons nor spaces): <a
+          href='https://help.libreoffice.org/Calc/Importing_and_Exporting_CSV_Files'> Click here to
+          find out how to do</a>.  Also check that <b>encoding is UTF-8</b>.
+        empty: Error while loading data, the result is empty.
+        interlinked_fields: >-
+          The fields {name} and {reverse} are linked between each other, and then can't be both
+          imported at the same time. Only the field {name} is preserved, the field {reverse} will
+          automatically be adjusted at the end of the import.
+        json: >-
+          Check that the <b>data object is at the root of the JSON file</b>. If it's not the case,
+          you can use the tab 'Modify data by running code'
+        main: It looks like there was a problem while reading the data.
+        need_title: >-
+          Before importing data, you first need to fill the Fields mapping table. At least provide a
+          Title for the item.
+      info:
+        need_title: Thanks to fill the Fields mapping table. At least provide a Title for the item.
+      success:
+        main: >-
+          <b>{count} items have been read successfully.<b><br> Here is the result for the first
+          item:
+        removed: Items related to this import were removed
+        see_all: See all data
+    waiting: Waiting...
+  dynamic: Dynamic Import, to display data managed by someone else
+  edit:
+    clear-elements: Delete all items
+    collect: Read the data
+    confirm: >-
+      Warning! Duplicate detection will take place during import, and automatic merges may occur.
+      Check your duplicate detection settings (in Data -> Duplicate management) before continuing
+    delete: Delete the import (and all imported items)
+    import: Import data
+    lastRefresh: 'Last import:'
+    reimport: Import again
+    saving: Saving and reading data in progress…
+    submit: Save
+    test_export:
+      no_element: No items found. Please import data first before doing a test
+      see_osm_export: Test what the OSM export of an element will look like
+  fields:
+    customCode: PHP code that will be executed
+    customCodeForExport: PHP code that will be executed
+    deletedCount: '{count} locally deleted'
+    elementsCreatedCount: +{count}
+    elementsDeletedCount: '-{count}'
+    elementsErrorsCount: '{count, plural, =1 {# error} other {# errors} } '
+    elementsMissingGeoCount: '{count} without geolocation'
+    elementsMissingTaxoCount: '{count} without categories'
+    elementsNothingToDoCount: '{count, plural, =1 {# unchanged} other {# unchanged} } '
+    elementsPreventImportedNoTaxo: '{count} not imported because no categories'
+    elementsUpdatedCount: '{count} updated'
+    fieldToCheckElementHaveBeenUpdated: Name of the attribute to compare for the update
+    fieldToCheckElementHaveBeenUpdated_help: >-
+      When updating a source, some of the elements to be imported already exist in our database. You
+      can fill in a field here that will allow you to compare if the element has been updated in the
+      source since the last import. Example field: updatedAt, date_maj etc... (leave empty to update
+      the elements each time)
+    file: CSV file to import (comma separated, UTF8 encoding)
+    geocodeIfNecessary: Geocode elements without latitude nor longitude from their address
+    idsToIgnore: List of IDs that will be ignored during import
+    idsToIgnore_help: >-
+      To ignore an element, delete it (permanently) and it will never be imported again. If you
+      delete a dynamically imported element just by changing its status (soft delete), the element
+      will still be imported but will keep its deleted status. You can restore this element at any
+      time to have it appear again
+    isSynchronized: Allow data editing {submessage}
+    isSynchronized_help: Each change will be sent to OpenStreetMap
+    lastRefresh: last Import
+    logs: Number of elements
+    manualRefresh: Manual
+    moderateElements: Moderate imported items
+    moderateElements_help: >-
+      The imported elements will have the status "pending validation" and will have to be manually
+      validated. Same for updates of existing elements (modification)
+    needToHaveOptionsOtherThanTheOnesAddedToEachElements: >-
+      Imported items without a category (other than those manually added above) will be marked as
+      "to be moderated"
+    needToHaveOptionsOtherThanTheOnesAddedToEachElements_help: >-
+      Without taking into account the categories added via the field "Categories to add to each
+      imported item", if the imported items have no categories, they will be marked as "Moderation
+      no category entered"
+    newOntologyToMap: New fields to map
+    newTaxonomyToMap: New categories to map
+    optionsToAddToEachElement: Categories to add to each imported item
+    parameters: Settings
+    preventImportIfNoCategories: Do not import items that are missing categories
+    preventImportIfNoCategories_help: >-
+      When you want to import only part of the elements in a database, it can be convenient to map
+      only the categories you want to import. But all other elements will also be imported but
+      without categories. By checking this option, only the items with a mapped category will be
+      imported
+    refreshFrequency: '{days, plural, =1 {Daily} =7 {Weekly} other {Every # day} }'
+    refreshFrequencyInDays: Frequency of data update in days
+    refreshFrequencyInDays_help: (leave empty to never update automatically)
+    sourceName: Source name
+    sourceType: Source type
+    submessage: (You have to fill in some credentials in Other configuration -> OpenStreetMap)
+    url: Or URL to a JSON API
+    usersToNotify: Users to be notified in case of errors, or when new fields/categories are to be matched
+  form:
+    groups:
+      Historic: History
+      code: >-
+        Enter code that will be executed when the data is received, before it is processed by
+        GoGoCarto
+      code_description: >-
+        The <b>$data</b> variable represents the PHP array created from the CSV or JSON data. </br>
+        <pre>Some examples of simple transformations:</pre> If the elements to import are in a
+        sub-property called ''elements'' <pre>&lt;?php</br>$data = $data[''elements''];</pre> Add a
+        ''source'' attribute to all elements, with the value ''MySource''
+        <pre>&lt;?php</br>foreach($data as $key => $row) '{
+           $data[$key][''source''] = ''MySource'';
+        '}</pre> Add an attribute using the value of another attribute
+        <pre>&lt;?php</br>foreach($data as $key => $row) '{
+            $data[$key][''latitude''] = $row[''geo''][''latitude'']);
+            $data[$key][''longitude''] = $row[''geo''][''longitude'']);
+        '}</pre> Transform an attribute <pre>&lt;?php</br>foreach($data as $key => $row) '{
+            $data[$key][''categories''] = array_map(function($cat) { return $cat[0];
+        }, $row[''categories'']); '}</pre>
+      customCode: Modify data by running code
+      customCodeForExportPanel: Enter code that will be executed during export, before sending them for synchronization
+      customCodeForExportPanel_description: >-
+        The <b>$element</b> variable represents the element in GoGoCarto, the <b>$gogoFeature</b>
+        variable represents the OSM data reconstructed from the GoGoCarto element</br> <pre>Some
+        examples of simple transformations: </pre> If the element contains the category "Bulk", we
+        add an OSM tag <pre>if (in_array(''Bulk'', $element->getCategoriesNames()) '{
+            $gogoFeature[''tags''][''bulk_purchase''] = ''yes'';
+        '}</pre> If the element contains category number 12, we add an OSM tag<br/> This method is
+        to be preferred because if we change the category name the code will still work<br/> The ID
+        of a category is noted in parenthesis after its name in Customization / Categories <pre> if
+        (in_array(12, $element->getCategoriesIds()) '{
+            $gogoFeature[''tags''][''bulk_purchase''] = ''yes'';
+        '}</pre> If the element has a specific value for a field defined in the form <pre> if
+        ($element->getProperty(''bulk'') == ''yes'') '{
+            $gogoFeature[''tags''][''bulk_purchase''] = ''yes'';
+        '}</pre> We add a tag for all elements <pre> $gogoFeature[''tags''][''bulk_purchase''] =
+        ''yes''; </pre>
+      customCodeForExportTab: Convert data for export
+      dynamicList: >-
+        List of dynamic imports (the imported data will be read-only because they are managed by
+        another site)
+      general: General
+      historic: History
+      newCategories: New categories
+      newFields: New fields
+      ontologyMappingPanel: Fields mapping table
+      ontologyMappingTab: Transform the data to be imported {suffix}
+      otherOptions: Other options
+      staticList: List of "hard" imports (the imported data will be managed by this site)
+      taxonomyMapping: Category mapping table {suffix}
+      taxonomyMapping2: Match the categories
+  import: 'Import- '
+  list:
+    idsToIgnore: Information
+    refreshFrequencyInDays: Update
+  progress:
+    inProgress: Pending…
+    reading_from: Reading data from {source}
+    return_to_import: Return to import
+    return_to_list: Return to the list
+    title: Importing {name}
+  static: Import hard data, from a CSV file or a JSON API
+
+js:
+  api:
+    placeholder: Select one or more categories
+  bounds_picker:
+    draw_rectangle: Draw a rectangle on the map
+    nomatch: No match found for {address}
+    search_button: Search
+    search_by_address: Search by address
+    search_placeholder: A city, region, country ...
+    title: Geographic zone of the request
+  charts:
+    display: Display
+    field:
+      avg_time_on_page: Average time on page (seconds)
+      nb_visits: Number of visits
+    last: The latest
+    period:
+      day: Day
+      month: Month
+      week: Week
+      year: Year
+    reload: Reload
+    title_visitors: Visitor statistics
+  element_form:
+    geocode_error: Error when geolocating "{address}"
+    geocoded_marker_text: Move me to specify the position</br>(in the centre of the building)
+  filters_builder:
+    choose_field: Please select the field to use
+    contracted_field: Filter collapsed by default
+    customize_field: Customize this filter in the category menu
+    date_views:
+      day: Day
+      month: Month
+      range: Range
+      week: Week
+      year: Year
+    default_view: Default display
+    field_end: End date field (optional)
+    field_name: Name of field to be used
+    gogo_date: Filter date
+    gogo_number: Filter number
+    max: Maximum
+    min: Minimum
+    multiday: Multiple days selectable
+    options:
+      slider: Slider
+      value: Value
+    select_views: Views (Ctrl + Click)
+    step: Step
+    taxonomy: Filter Categories
+    type: Type
+    used_field: 'Field used : {field}'
+  form_builder:
+    accept: Accepted files
+    accept_placeholder: .pdf audio/* .mp3 (separated by spaces)
+    addOption: Add an Option
+    checkbox: Check box
+    checkboxGroup: Group of checkboxes
+    checked_value: Field value if checked
+    class: Class
+    close: Close
+    content: Content
+    copy_icon: Duplicate
+    dateField: Date field
+    defaultvalue: Initial value
+    description: Text Help
+    edit_icon: Edit/Hide
+    errorMsg: Error Message
+    errorMsg_placeholder: Oops this text is a bit long ! // Please fill in a valid email address //…
+    fields:
+      address: Address (required)
+      address_help: required field
+      checkbox: check box
+      elements: Link to another item
+      email: Main email
+      email_help: This field is recommended (allows to send emails)
+      files: Files(upload)
+      images: Images(upload)
+      openhours: Opening hours
+      openhours_help: Block containing a schedule selector
+      separator: Section separator
+      taxonomy: Categories (required)
+      title: Title of the form (required)
+      title_help: This field is mandatory
+    header: Title
+    icon: Icon
+    icon_placeholder: Choose an icon
+    label: Label
+    limitRole: Visible only to admins
+    mandatory: Mandatory
+    maxlength: Max. length.
+    multiple: Several choices
+    name: Field name
+    number: Number
+    option: Option
+    optionLabelPlaceholder: Label
+    optionValuePlaceholder: Value
+    optional: optional
+    options:
+      filled: Full
+      'no': Not checked
+      normal: Normal
+      'yes': Checked
+    paragraph: Paragraph
+    pattern: Validation pattern
+    pattern_placeholder: Regular expression for the validation of this field
+    placeholder: Placeholder
+    placeholder_className: classes separated by spaces
+    placeholder_email: Enter your email address
+    placeholder_label: Label
+    placeholder_password: Enter your password
+    placeholder_placeholder: Placeholder
+    placeholder_text: Enter Text
+    placeholder_textarea: Enter a long text
+    placeholder_value: Value
+    propNameOptions: Choose an existing field or enter a new field
+    radio: Radio button
+    radioGroup: Radio Button Group
+    range: Interval of dates
+    remove_icon: Delete
+    required: Required
+    reversedBy: Reversed by
+    reversedBy_placeholder: The name of another field of type "link to another element"
+    richText: Text editor
+    roles: Access
+    roles_admin: Administrator
+    search: Search in this field
+    searchWeigh: Weight of research
+    select: Select
+    selectOptions: Options
+    style: Style of the boxes
+    subtype: Type
+    subtype_options:
+      email: email
+      tel: Telephone
+      text: Text
+      textarea: Simple editor
+      url: URL
+      wysiwyg: Enhanced editor
+    text: Text, email, phone, URL.
+    textArea: Long text
+    timepicker: Timepicker
+    toggle: Toggle
+    value: Value
+  import:
+    source_this_map: This Map
+  mapping_ontology:
+    addressCountry: 'Address: country'
+    addressLocality: 'Address: city'
+    categories: Categories (several fields selectable)
+    coreData: Main fields
+    email: Element email
+    files: File(s) as URL, in array, or separated by commas
+    formData: Form Fields
+    fullAddress: Full address
+    id: Unique identifier (in the old database)
+    images: Image(s) as URL, in table, or separated by commas
+    importedData: Original import fields
+    info: Editable
+    info_title: This field will be editable in the public form
+    latitude: Latitude
+    longitude: Longitude
+    name: File title
+    openHours: Opening hours (GoGoCarto format)
+    osm_opening_hours: Opening hours (OSM format)
+    osm_source: Data source OpenStreetMap
+    osm_timestamp: OSM Timestamp (automatically mapped)
+    osm_url: OSM URL (automatically mapped)
+    osm_version: OSM Version (automatically mapped)
+    otherData: Other fields already present in the database
+    owner: E-mail of the user who owns the file
+    postalCode: 'Address: postal code'
+    primary: Non-editable
+    primary_title: >-
+      This field is currently not present in the public form. It will only be editable from the
+      administrator interface. You can modify the public form to make this field editable by all
+    source: Origin of the item (source)
+    specificData: Specific fields
+    streetAddress: 'Address: street'
+    streetNumber: 'Address: street number'
+  mapping_taxonomy:
+    createTerm: '{term} (Will be created when saving)'
+    selectCategory: Select an existing category or enter the name of a new category to create
+  osm_query_builder:
+    add_condition: Add a condition
+    auto_generated: Automatically generated code for the OpenStreetMap query (via OverPass)
+    condition:
+      different_from: Is different from
+      dont_exist: Don't exist
+      equal_to: Is equal to
+      exists: Exists
+      none_of: Is none of the values
+      one_of: Is one of the values
+      search: Search a key
+      title: Condition...
+    or_add_manually: Or add a query manually
+    tagsearch:
+      search_placeholder: Quick search in OpenStreetMap (restaurant, organic, second hand...)
+    title: List of queries in the OpenStreetMap database
+    wikilink:
+      link_to: Link to the wiki page of {key}
+
+mapping-ontology:
+  alert: Please click on the "Read Data" button to load the attributes of the data to be imported
+  arrowTitle: Use the original name
+  clearTitle: Do not import this field again
+  displayMore: View all fields (fields present in less than {percent}% of items are hidden by default)
+  mapped: >-
+    To be transformed into <span style='font-weight: normal'>(empty fields will not be
+    imported)</span>
+  original: Original name
+
+mapping-taxonomy:
+  alert: >-
+    First, select the field corresponding to the categories in the 'Field mapping table' tab and
+    click on 'Read data'
+  arrowTitle: Create a category from the original name
+  category-group: Group {name}
+  clearTitle: Don't use this category
+  collectedPercent: Present in {percent}% of imported items.
+  create-missing-categories: Create all missing categories
+  mapped: Site categories
+  moreInfos: |-
+    Values: 
+
+    {values}
+  original: Categories read from the original file
+
+monitoring:
+  activeUsersNewsletter: Subscribers to the newsletter
+  all_elements: All visible elements
+  delete: Delete all messages
+  detectDuplicates: Detect duplicates
+  display: Display
+  display_all: Display all
+  duplicates: Potential duplicates
+  error: Errors have occurred recently
+  manageDuplicates: Manage duplicates
+  moderationNeeded: Items to be moderated
+  pending: Pending validation
+  title: New on GoGoCarto !
+  users: Users
+
+news:
+  _label: Latest news (newsletter)
+  fields:
+    content: Content
+    publicationDate: Publication date
+    status: Status
+    status_choices:
+      draft: Draft (unpublished)
+      published: Published
+    title: Title
+  form:
+    groups:
+      list_header: Create news items to be included in the newsletter
+
+options:
+  _label: Option
+  fields:
+    add_a_tag: Add a tag
+    color: Colour
+    customId: Custom Id
+    customId_help: >-
+      When importing items, we will compare the category name of the imported item with the category
+      name of your map. We will also compare with the custom Ids
+    descriptionLabel: Label for additional field
+    displayChildrenInForm: In the form
+    displayChildrenInInfoBar: In the detail file
+    displayChildrenInMenu: In the menu
+    displayInForm: In the form
+    displayInInfoBar: In the detail file
+    displayInMenu: In the menu
+    enableDescription: Add a text field to this category
+    enableDescription_help: >-
+      You can fill in a text to describe this category. For example, for a category "Other" you can
+      specify the value. If you want to activate this field for all categories, activate the
+      "category description" parameter in the Category Group
+    icon: Icon
+    index: Position (to sort categories)
+    name: Name
+    nameShort: Name (shortened)
+    nameShort_help: The short version is used in the menu, because we often lack space
+    osmTags: OSM tags list
+    osmTags_help: >-
+      When exporting OSM, each element that has this category will be assigned the corresponding OSM
+      tag
+    parent: Parent Category Group
+    pickingOptionText: 'Text to be displayed in the form: Choose…'
+    return_to_list: Back to the list
+    showExpanded: In the initial position, display the subgroups of this category
+    softColor: Softened colour
+    softColor_help: >-
+      Some colours suit the marker (a bit flashy) but don't really suit the header of the detail
+      sheet. In this case, the ‘softened’ version is used if it has been filled in
+    textHelper: Help message to quickly describe this category
+    textHelper_help: It will be displayed in the menu and in the form
+    unexpandable: Cannot reduce this category
+    unexpandable_help: The subgroups and subcategories will always be displayed
+    url: URL to an external page
+    url_help: >-
+      In the detail file, a small icon will appear next to the category with a link to the external
+      URL. This can be for example an age of a wiki describing the category
+    useColorForMarker: Use the colour of this category for the marker
+    useColorForMarker_help: If an item has several categories that give the colour, the lowest level category is used
+    useIconForMarker: Use the icon of this category for the marker
+    useIconForMarker_help: >-
+      The marker will display all icons of each category that have this option enabled. The icons
+      will be sorted in order of category selection in the form
+  form:
+    groups:
+      advanced: Advanced setup
+      description: Text fields adjacent to the category
+      display: Show category
+      displayChildren: Show subgroups and subcategories
+      main: Primary
+      osm: Link to OpenStreetMap
+      osm_help: >-
+        When exporting OSM, each element that has this category will be assigned the corresponding
+        OSM tag
+      primary: Main parameters
+      secondary: Secondary parameters
+      subcategories: Sub-groups
+
+partners:
+  _label: Partners
+  form:
+    content: Content
+    logo: Logo
+    logo_placeholder: Select an already imported image, or add one!
+    name: Name
+    websiteUrl: Website's URL
+
+projects:
+  _label: Project list
+  initialize:
+    email: E-mail address
+    plainPassword-1: Password
+  warnings:
+    abandonned_map: Your map created on {baseUrl} may be deleted?
+    message: >-
+      Hello!</br></br> You are the admin for the map  {projectName} on {baseUrl}. We have noticed
+      that no one has been using this map for several months. Has your project been abandoned or
+      changed?</br> Or you are recieveing this message because {baseUrl} keeps growing, and using
+      lots of ressources on our server. </br> <b>If your project is no longer active please connect
+      to your account at <a href="{adminUrl}">admin space</a> and click on "Delete my project" on
+      the bottom of the left menu.</b></br> If you want to keep your project, please login to your
+      map.</br> <b>If your map remains inactive in the next few months we reserve the right to
+      delete it.</b></br></br> Best regards,</br> Team of {baseUrl}.
+
+sonata.user.user:
+  _label: Users
+  batch:
+    error: 'ERROR: {message}'
+    mailError: You must fill in a subject and a content. Please start again
+    sendmails: '{count, plural, =1 {# e-mail was sent} other {# e-mails were sent} }'
+    tooMany: Too many items to process! Only {limit} have been processed
+    usersWithoutEmail: >-
+      {count, plural =1 {# e-mail could not be sent, because no e-mail address was given} other {#
+      e-mails could not be sent, because no e-mail address was given} }
+  facebook_warning: >-
+    WARNING: If your e-mail is private on Facebook, you will not be informed of the evolution of
+    your contributions
+  fields:
+    check_uncheck: Check/uncheck all
+    content: Message
+    contributionsCount: Contributions
+    createdAt: Created on
+    email: E-mail
+    gamification: Interactions
+    groups: Groups
+    object: Title
+    permissions_warning: >-
+      For users who have access to the admin dashboard, you have to <b>configure permissions on each
+      item</b><br> (Note: SUPER_ADMIN users already have access to every items, no need to configure
+      anything for them)
+    reportsCount: Reports
+    sendMail: Send e-mail
+    username: Name
+    votes: Votes
+    votesCount: Votes
+  forgottedPassword: Forgot your password
+  form:
+    allowedStamps: Authorized labels
+    enabled: Activated
+    expired: Expired
+    groups:
+      general: General
+      roles: Roles
+      security: Security
+      status: Status
+      user: User
+    locked: Locked
+    main-roles: Main roles
+    plainPassword: Password
+    watchModeration: Send notification e-mail when items are to be moderated
+    watchModerationOnlyWithOptions: Only for items with one of the following categories
+    watchModerationOnlyWithPostCodes: Only for items with postal code
+    watchModerationOnlyWithPostCodes_help: >-
+      Separated by commas. You can use the * symbol to select a whole department, for example : 40*,
+      47*, 48500
+    watchModerationOnlyWithPostCodes_placeholder: 40*, 47*, 48500
+  role:
+    ROLE_ADMIN: MODERATOR (Access to moderation functions, to be detailed in DataModel/WhoCanContribute)
+    ROLE_DIRECTMODERATION_ADD: CONTRIBUTOR + (can add elements as an Admin from the site)
+    ROLE_DIRECTMODERATION_EDIT_OWN_CONTRIB: >-
+      CONTRIBUTOR + (can edit the elements to which he has contributed, even without being the
+      owner)
+    ROLE_SONATA_ADMIN: ADMIN INTERFACE
+    ROLE_SUPER_ADMIN: SUPER ADMIN (all powers)
+
+stamps:
+  _label: Labels
+  fields:
+    isPublic: Public (anyone can assign it)
+    name: Name
+
+tile_layers:
+  _label: Map backgrounds
+
+webhooks:
+  _label: Webhooks
+  fields:
+    format: Format
+    url: URL
+  messages:
+    error_msg: '(Attempt n°{attempts}). Error is: {message}'
+    error_osm_auth: The credentials for your OSM may not be correct.
+    error_send: Error while sending webhook {url} for the item {element}
+    error_sync: Error while synchronizing item {element}.
+  texts:
+    add: added
+    delete: deleted
+    edit: updated
+  titles:
+    add: ADD
+    delete: DELETE
+    edit: EDIT
+
+wrappers:
+  _label: Home page banners
+  fields:
+    backgroundColor: Background colour
+    content: Content of the banner
+    rawContent: Raw HTML content (optional)
+    textColor: Text colour

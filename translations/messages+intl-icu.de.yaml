@@ -1,296 +1,303 @@
+action:
+  cancel: Abbrechen
+  continue: Fortsetzen
+  create: Erstellen
+  element:
+    delete:
+      done: Das Element ist gelöscht worden
+      unallowed: Entschuldigung, Sie dürfen ein Element nicht löschen!
+      uncomplete: Parameter sind unvollständig
+    report:
+      done: Vielen Dank, Ihr Bericht wurde registriert!
+      unallowed: Entschuldigung, Sie dürfen keine Fehler melden!
+    resolveReports:
+      done: Das Element ist moderiert worden
+      unallowed: Entschuldigung, Sie dürfen dieses Element nicht moderieren!
+      uncomplete: Parameter sind unvollständig
+    sendEditLink:
+      done: Ein Bearbeitungslink ist an {email} gesendet worden
+      emailContent: >-
+        <p>Hallo <i>'{{ element '}}</i>,</p><p><a href="'{{ directEditElementUniqueUrl '}}">Klicken
+        Sie hier</a>, um Ihr Datenblatt zu bearbeiten</p>
+    sendMail:
+      done: Die E-Mail ist gesendet worden
+      emailContent: >-
+        <p>Hallo <i>{element}</i>,</p> <p>Sie haben eine Nachricht von <a
+        href="mailto:{sender}">{sender}</a> empfangen</br> </p> <p><b>Nachrichtsbetreff</b></p><p>
+        {subject}</p> <p><b>Inhalt</b></p><p>{content}</p>
+      emailSubject: Nachricht von der Plattform {instance} empfangen
+      uncomplete: Parameter sind unvollständig
+    stamp:
+      done: Das Etikett ist geändert worden
+      unallowed: Sie dürfen dieses Etikett nicht benutzen
+      uncomplete: Parameter sind unvollständig
+    vote:
+      unallowed: Sie sind leider nicht stimmberechtigt!
+      uncomplete: Die Abstimmungsparameter sind unvollständig
+  error: 'Fehler: {message}'
+  geolocalize_me: Meine Position geolokalisieren
+  search: Suchen
+  send: Senden
+  send_stay: Senden und auf dem Formular bleiben
+  submit: Speichern
+
+api_ui:
+  _label: API einrichten
+  api_url: API-URL
+  format: 'Format:'
+  include_external: Externe Quellen in die Datenbank einbinden
+  json: JSON
+  jsonld: JSON-LD (Semantisch)
+  test: Testen
+  title: Zugriff auf Daten über eine API
+  use_bounds: Auf einem geografischen Gebiet einschränken (zeichnen Sie ein Rechteck auf der Karte)
+  use_categories: Nach Kategorie einschränken
+  use_limit: Anzahl der Ergebnisse begrenzen
+
 commons:
-  errors:
-    file-too-big: Diese Datei ist zu groß, die maximal zulässige Größe ist {size} MB
-    bad_url: Bitte geben Sie eine URL wie http://… ein
-    bad_number: Dies ist keine Zahl!
-    too_long: Hoppla, dieser Text ist ein bisschen lang!
-    bad_email: Bitte geben Sie eine gültige E-Mail Adresse ein
-  choose_one_option: Bitte wählen Sie mindestens eine Option
-  choose_category: Wählen Sie {cat}
   category_placeholder: Spezifizieren Sie (falls benötigt)
   check_password: Geben Sie Ihr Passwort erneut ein
-  every:
-    week: Jede Woche
-    month: Jeden Monat
-  location: Ihre Adresse oder Ihre Stadt
-  never: Nie
-  menu: Menü
-  password: Passwort
-  optional: (optional)
-  validation: Validierung
-  username: Benutzername
-  register: Konto erstellen
-  newsletter-explanation: Lassen Sie sich per E-Mail über die neuen Referenzpunkte
-    in Ihrer Nähe informieren!
+  choose_category: Wählen Sie {cat}
+  choose_one_option: Bitte wählen Sie mindestens eine Option
   email: E-Mail-Adresse
+  errors:
+    bad_email: Bitte geben Sie eine gültige E-Mail Adresse ein
+    bad_number: Dies ist keine Zahl!
+    bad_url: Bitte geben Sie eine URL wie http://… ein
+    file-too-big: "Diese Datei ist zu groß, die maximal zulässige Größe ist {size}\_MB"
+    too_long: Hoppla, dieser Text ist ein bisschen lang!
+  every:
+    month: Jeden Monat
+    week: Jede Woche
+  location: Ihre Adresse oder Ihre Stadt
+  menu: Menü
+  never: Nie
+  newsletter-explanation: Lassen Sie sich per E-Mail über die neuen Referenzpunkte in Ihrer Nähe informieren!
+  optional: (optional)
+  password: Passwort
+  register: Konto erstellen
+  username: Benutzername
+  validation: Validierung
+
+contributor-login:
+  _label: Identifizierung
+  communs: LesCommuns.org
+  email: Geben Sie einfach eine E-Mail Adresse ein
+  error:
+    admin_only: Achtung! Diese Funktion ist für Administratoren reserviert
+    invalid_email: Bitte geben Sie eine gültige E-Mail-Adresse ein
+    used_email: >-
+      Hoppla, ein Konto mit dieser E-Mail-Adresse existiert bereits! Melden Sie sich an oder
+      verwenden Sie eine andere Adresse!
+  login: Anmelden
+  oauth: Melden Sie sich mit Ihrem Konto an
+  printemps: Bildungsfrühling
+
+directory:
+  _label: Die Karte
+
 duplicates:
   controller:
     marked: Markiert als nicht dupliziert
-    merged: Dieses Element wurde mit einem potenziellen Duplikat zusammengeführt
     marked_long: Elemente sind als nicht dupliziert markiert worden
-  title: Suche nach Duplikaten
-  subtitle: Es wurden ähnliche Elemente erkannt, vielleicht wollten Sie eines davon
-    hinzufügen?
-  see_on_map: (Auf OpenStreetMap ansehen)
-  new_element: Nein, es ist ein neues Element, ich mache weiter!
-  label: Duplikat-Erkennung
+    merged: Dieses Element wurde mit einem potenziellen Duplikat zusammengeführt
   duplicated_element: Dies ist es!
-directory:
-  _label: Die Karte
-contributor-login:
-  printemps: Bildungsfrühling
-  error:
-    admin_only: Achtung! Diese Funktion ist für Administratoren reserviert
-    used_email: Hoppla, ein Konto mit dieser E-Mail-Adresse existiert bereits! Melden
-      Sie sich an oder verwenden Sie eine andere Adresse!
-    invalid_email: Bitte geben Sie eine gültige E-Mail-Adresse ein
-  oauth: Melden Sie sich mit Ihrem Konto an
-  login: Anmelden
-  communs: LesCommuns.org
-  _label: Identifizierung
-  email: Geben Sie einfach eine E-Mail Adresse ein
-action:
-  element:
-    vote:
-      uncomplete: Die Abstimmungsparameter sind unvollständig
-      unallowed: Sie sind leider nicht stimmberechtigt!
-    stamp:
-      uncomplete: Parameter sind unvollständig
-      unallowed: Sie dürfen dieses Etikett nicht benutzen
-      done: Das Etikett ist geändert worden
-    sendMail:
-      uncomplete: Parameter sind unvollständig
-      emailContent: <p>Hallo <i>{element}</i>,</p> <p>Sie haben eine Nachricht von
-        <a href="mailto:{sender}">{sender}</a> empfangen</br> </p> <p><b>Nachrichtsbetreff</b></p><p>
-        {subject}</p> <p><b>Inhalt</b></p><p>{content}</p>
-      done: Die E-Mail ist gesendet worden
-      emailSubject: Nachricht von der Plattform {instance} empfangen
-    sendEditLink:
-      emailContent: <p>Hallo <i>'{{ element '}}</i>,</p><p><a href="'{{ directEditElementUniqueUrl
-        '}}">Klicken Sie hier</a>, um Ihr Datenblatt zu bearbeiten</p>
-      done: Ein Bearbeitungslink ist an {email} gesendet worden
-    resolveReports:
-      uncomplete: Parameter sind unvollständig
-      unallowed: Entschuldigung, Sie dürfen dieses Element nicht moderieren!
-      done: Das Element ist moderiert worden
-    report:
-      unallowed: Entschuldigung, Sie dürfen keine Fehler melden!
-      done: Vielen Dank, Ihr Bericht wurde registriert!
-    delete:
-      uncomplete: Parameter sind unvollständig
-      unallowed: Entschuldigung, Sie dürfen ein Element nicht löschen!
-      done: Das Element ist gelöscht worden
-  submit: Speichern
-  send: Senden
-  search: Suchen
-  geolocalize_me: Meine Position geolokalisieren
-  error: 'Fehler: {message}'
-  create: Erstellen
-  continue: Fortsetzen
-  cancel: Abbrechen
-  send_stay: Senden und auf dem Formular bleiben
-login:
-  register: Sie benötigen ein Konto? <a href="{url}">Registrieren</a>
-  login_with: Anmelden mit {provider}
-  _label: Anmelden
+  label: Duplikat-Erkennung
+  new_element: Nein, es ist ein neues Element, ich mache weiter!
+  see_on_map: (Auf OpenStreetMap ansehen)
+  subtitle: Es wurden ähnliche Elemente erkannt, vielleicht wollten Sie eines davon hinzufügen?
+  title: Suche nach Duplikaten
+
 element.form:
-  create_user: Passwort zum Erstellen Ihres Kontos
-  controller:
-    thankyou:
-      edited: Vielen Dank für Ihre Hilfe! Die Änderungen sind berücksichtigt worden!
-      added: Vielen Dank für Ihre Hilfe! {name} ist hinzugefügt worden
-    success: Ihr Konto ist erstellt worden! Sie können jetzt <a href="{url}" >Ihr
-      Profil</a> vervollständigen!
-    user_contributions: Finden und bearbeiten Sie Ihre Beiträge auf der Seite <a href="{url}">Meine
-      Beiträge</a>
-    pending: Ihr Beitrag wartet derzeit auf die Validierung, <a class='validation-process'
-      onclick="$('#popup-collaborative-explanation').openModal()">klicken Sie hier</a>,
-      um mehr über den kollaborativen Moderationsprozess zu erfahren!
-    error_unauthorized: Entschuldigung, Sie dürfen dieses Element leider nicht verändern!
-    error_dont_exist: Das angeforderte Element existiert nicht …
   admin_section:
-    send_mail:
-      modify: Benachrichtigen über Bearbeitungen zu {element} per E-Mail
-      add: Benachrichtigen über Aktualisierungen zu {element} per E-Mail
-    admin_message: Detail der Änderung; dieser Text wird 'customMessage' in den automatischen
-      E-Mails ersetzen
-    recopy_info: Informationen in ein neues Formular kopieren
     _label: Validierung
-  title_edit: Datenänderung
-  title_add: '{element} hinzufügen'
-  success_becomeOwner: Sie besitzen jetzt den Datensatz {name}!
-  open_hours:
-    to: bis
-    recopy_tooltip: Vorherigen Zeitpläne kopieren
-    from: Von
-    and: Und
-    add_tooltip: Zeitfenster hinzufügen
-  need_help: Hilfe?
-  localize: Lokalisieren
-  info_saved: Gespeicherte Änderungen!
-  error_username: Dieser Benutzername ist bereits vergeben!
-  error_missing_adress: Wenn Sie die Neuzugänge erhalten möchten, müssen Sie eine
-    Adresse eingeben
-  error_geocode: Diese Adresse kann nicht gefunden werden
+    admin_message: Detail der Änderung; dieser Text wird 'customMessage' in den automatischen E-Mails ersetzen
+    recopy_info: Informationen in ein neues Formular kopieren
+    send_mail:
+      add: Benachrichtigen über Aktualisierungen zu {element} per E-Mail
+      modify: Benachrichtigen über Bearbeitungen zu {element} per E-Mail
+  controller:
+    error_dont_exist: "Das angeforderte Element existiert nicht\_…"
+    error_unauthorized: Entschuldigung, Sie dürfen dieses Element leider nicht verändern!
+    pending: >-
+      Ihr Beitrag wartet derzeit auf die Validierung, <a class='validation-process'
+      onclick="$('#popup-collaborative-explanation').openModal()">klicken Sie hier</a>, um mehr über
+      den kollaborativen Moderationsprozess zu erfahren!
+    success: >-
+      Ihr Konto ist erstellt worden! Sie können jetzt <a href="{url}" >Ihr Profil</a>
+      vervollständigen!
+    thankyou:
+      added: Vielen Dank für Ihre Hilfe! {name} ist hinzugefügt worden
+      edited: Vielen Dank für Ihre Hilfe! Die Änderungen sind berücksichtigt worden!
+    user_contributions: Finden und bearbeiten Sie Ihre Beiträge auf der Seite <a href="{url}">Meine Beiträge</a>
+  create_user: Passwort zum Erstellen Ihres Kontos
   error_becomeOwner: Entschuldigung, dieses Element gehört bereits jemandem!
+  error_geocode: Diese Adresse kann nicht gefunden werden
+  error_missing_adress: Wenn Sie die Neuzugänge erhalten möchten, müssen Sie eine Adresse eingeben
+  error_username: Dieser Benutzername ist bereits vergeben!
+  info_saved: Gespeicherte Änderungen!
+  localize: Lokalisieren
+  need_help: Hilfe?
+  open_hours:
+    add_tooltip: Zeitfenster hinzufügen
+    and: Und
+    from: Von
+    recopy_tooltip: Vorherigen Zeitpläne kopieren
+    to: bis
+  success_becomeOwner: Sie besitzen jetzt den Datensatz {name}!
+  title_add: '{element} hinzufügen'
+  title_edit: Datenänderung
+
 home:
-  logout: Abmelden
-  search:
-    placeholder: Geben Sie ein
-    category: eine Kategorie
-    all: Alle
-    address: eine Adresse
-  pick_category: 'Wählen Sie eine Kategorie (Standard: alle)'
-  my_space: Mein Raum
-  geolocalize: Geolokalisieren Sie Ihre Position
-  credits: Angetrieben von {ggc}
   admin_interface: Admin-Schnittstelle
-my_contributions:
-  edit: Bearbeiten
-  me: Ich
-  type: Typ
-  status: Status
-  show: Ansehen
-  owner: Eigentümer
-  none: Sie haben noch keinen Beitrag geleistet
-  name: Name
-  my_votes: Meine Stimmen
-  my_reports: Meine Meldungen
-  my_elements: Meine Datensätze
-  history: Verlauf meiner Beiträge
-  element_contributed: Andere Datensätze, zu denen ich beigetragen habe
-  element: Datensatz
-  date: Datum
-  confirmation_hint: Um Eigentümer eines Datensatzes zu werden, müssen Sie bescheinigen,
-    dass Sie an der Verwaltung dieser Struktur beteiligt sind
-  confirmation_cancel: Abbrechen
-  confirmation_button: Ich bestätige
-  confirmation: Bestätigung
-  become_owner: Eigentümer werden
-  action: Aktion
-  _label: Meine Beiträge
-api_ui:
-  json: JSON
-  include_external: Externe Quellen in die Datenbank einbinden
-  format: 'Format:'
-  use_limit: Anzahl der Ergebnisse begrenzen
-  use_categories: Nach Kategorie einschränken
-  use_bounds: Auf einem geografischen Gebiet einschränken (zeichnen Sie ein Rechteck
-    auf der Karte)
-  title: Zugriff auf Daten über eine API
-  test: Testen
-  jsonld: JSON-LD (Semantisch)
-  api_url: API-URL
-  _label: API einrichten
-load_configuration:
-  AppBaseline: Erstellen Sie Karten in rauen Mengen
-  AddElementHintText: Helfen Sie, die Datenbank zu vergrößern!
-  AboutHeaderTitle: Über
-  ElementFormGeocodingHelp: Verwenden Sie keine Satzzeichen, auch Namen in Großbuchstaben
-    werden nicht erkannt. Wenn die Ortung nicht funktioniert (manchmal werden einige
-    Adressen nicht erkannt), geben Sie den Namen der nächstgelegenen Stadt/des nächstgelegenen
-    Dorfes ein, klicken Sie auf „Lokalisieren“ und setzen Sie den Ortungspunkt manuell.
-    Geben Sie die vollständige Adresse erneut in die Leiste ein und fahren Sie mit
-    dem nächsten Teil des Formulars fort, ohne erneut auf „Lokalisieren“ zu klicken.
-  CollaborativeModerationExplanations: ' <p> Wenn ein Element hinzugefügt oder geändert
-    wird, erfolgt die Aktualisierung der Daten nicht sofort. Das Element erscheint
-    zunächst grau dargestellten auf der Karte, und es ist dann für alle registrierten
-    Benutzer möglich, einmal und nur einmal für diesen Punkt abzustimmen. Diese Abstimmung
-    ist keine Meinung, sondern ein Wissensaustausch. Wenn Sie dieses Element kennen,
-    oder wissen, dass es dieses Element nicht gibt, dann sind wir an Ihrem Wissen
-    interessiert! </p> <p> Nach einer bestimmten Anzahl von Stimmen kann das Element
-    dann automatisch validiert oder abgelehnt werden. Im Falle von Streitigkeiten
-    (sowohl positive als auch negative Stimmen) wird ein Moderator so schnell wie
-    möglich eingreifen. Wir zählen auf Sie! </p>'
-  SeeMoreButtonText: Mehr erfahren
-  PartnerPageTitle: Partner
+  credits: Angetrieben von {ggc}
+  geolocalize: Geolokalisieren Sie Ihre Position
+  logout: Abmelden
+  my_space: Mein Raum
+  pick_category: 'Wählen Sie eine Kategorie (Standard: alle)'
+  search:
+    address: eine Adresse
+    all: Alle
+    category: eine Kategorie
+    placeholder: Geben Sie ein
+
 js:
-  login:
-    wrong_id: Die Anmeldedaten sind nicht korrekt
-    exception: Beim Verbindungsversuch ist ein Fehler aufgetreten
   element_form:
-    geocoded_marker_text: Bewegen Sie mich, um die Position festzulegen</br>(in die
-      Mitte des Gebäudes)
-votes:
-  vote: Abstimmen
-  status: Status
-  empty: Sie haben noch nicht abgestimmt! Und dann muss man anfangen :) </br>Abstimmungen
-    ermöglichen kollaborative Moderation!
-  element: Name
+    geocoded_marker_text: Bewegen Sie mich, um die Position festzulegen</br>(in die Mitte des Gebäudes)
+  login:
+    exception: Beim Verbindungsversuch ist ein Fehler aufgetreten
+    wrong_id: Die Anmeldedaten sind nicht korrekt
+
+load_configuration:
+  AboutHeaderTitle: Über
+  AddElementHintText: Helfen Sie, die Datenbank zu vergrößern!
+  AppBaseline: Erstellen Sie Karten in rauen Mengen
+  CollaborativeModerationExplanations: ' <p> Wenn ein Element hinzugefügt oder geändert wird, erfolgt die Aktualisierung der Daten nicht sofort. Das Element erscheint zunächst grau dargestellten auf der Karte, und es ist dann für alle registrierten Benutzer möglich, einmal und nur einmal für diesen Punkt abzustimmen. Diese Abstimmung ist keine Meinung, sondern ein Wissensaustausch. Wenn Sie dieses Element kennen, oder wissen, dass es dieses Element nicht gibt, dann sind wir an Ihrem Wissen interessiert! </p> <p> Nach einer bestimmten Anzahl von Stimmen kann das Element dann automatisch validiert oder abgelehnt werden. Im Falle von Streitigkeiten (sowohl positive als auch negative Stimmen) wird ein Moderator so schnell wie möglich eingreifen. Wir zählen auf Sie! </p>'
+  ElementFormGeocodingHelp: >-
+    Verwenden Sie keine Satzzeichen, auch Namen in Großbuchstaben werden nicht erkannt. Wenn die
+    Ortung nicht funktioniert (manchmal werden einige Adressen nicht erkannt), geben Sie den Namen
+    der nächstgelegenen Stadt/des nächstgelegenen Dorfes ein, klicken Sie auf „Lokalisieren“ und
+    setzen Sie den Ortungspunkt manuell. Geben Sie die vollständige Adresse erneut in die Leiste ein
+    und fahren Sie mit dem nächsten Teil des Formulars fort, ohne erneut auf „Lokalisieren“ zu
+    klicken.
+  PartnerPageTitle: Partner
+  SeeMoreButtonText: Mehr erfahren
+
+login:
+  _label: Anmelden
+  login_with: Anmelden mit {provider}
+  register: Sie benötigen ein Konto? <a href="{url}">Registrieren</a>
+
+my_contributions:
+  _label: Meine Beiträge
+  action: Aktion
+  become_owner: Eigentümer werden
+  confirmation: Bestätigung
+  confirmation_button: Ich bestätige
+  confirmation_cancel: Abbrechen
+  confirmation_hint: >-
+    Um Eigentümer eines Datensatzes zu werden, müssen Sie bescheinigen, dass Sie an der Verwaltung
+    dieser Struktur beteiligt sind
   date: Datum
-  _label: Meine Stimmen
-vote:
-  vote_added: Danke für Ihren Beitrag!
-  user_vote_for_him: 'Mal sehen, Sie hatten doch nicht vor, für Ihren eigenen Beitrag
-    zu stimmen, oder? Lassen Sie einige für die anderen übrig! Seien Sie vorsichtig,
-    Schlaumeier, wenn Sie eine andere Ihrer persönlichen Adressen verwenden, sehen
-    wir es auch! '
-  pending:
-    user_validated:
-      positive: Herzlichen Glückwunsch, die Änderungen haben genug Stimmen erhalten,
-        um validiert zu werden!
-      negative: Der Änderungsvorschlag hat genügend negative Stimmen erhalten, er
-        ist damit gestrichen.
-    admin_validated:
-      positive: Die Änderungen sind übernommen worden
-      negative: Die Änderungen sind abgelehnt worden
-  collaborative:
-    positive: Herzlichen Glückwunsch, {element} hat genug Stimmen erhalten, um validiert
-      zu werden!
-    negative: '{element} hat genügend negative Stimmen erhalten, wird es entfernt.'
-  admin:
-    positive: '{element} ist validiert worden'
-    negative: '{element} ist abgelehnt worden'
-  vote_modified: 'Danke {user}: Ihre Stimme ist geändert worden!'
-reports:
+  edit: Bearbeiten
+  element: Datensatz
+  element_contributed: Andere Datensätze, zu denen ich beigetragen habe
+  history: Verlauf meiner Beiträge
+  me: Ich
+  my_elements: Meine Datensätze
+  my_reports: Meine Meldungen
+  my_votes: Meine Stimmen
+  name: Name
+  none: Sie haben noch keinen Beitrag geleistet
+  owner: Eigentümer
+  show: Ansehen
   status: Status
-  reportValues:
-    v3: Das Element wird mehrfach referenziert
-    v2: Das Element respektiert die Charta nicht
-    v1: Informationen sind falsch
-    v0: Das Element existiert nicht mehr
-  report: Meldung
-  pending_moderation: Warten auf Moderation
-  empty: Sie haben noch keine Fehler gemeldet. Könnte unsere Datenbank perfekt sein?
-    :P
-  element: Name
-  date: Datum
-  _label: Meine Meldungen
-projects:
-  initialize:
-    username: Benutzername
-    plainPassword-2: Geben Sie Ihr Passwort erneut ein
-    plainPassword-1: Passwort
-    email: E-Mail-Adresse
-    _label: Administratorkonto erstellen
-  form:
-    project_name: Projektname
-    message: Ihr Projekt wird erstellt, bitte warten …
-    domaine_name: Domainname
-    data-error: Hoppla, dieser Name ist zu lang!
-    contribOptions:
-      open: Offen
-      intermediate: Zwischengeschaltet
-      inherit: Standard
-      closed: Geschlossen
-    contribHints:
-      open: Alle Benutzer können frei hinzufügen/bearbeiten/löschen
-      intermediate: Alle Benutzer können Beiträge leisten, aber die Beiträge müssen
-        von Administratoren moderiert werden
-      inherit: '{base_url}-Standardeinstellungen verwenden'
-      closed: Nur Administratoren können beitragen
-    contrib: Offen für öffentliche Beiträge
-    cgu: Nutzungsbedingungen
-    accept_cgu: Ich akzeptiere die allgemeinen Nutzungsbedingungen
-    _label: Projekt erstellen
-  pitch: Erstellen Sie Karten in rauen Mengen!
-pending-contributions:
-  form: Datensatz
-  empty_section: Sie haben keine ausstehenden Beiträge. Sie können gerne einen Datensatz
-    <a href="{url}">hinzufügen</a>!
-  _label: Meine ausstehenden Beiträge
+  type: Typ
+
 my_parameters:
-  unit: Kilometer
-  range: 'Suchradius:'
-  input_location: Ihre Adresse oder Stadt
   _label: Meine Einstellungen
+  input_location: Ihre Adresse oder Stadt
+  range: 'Suchradius:'
+  unit: Kilometer
+
+pending-contributions:
+  _label: Meine ausstehenden Beiträge
+  empty_section: >-
+    Sie haben keine ausstehenden Beiträge. Sie können gerne einen Datensatz <a
+    href="{url}">hinzufügen</a>!
+  form: Datensatz
+
+projects:
+  form:
+    _label: Projekt erstellen
+    accept_cgu: Ich akzeptiere die allgemeinen Nutzungsbedingungen
+    cgu: Nutzungsbedingungen
+    contrib: Offen für öffentliche Beiträge
+    contribHints:
+      closed: Nur Administratoren können beitragen
+      inherit: '{base_url}-Standardeinstellungen verwenden'
+      intermediate: >-
+        Alle Benutzer können Beiträge leisten, aber die Beiträge müssen von Administratoren
+        moderiert werden
+      open: Alle Benutzer können frei hinzufügen/bearbeiten/löschen
+    contribOptions:
+      closed: Geschlossen
+      inherit: Standard
+      intermediate: Zwischengeschaltet
+      open: Offen
+    data-error: Hoppla, dieser Name ist zu lang!
+    domaine_name: Domainname
+    message: "Ihr Projekt wird erstellt, bitte warten\_…"
+    project_name: Projektname
+  initialize:
+    _label: Administratorkonto erstellen
+    email: E-Mail-Adresse
+    plainPassword-1: Passwort
+    plainPassword-2: Geben Sie Ihr Passwort erneut ein
+    username: Benutzername
+  pitch: Erstellen Sie Karten in rauen Mengen!
+
+reports:
+  _label: Meine Meldungen
+  date: Datum
+  element: Name
+  empty: Sie haben noch keine Fehler gemeldet. Könnte unsere Datenbank perfekt sein? :P
+  pending_moderation: Warten auf Moderation
+  report: Meldung
+  reportValues:
+    v0: Das Element existiert nicht mehr
+    v1: Informationen sind falsch
+    v2: Das Element respektiert die Charta nicht
+    v3: Das Element wird mehrfach referenziert
+  status: Status
+
+vote:
+  admin:
+    negative: '{element} ist abgelehnt worden'
+    positive: '{element} ist validiert worden'
+  collaborative:
+    negative: '{element} hat genügend negative Stimmen erhalten, wird es entfernt.'
+    positive: Herzlichen Glückwunsch, {element} hat genug Stimmen erhalten, um validiert zu werden!
+  pending:
+    admin_validated:
+      negative: Die Änderungen sind abgelehnt worden
+      positive: Die Änderungen sind übernommen worden
+    user_validated:
+      negative: Der Änderungsvorschlag hat genügend negative Stimmen erhalten, er ist damit gestrichen.
+      positive: Herzlichen Glückwunsch, die Änderungen haben genug Stimmen erhalten, um validiert zu werden!
+  user_vote_for_him: >-
+    Mal sehen, Sie hatten doch nicht vor, für Ihren eigenen Beitrag zu stimmen, oder? Lassen Sie
+    einige für die anderen übrig! Seien Sie vorsichtig, Schlaumeier, wenn Sie eine andere Ihrer
+    persönlichen Adressen verwenden, sehen wir es auch! 
+  vote_added: Danke für Ihren Beitrag!
+  vote_modified: 'Danke {user}: Ihre Stimme ist geändert worden!'
+
+votes:
+  _label: Meine Stimmen
+  date: Datum
+  element: Name
+  empty: >-
+    Sie haben noch nicht abgestimmt! Und dann muss man anfangen :) </br>Abstimmungen ermöglichen
+    kollaborative Moderation!
+  status: Status
+  vote: Abstimmen
