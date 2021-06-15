@@ -11,7 +11,7 @@ bulk:
   batchDone: ''
   continue: ''
   delete: ''
-  deleteElement: >
+  deleteElement: ''
   detectDuplicatesAction: ''
   done: ''
   duplicateDeleted: ''
@@ -22,7 +22,7 @@ bulk:
   manualMerge: ''
   results: ''
   return: ''
-  updateUser: >
+  updateUser: ''
   update_gamification: ''
 
 categories:
@@ -38,7 +38,7 @@ categories:
     displayInMenu_help: ''
     displaySuboptionsInline: ''
     enableDescription: ''
-    enableDescription_help: >
+    enableDescription_help: ''
     index: ''
     isMandatory: ''
     isMandatory_help: ''
@@ -69,9 +69,9 @@ categories:
     addCategories: ''
     addCategory: ''
     categoriesDescription: ''
-    empty: >
+    empty: ''
     help: ''
-    help_description: >
+    help_description: ''
     multiple: ''
     title: ''
     unique: ''
@@ -111,7 +111,7 @@ config_api:
   elements: ''
   fields:
     api.publicApiPrivateProperties: ''
-    apilist:
+    apilist: null
     gogo_api_configuration: ''
     gogo_api_element_get: ''
     gogo_api_elements_from_text: ''
@@ -127,7 +127,7 @@ config_api:
     groups:
       apis: ''
       config: ''
-      config_description: >
+      config_description: ''
   taxonomy: ''
 
 config_contributions:
@@ -167,15 +167,15 @@ config_duplicates:
     duplicates:
       automaticMergeIfPerfectMatch: ''
       detectAfterImport: ''
-      detectAfterImport_help: >
+      detectAfterImport_help: ''
       fieldsToBeUsedForComparaison: ''
-      fieldsToBeUsedForComparaison_help: >
+      fieldsToBeUsedForComparaison_help: ''
       rangeInMeters: ''
       sourcePriorityInAutomaticMerge: ''
-      sourcesToDetectFrom: >
+      sourcesToDetectFrom: ''
       sourcesToDetectWith: ''
       useGlobalSearch: ''
-      useGlobalSearch_help: >
+      useGlobalSearch_help: ''
     gogo_bulk_actions_detect_duplicates: ''
     gogo_duplicates_index: ''
   form:
@@ -192,11 +192,11 @@ config_emails:
       delete: ''
       edit: ''
       infosContributors: ''
-      infosContributors_description: >
+      infosContributors_description: ''
       infosElements: ''
-      infosElements_description: >
+      infosElements_description: ''
       infosNewletter: ''
-      infosNewletter_description: >
+      infosNewletter_description: ''
       mailForContributors: ''
       mailForElements: ''
       newsletter: ''
@@ -219,20 +219,20 @@ config_form:
     elementFormGeocodingHelp: ''
     elementFormIntroText: ''
     elementFormIntroText_placeholder: ''
-    elementFormOwningText: >
+    elementFormOwningText: ''
     elementFormOwningText_placeholder: ''
     elementFormValidationText: ''
     elementFormValidationText_placeholder: ''
   form:
     groups:
       config: ''
-      config_description: >
+      config_description: ''
       form: ''
       other: ''
 
 config_general:
   _label: ''
-  cannot_delete: >
+  cannot_delete: ''
   downloadImage: ''
   fields:
     aboutHeaderTitle: ''
@@ -242,7 +242,7 @@ config_general:
     appName: ''
     appTags: ''
     customDomain: ''
-    customDomain_help: >
+    customDomain_help: ''
     dataLicenseUrl: ''
     elementDisplayName: ''
     elementDisplayNameDefinite: ''
@@ -259,7 +259,7 @@ config_general:
     groups:
       images: ''
       main: ''
-      main_description: >
+      main_description: ''
       pages: ''
       text: ''
 
@@ -291,18 +291,18 @@ config_infobar:
       isPending: ''
       originalAddress: ''
       sourceKey: ''
-      status: |
+      status: ''
       updatedAt: ''
     example:
       categories: ''
-      categoriesFull: |
-      colorOptionId: >
+      categoriesFull: ''
+      colorOptionId: ''
       createdAt: ''
       distance: ''
-      images: >
+      images: ''
       isDeleted: ''
       isPending: ''
-      originalAddress: >
+      originalAddress: ''
       sourceKey: ''
       status: ''
       updatedAt: ''
@@ -324,20 +324,20 @@ config_infobar:
   form:
     groups:
       automatic_emails: ''
-      automatic_emails_description: >
+      automatic_emails_description: ''
       field_list: ''
       filter_list: ''
       infobar_content: ''
-      infobar_content_description: >
+      infobar_content_description: ''
       infobar_param: ''
 
 config_map:
   _label: ''
   fields:
     customPopupId: ''
-    customPopupShowOnlyOnce: >
+    customPopupShowOnlyOnce: ''
     customPopupText: ''
-    defaultTileLayer: >
+    defaultTileLayer: ''
     saveTileLayerInCookies: ''
     saveViewportInCookies: ''
     viewport_picker: ''
@@ -371,15 +371,15 @@ config_marker:
   form:
     groups:
       cluster: ''
-      cluster_description: >
+      cluster_description: ''
       popup: ''
-      popup_description: >
+      popup_description: ''
 
 config_menu:
   _label: ''
   fields:
     box: ''
-    box_description: >
+    box_description: ''
     menu:
       displayNumberOfElementForEachCategory: ''
       displayNumberOfElementRoundResults: ''
@@ -389,13 +389,13 @@ config_menu:
       showCheckboxForSubFilterPane_help: ''
       showOnePanePerMainOption: ''
       smallWidthStyle: ''
-      smallWidthStyle_help: >
+      smallWidthStyle_help: ''
       width: ''
       width_placeholder: ''
     searchCategoriesFeature: ''
     searchElementsFeature: ''
     searchExcludingWords: ''
-    searchExcludingWords_title: >
+    searchExcludingWords_title: ''
     searchGeolocateFeature: ''
     searchPlaceFeature: ''
   form:
@@ -415,7 +415,7 @@ config_mobile:
   form:
     groups:
       progressive: ''
-      progressive_description: >
+      progressive_description: ''
       trusted: ''
       trusted_description: ''
 
@@ -428,7 +428,7 @@ config_osm:
   form:
     groups:
       account: ''
-      account_description: >
+      account_description: ''
       host_description: ''
 
 config_saas:
@@ -488,7 +488,7 @@ config_users:
 
 dashboard:
   _label: ''
-  confirm: >
+  confirm: ''
   delete: ''
   errors: ''
   menu:
@@ -505,11 +505,11 @@ dashboard:
     gogo_element_add: ''
     gogo_homepage: ''
     gogo_partners: ''
-  welcome: >
+  welcome: ''
 
 duplicates:
   index:
-    leftDuplicatesToProceedCount: ""
+    leftDuplicatesToProceedCount: ''
     merge: ''
     none: ''
     return: ''
@@ -519,13 +519,13 @@ duplicates:
     address: ''
     deleted: ''
     merge: ''
-    merge_title: >
+    merge_title: ''
     non-duplicates: ''
-    non-duplicates_title: >
+    non-duplicates_title: ''
 
 dynamic_imports:
   _label: ''
-  fields: &ref_import_fields
+  fields: &ref_1
     customCode: ''
     customCodeForExport: ''
     deletedCount: ''
@@ -538,44 +538,44 @@ dynamic_imports:
     elementsPreventImportedNoTaxo: ''
     elementsUpdatedCount: ''
     fieldToCheckElementHaveBeenUpdated: ''
-    fieldToCheckElementHaveBeenUpdated_help: >
+    fieldToCheckElementHaveBeenUpdated_help: ''
     file: ''
     geocodeIfNecessary: ''
     idsToIgnore: ''
-    idsToIgnore_help: >
+    idsToIgnore_help: ''
     isSynchronized: ''
     isSynchronized_help: ''
     lastRefresh: ''
     logs: ''
     manualRefresh: ''
     moderateElements: ''
-    moderateElements_help: >
-    needToHaveOptionsOtherThanTheOnesAddedToEachElements: >
-    needToHaveOptionsOtherThanTheOnesAddedToEachElements_help: >
+    moderateElements_help: ''
+    needToHaveOptionsOtherThanTheOnesAddedToEachElements: ''
+    needToHaveOptionsOtherThanTheOnesAddedToEachElements_help: ''
     newOntologyToMap: ''
     newTaxonomyToMap: ''
     optionsToAddToEachElement: ''
     parameters: ''
     preventImportIfNoCategories: ''
-    preventImportIfNoCategories_help: >
+    preventImportIfNoCategories_help: ''
     refreshFrequency: ''
     refreshFrequencyInDays: ''
     refreshFrequencyInDays_help: ''
     sourceName: ''
     sourceType: ''
-    submessage: >
+    submessage: ''
     url: ''
-    usersToNotify: >
-  form: &ref_import_form
+    usersToNotify: ''
+  form: &ref_2
     groups:
       Historic: ''
-      code: >
-      code_description: >
+      code: ''
+      code_description: ''
       customCode: ''
       customCodeForExportPanel: ''
-      customCodeForExportPanel_description: >
+      customCodeForExportPanel_description: ''
       customCodeForExportTab: ''
-      dynamicList: >
+      dynamicList: ''
       general: ''
       historic: ''
       newCategories: ''
@@ -586,7 +586,7 @@ dynamic_imports:
       staticList: ''
       taxonomyMapping: ''
       taxonomyMapping2: ''
-  list: &ref_import_list
+  list: &ref_3
     idsToIgnore: ''
     refreshFrequencyInDays: ''
 
@@ -597,7 +597,7 @@ elements:
       delete: ''
       editOptions: ''
       params:
-        comment: >
+        comment: ''
         dont_send_mail: ''
         from: ''
         mail_content: ''
@@ -615,7 +615,7 @@ elements:
     edit:
       editOnSite: ''
       geocode: ''
-      havePendingReports: >
+      havePendingReports: ''
       isPending: ''
       returnToList: ''
       send_mail: ''
@@ -777,7 +777,7 @@ files:
     fileUrl: ''
   form:
     customDirectory: ''
-    customDirectory_help: >
+    customDirectory_help: ''
     customDirectory_placeholder: ''
     fileName: ''
     fileName_placeholder: ''
@@ -786,18 +786,18 @@ help:
   _label: ''
   doc: ''
 
-images: &ref_images
+images: &ref_0
   _label: ''
   fields:
     externalImageUrl: ''
     file: ''
   placeholder: ''
 
-images_conf: *ref_images
+images_conf: *ref_0
 
-images_element: *ref_images
+images_element: *ref_0
 
-images_partner: *ref_images
+images_partner: *ref_0
 
 importService:
   automaticMergesCount: ''
@@ -825,7 +825,7 @@ imports:
   edit:
     clear-elements: ''
     collect: ''
-    confirm: >
+    confirm: ''
     delete: ''
     import: ''
     lastRefresh: ''
@@ -835,11 +835,11 @@ imports:
     test_export:
       no_element: ''
       see_osm_export: ''
-  fields: *ref_import_fields
-  form: *ref_import_form
+  fields: *ref_1
+  form: *ref_2
   import: ''
-  last:
-  list: *ref_import_list
+  last: null
+  list: *ref_3
   progress:
     inProgress: ''
     return_to_import: ''
@@ -1013,7 +1013,7 @@ js:
     owner: ''
     postalCode: ''
     primary: ''
-    primary_title: >
+    primary_title: ''
     source: ''
     specificData: ''
     streetAddress: ''
@@ -1025,22 +1025,22 @@ js:
     title: ''
 
 mapping-ontology:
-  alert: >
+  alert: ''
   arrowTitle: ''
   clearTitle: ''
-  displayMore: >
-  mapped: >
+  displayMore: ''
+  mapped: ''
   original: ''
 
 mapping-taxonomy:
-  alert: >
+  alert: ''
   arrowTitle: ''
   category-group: ''
   clearTitle: ''
   collectedPercent: ''
   create-missing-categories: ''
   mapped: ''
-  moreInfos: ""
+  moreInfos: ''
   original: ''
 
 monitoring:
@@ -1078,7 +1078,7 @@ options:
     add_a_tag: ''
     color: ''
     customId: ''
-    customId_help: >
+    customId_help: ''
     descriptionLabel: ''
     displayChildrenInForm: ''
     displayChildrenInInfoBar: ''
@@ -1087,30 +1087,30 @@ options:
     displayInInfoBar: ''
     displayInMenu: ''
     enableDescription: ''
-    enableDescription_help: >
+    enableDescription_help: ''
     icon: ''
     index: ''
     name: ''
     nameShort: ''
     nameShort_help: ''
     osmTags: ''
-    osmTags_help: >
+    osmTags_help: ''
     parent: ''
     pickingOptionText: ''
     return_to_list: ''
     showExpanded: ''
     softColor: ''
-    softColor_help: >
+    softColor_help: ''
     textHelper: ''
     textHelper_help: ''
     unexpandable: ''
     unexpandable_help: ''
     url: ''
-    url_help: >
+    url_help: ''
     useColorForMarker: ''
-    useColorForMarker_help: >
+    useColorForMarker_help: ''
     useIconForMarker: ''
-    useIconForMarker_help: >
+    useIconForMarker_help: ''
   form:
     groups:
       advanced: ''
@@ -1119,7 +1119,7 @@ options:
       displayChildren: ''
       main: ''
       osm: ''
-      osm_help: >
+      osm_help: ''
       primary: ''
       secondary: ''
       subcategories: ''
@@ -1140,8 +1140,8 @@ sonata.user.user:
     mailError: ''
     sendmails: ''
     tooMany: ''
-    usersWithoutEmail: >
-  facebook_warning: >
+    usersWithoutEmail: ''
+  facebook_warning: ''
   fields:
     content: ''
     contributionsCount: ''
@@ -1149,7 +1149,7 @@ sonata.user.user:
     email: ''
     gamification: ''
     groups: ''
-    impersonating:
+    impersonating: null
     object: ''
     reportsCount: ''
     sendMail: ''
@@ -1158,7 +1158,7 @@ sonata.user.user:
   forgottedPassword: ''
   form:
     allowedStamps: ''
-    credentialsExpired:
+    credentialsExpired: null
     enabled: ''
     expired: ''
     groups:
@@ -1173,11 +1173,11 @@ sonata.user.user:
     watchModeration: ''
     watchModerationOnlyWithOptions: ''
     watchModerationOnlyWithPostCodes: ''
-    watchModerationOnlyWithPostCodes_help: >
+    watchModerationOnlyWithPostCodes_help: ''
     watchModerationOnlyWithPostCodes_placeholder: ''
   login_with: ''
   role:
-    ROLE_ADMIN: >
+    ROLE_ADMIN: ''
     ROLE_DIRECTMODERATION_ADD: ''
     ROLE_DIRECTMODERATION_EDIT_OWN_CONTRIB: ''
     ROLE_SONATA_ADMIN: ''
@@ -1191,9 +1191,9 @@ stamps:
 
 tile_layers:
   _label: ''
-  fields:
+  fields: null
   form:
-    groups:
+    groups: null
 
 webhooks:
   _label: ''
