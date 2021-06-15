@@ -28,9 +28,7 @@ class ElementVoteService
     {
         // Check user don't vote for his own creation
         if ($element->isLastContributorEqualsTo($this->user, $userEmail)) {
-            //return $t->trans('vote.user_vote_for_him'); // TODO  translate
-            return 'Voyons voyons, vous ne comptiez quand même pas voter pour votre propre contribution si ? Laissez-en un peu pour les autres !</br>
-                        Attention les petits malins, si vous utilisez une autre de vos adresse perso on le verra aussi ! '; // TODO translate
+            return $this->t('vote.user_vote_for_him');
         }
 
         $hasAlreadyVoted = false;
@@ -73,7 +71,7 @@ class ElementVoteService
         $this->dm->persist($element);
         $this->dm->flush();
 
-        $resultMessage = $hasAlreadyVoted ? 'Merci '.$this->user.' : votre vote a bien été modifié !' : 'Merci de votre contribution !';// TODO  translate
+        $resultMessage = $hasAlreadyVoted ? $this->t('vote.vote_modified', [ 'user' => $this->user ]) : $this->t('vote.vote_added');
         if ($procedureCompleteMessage) {
             $resultMessage .= '</br>'.$procedureCompleteMessage;
         }
@@ -147,16 +145,15 @@ class ElementVoteService
 
         if (ElementStatus::PendingAdd == $element->getStatus()) {
             if (ValidationType::Collaborative == $voteType) {
-                $flashMessage = $positiveVote ? 'Félicitations, '.$elDisplayName.' a reçu assez de vote pour être validé !'// TODO  translate
-                                      : ucwords($elDisplayName).' a reçu suffisamment de votes négatifs, il va être supprimé.';// TODO  translate
+                $flashMessage = $positiveVote ? $this->t('vote.collaborative.positive', [ 'element' => $elDisplayName ]) : $this->t('vote.collaborative.negative', [ 'element' => ucwords($elDisplayName) ]);
             } elseif (ValidationType::Admin == $voteType) {
-                $flashMessage = $positiveVote ? ucwords($elDisplayName).' a bien été validé' : ucwords($elDisplayName).' a bien été refusé';// TODO  translate
+                $flashMessage = $positiveVote ? $this->t('vote.admin.positive', [ 'element' => ucwords($elDisplayName) ]) : $this->t('vote.admin.negative', [ 'element' => ucwords($elDisplayName) ]);
             }
         } elseif (ElementStatus::PendingModification == $element->getStatus()) {
             if ($positiveVote) {
-                $flashMessage = ValidationType::Admin == $voteType ? 'Les modifications ont bien été acceptées' : 'Félicitations, les modifications ont reçues assez de vote pour être validées !';// TODO  translate
+                $flashMessage = ValidationType::Admin == $voteType ? $this->t('vote.pending.admin_validated.positive') : $this->t('vote.pending.user_validated.positive');
             } else {
-                $flashMessage = ValidationType::Admin == $voteType ? 'Les modifications ont bien été refusées' : 'La proposition de modification a reçu suffisamment de votes négatifs, elle est annulée.';// TODO  translate
+                $flashMessage = ValidationType::Admin == $voteType ? $this->t('vote.pending.admin_validated.negative') : $this->t('vote.pending.user_validated.negative');
             }
         }
 

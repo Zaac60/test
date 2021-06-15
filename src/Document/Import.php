@@ -209,7 +209,7 @@ class Import extends AbstractFile
         $codeFields = ['customCode' => $this->customCode, 'customCodeForExport' => $this->customCodeForExport];
         foreach($codeFields as $field => $value) {
             if (preg_match('/new |process|mongo|this|symfony|exec|passthru|shell_exec|system|proc_open|popen|curl_exec|curl_multi_exec|parse_ini_file|show_source|var_dump|print_r/i', $value)) {
-                $context->buildViolation("Il est interdit d'utiliser les mots suivants: new , process, mongo, this, symfony, exec, passthru, shell_exec, system, proc_open, popen, curl_exec, curl_multi_exec, parse_ini_file, show_source, var_dump, print_r... Merci de ne pas faire de betises !") // TODO translate
+                $context->buildViolation($this->t('error.edit_constraints'))
                     ->atPath($field)
                     ->addViolation();
             }

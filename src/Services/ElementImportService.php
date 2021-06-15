@@ -232,7 +232,7 @@ class ElementImportService
                         $qb->field('source')->references($import)
                            ->updateMany()
                            ->field("data.$field->reversedBy")->unsetField()
-                           ->execute();                        
+                           ->execute();
                     }
                 }
             }
@@ -245,7 +245,11 @@ class ElementImportService
                 $i = 0; $size = count($importedElements);
                 foreach ($elementsLinkedFields as $linkField) {
                     foreach ($importedElements as $element) {
-                        $import->setCurrMessage("Calcul des liens pour le champ '$linkField' : $i/$size éléments traitées"); // TODO translate
+                        $import->setCurrMessage($this->t('importService.x', [
+                            'linkField' => $linkField,
+                            'i' => $i,
+                            'size' => $size
+                        ], 'admin'));
                         $values = $element->getCustomProperty($linkField);
                         if ($values !== null) {
                             if (!is_array($values)) $values = preg_split("/[,;]/", $values);
@@ -278,7 +282,10 @@ class ElementImportService
                     ->getCursor();
                 $i = 0; $size = $elements->count();
                 foreach($elements as $element) {
-                    $import->setCurrMessage("Détection des doublons : $i/$size éléments traitées"); // TODO translate
+                    $import->setCurrMessage($this->t('importService.duplicate', [
+                        'i' => $i,
+                        'size' => $size
+                    ], 'admin'));
                     $result = $this->duplicateService->detectDuplicatesFor($element);
                     if ($result && $result['automaticMerge']) ++$automaticMergesCount;
                     if ($result && !$result['automaticMerge']) ++$potentialDuplicatesCount;

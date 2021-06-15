@@ -1,8 +1,5 @@
 <div class="row ">
-	
 	{% set dayKey = 0 %}
-	{% set frenchDays = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'] %} {# TODO translation (need localization: week could start a sunday ;) #}
-	{% set frenchDaysShort = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'] %} {# TODO translation (need localization: week could start a sunday ;) #}
 
 	{# pour chaque day de la semaine on crée un ligne pour entrée une plage horaire
 	   une deuxième ligne cachée est crée pour pouvoir ajouter une deuxième plage si besoin #}
@@ -20,13 +17,13 @@
 	  		
 	  		{% if (day.vars.name == "Monday") %} 
 	  			<div class="col s3 day-col">
-	  				<span class="hide-on-small-only">{{ frenchDays[dayKey] }}</span>
-	  				<span class="hide-on-med-and-up">{{ frenchDaysShort[dayKey] }}</span>
+	  				<span class="hide-on-small-only">{{ ('element.form.open_hours.days_of_week.' ~ dayKey)|trans }}</span>
+	  				<span class="hide-on-med-and-up">{{ ('element.form.open_hours.days_of_week_short.' ~ dayKey)|trans }}</span>
 	  			</div>
 	  		{% else %}
 	  			<div class="col s2 day-col open-hours-day">
-	  				<span class="hide-on-small-only">{{ frenchDays[dayKey] }}</span>
-	  				<span class="hide-on-med-and-up">{{ frenchDaysShort[dayKey] }}</span>
+	  				<span class="hide-on-small-only">{{ ('element.form.open_hours.days_of_week.' ~ dayKey)|trans }}</span>
+	  				<span class="hide-on-med-and-up">{{ ('element.form.open_hours.days_of_week_short.' ~ dayKey)|trans }}</span>
 	  			</div>
 	  			
 	  			{# Redo time slot button #}

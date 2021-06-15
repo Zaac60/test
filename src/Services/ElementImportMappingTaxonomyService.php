@@ -102,7 +102,10 @@ class ElementImportMappingTaxonomyService
                                         // Adds also the parent categories
                                         foreach ($parentIds as $id) {
                                             if (!in_array($id, $categoriesIds)) {
-                                                $categories[] = ['id' => $id, 'info' => "Automatiquement ajoutée (category parente d'une category importée)"]; // TODO translate
+                                                $categories[] = [
+                                                    'id' => $id,
+                                                    'info' => $this->t('importService.auto_added_category', [], 'admin')
+                                                ];
                                                 $categoriesIds[] = $id;
                                             }
                                         }

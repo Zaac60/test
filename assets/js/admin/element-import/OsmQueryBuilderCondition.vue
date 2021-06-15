@@ -3,27 +3,25 @@
         <osm-wiki-link :condition="condition" ref="wikiLink"></osm-wiki-link>
 
         <input type="text" class="form-control" ref="inputKey" v-model="condition.key"
-                    placeholder="Chercher une clé"/>
+                    :placeholder="t('osm_query_builder.condition.search')"/>
         
         <select data-sonata-select2="false" class="condition-operator form-control" ref="selectOperator" 
-                v-model="condition.operator" placeholder="Condition...">
-            <option value="">Existe</option>
-            <option value="!">N'existe pas</option>
-            <option value="=">Est égal à</option>
-            <option value="!=">Différent de</option>
-            <option value="~">Est l'une des valeurs</option>
-            <option value="!~">N'est aucune des valeurs</option>
+                v-model="condition.operator" :placeholder="t('osm_query_builder.condition.title')">
+            <option value="">{{ t('osm_query_builder.condition.exists') }}</option>
+            <option value="!">{{ t('osm_query_builder.condition.dont_exist') }}</option>
+            <option value="=">{{ t('osm_query_builder.condition.equal_to') }}</option>
+            <option value="!=">{{ t('osm_query_builder.condition.different_from') }}</option>
+            <option value="~">{{ t('osm_query_builder.condition.one_of') }}</option>
+            <option value="!~">{{ t('osm_query_builder.condition.none_of') }}</option>
         </select>
 
         <input class="form-control" v-model="condition.value" ref="inputValue"
-            :disabled="['', '!'].includes(condition.operator)" />            
+            :disabled="['', '!'].includes(condition.operator)" />
     </div>
 </template>
 
 <script>
 import OsmWikiLink from "./OsmqueryBuilderWikiLink"
-
-// TODO translate .vue file
 
 export default {
     props: ['condition'],
@@ -84,9 +82,9 @@ export default {
             })
         },
         onKeySelectedFromSearchResults(item) {
-            this.prevalentValues = item.prevalent_values   
-            this.initInputValue()     
-            this.condition.key = item.key            
+            this.prevalentValues = item.prevalent_values
+            this.initInputValue()
+            this.condition.key = item.key
             return item.key
         },
         initInputValue() {

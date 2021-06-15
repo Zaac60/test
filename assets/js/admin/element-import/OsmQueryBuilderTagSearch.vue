@@ -1,13 +1,11 @@
 <template>
     <p>
         <input type="text" class="form-control tag-search" 
-               placeholder="Recherche rapide dans OpenSteetMap en Anglais (restaurant, organic, second hand...)"/>
+               :placeholder="t('osm_query_builder.tagsearch.search_placeholder')"/>
     </p>
 </template>
 
 <script>
-
-// TODO translate .vue file
 
 export default {
     mounted() {
@@ -15,7 +13,7 @@ export default {
             minimumInputLength: 2,
             ajax: {
                 url: (term) => `https://tagfinder.herokuapp.com/api/search?query=${term}`,
-                dataType: 'json',     
+                dataType: 'json',
                 processResults: function (data) { return { results: data }; } 
             },
             id: (item) => item.subject, 
@@ -32,7 +30,7 @@ export default {
                     if (['name', 'website', 'wikipedia', 'opening_hours'].includes(combineKey)) continue
                     
                     if (combinesTags[combineKey]) combinesTags[combineKey] += `,${combineValue}`
-                    else combinesTags[combineKey] = combineValue                    
+                    else combinesTags[combineKey] = combineValue
                 }
                 for(let key in combinesTags) {
                     let value = combinesTags[key]
@@ -41,8 +39,8 @@ export default {
                 }
                 this.$parent.queries.push(query)
                 return null
-            },         
-        });     
+            },
+        });
     }
 }
 </script>

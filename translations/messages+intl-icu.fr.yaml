@@ -14,6 +14,7 @@ api_ui:
 
 action:
   cancel: Annuler
+  ok: OK
   continue: Continuer
   create: Créer
   element:
@@ -49,6 +50,10 @@ action:
     vote:
       unallowed: Désolé, vous n'êtes pas autorisé à voter !
       uncomplete: Les paramètres du vote sont incomplets
+  registration:
+    unallowed: Désolé, vous n'êtes pas autorisé à créer un compte.
+    need_address: Si vous voulez recevoir les nouveaux ajouts, vous devez renseigner une adresse
+    geo_error: Impossible de localiser cette adresse
   error: 'Erreur : {message}'
   geolocalize_me: Géolocaliser ma position
   search: Rechercher
@@ -81,6 +86,7 @@ commons:
   register: Créer un compte
   username: Nom d'utilisateur
   validation: Validation
+  continue_browsing: Vous pouvez continuer à naviguer sur le site !
 
 contributor-login:
   _label: Identification
@@ -113,51 +119,98 @@ duplicates:
     l'un d'eux ?
   title: Recherche de doublons
 
-element.form:
-  admin_section:
-    _label: Validation
-    admin_message: Détail de la modification, ce texte remplacera 'customMessage'
-      dans les mails automatiques
-    recopy_info: Recopier les informations dans un nouveau formulaire
-    send_mail:
-      add: Avertir de l'ajout d''{element} en lui envoyant un mail
-      modify: Avertir des modifications d''{element} en lui envoyant un mail
-  controller:
-    error_dont_exist: L'élément demandé n'existe pas…
-    error_unauthorized: Désolé, vous n'êtes pas autorisé à modifier cet élement !
-    pending: >-
-      Votre contribution est pour l'instant en attente de validation, <a class='validation-process'
-      onclick="$('#popup-collaborative-explanation').openModal()">cliquez ici</a>
-      pour en savoir
-      plus sur le processus de modération collaborative !
-    success: >-
-      Votre compte a bien été créé ! Vous pouvez maintenant compléter <a href="{url}"
-      >votre
-      profil</a> !
-    thankyou:
-      added: Merci de votre aide ! {name} a bien été ajouté
-      edited: Merci de votre aide ! Les modifications ont bien été prises en compte
-        !
-    user_contributions: Retrouvez et modifiez vos contributions sur la page <a href="{url}">Mes
-      Contributions</a>
-  create_user: Mot de passe pour créer votre compte
-  error_becomeOwner: Désolé, cet élément appartient déjà à quelqu'un !
-  error_geocode: Impossible de localiser cette adresse
-  error_missing_adress: Si vous voulez recevoir les nouveaux ajouts, vous devez renseigner
-    une adresse
-  error_username: Ce nom d'utilisateur est déjà pris !
-  info_saved: Modifications sauvegardées !
-  localize: Localiser
-  need_help: Aide ?
-  open_hours:
-    add_tooltip: Ajouter plage horaire
-    and: Et
-    from: De
-    recopy_tooltip: Recopier les horaires précédents
-    to: à
-  success_becomeOwner: Vous êtes maintenant propriétaire de la fiche {name} !
-  title_add: Ajouter {element}
-  title_edit: Modification des données
+element:
+  status:
+    pending: En attente
+    modifications: Modifications
+    vote: Voter !
+    view: Voir
+    more_to_discover: ... Et {nb} autres à découvrir sur le site !
+  form:
+    admin_section:
+      _label: Validation
+      admin_message: Détail de la modification, ce texte remplacera 'customMessage'
+        dans les mails automatiques
+      recopy_info: Recopier les informations dans un nouveau formulaire
+      send_mail:
+        add: Avertir de l'ajout d''{element} en lui envoyant un mail
+        modify: Avertir des modifications d''{element} en lui envoyant un mail
+      do_not_validate: Ne pas valider {element}, je modifie simplement la mise en forme
+
+    controller:
+      error_dont_exist: L'élément demandé n'existe pas…
+      error_unauthorized: Désolé, vous n'êtes pas autorisé à modifier cet élement !
+      pending: >-
+        Votre contribution est pour l'instant en attente de validation, <a class='validation-process'
+        onclick="$('#popup-collaborative-explanation').openModal()">cliquez ici</a>
+        pour en savoir
+        plus sur le processus de modération collaborative !
+      success: >-
+        Votre compte a bien été créé ! Vous pouvez maintenant compléter <a href="{url}"
+        >votre
+        profil</a> !
+      thankyou:
+        added: Merci de votre aide ! {name} a bien été ajouté
+        edited: Merci de votre aide ! Les modifications ont bien été prises en compte
+          !
+      user_contributions: Retrouvez et modifiez vos contributions sur la page <a href="{url}">Mes
+        Contributions</a>
+    create_user: Mot de passe pour créer votre compte
+    error_becomeOwner: Désolé, cet élément appartient déjà à quelqu'un !
+    error_geocode: Impossible de localiser cette adresse
+    error_missing_adress: Si vous voulez recevoir les nouveaux ajouts, vous devez renseigner
+      une adresse
+    error_username: Ce nom d'utilisateur est déjà pris !
+    info_saved: Modifications sauvegardées !
+    localize: Localiser
+    need_help: Aide ?
+    open_hours:
+      add_tooltip: Ajouter plage horaire
+      and: Et
+      from: De
+      recopy_tooltip: Recopier les horaires précédents
+      to: à
+      days_of_week:
+        0: Lundi
+        1: Mardi
+        2: Mercredi
+        3: Jeudi
+        4: Vendredi
+        5: Samedi
+        6: Dimanche
+      days_of_week_short:
+        0: Lun
+        1: Mar
+        2: Mer
+        3: Jeu
+        4: Ven
+        5: Sam
+        6: Dim
+
+    success_becomeOwner: Vous êtes maintenant propriétaire de la fiche {name} !
+    title_add: Ajouter {element}
+    title_edit: Modification des données
+
+error:
+  title: Erreur !
+  header: Oops! Une erreur s'est produite
+  404:
+    text: La page demandée n'existe pas (ou plus!)...
+  generic:
+    text: >-
+      Si le problème persiste, merci de nous en informer de préférence sur le </br>
+      <a href="https://chat.lescommuns.org/channel/gogocarto" target="blank">Tchat GoGoCarto</a>
+      ou par mail à {email} en copiant le message d'erreur ci-dessous.
+    file_line: "{file} à la ligne {line}"
+  edit_constraints: >-
+    Il est interdit d'utiliser les mots suivants: 
+    new , process, mongo, this, symfony, exec, passthru, shell_exec, system, proc_open, 
+    popen, curl_exec, curl_multi_exec, parse_ini_file, show_source, var_dump, print_r... 
+    Merci de ne pas faire de betises !
+  fields_not_shared: >-
+    Les champs "{fieldsList}" ont été configurés pour ne pas être partagés.
+    Vous ne pouvez pas les utiliser dans la fiche détail. Pour changer la 
+    configuration allez dans : Autre Configuration / API
 
 home:
   admin_interface: Interface admin
@@ -171,6 +224,15 @@ home:
     all: Toutes
     category: une catégorie
     placeholder: Entrez
+  discover: Découvrir
+  documentation: Documentation
+  source_code: Code Source
+  donate: Faire un Don
+  pinned_projects: Projets mis en avant
+  all_projects: Tous les projets ({length})
+  sort_by_date: Trier par date de publication
+  sort_by_points: Trier par nombre de points
+  search_placeholder: Chercher par nom, par tag
 
 js:
   element_form:
@@ -244,10 +306,11 @@ my_parameters:
 pending-contributions:
   _label: Mes contributions en attente
   empty_section: >-
-    Vous n'avez aucune contribution en attente. N'hésitez pas à <a href="{url}">ajouter
-    une
-    fiche</a> !
+    Vous n'avez aucune contribution en attente. N'hésitez pas à 
+    <a href="{url}">ajouter une fiche</a> !
   form: Fiche
+  approved: Cette contribution a été approuvée le processus de modération collaborative
+  rejected: Cette contribution a été refusée par le processus de modération collaborative
 
 projects:
   pitch: Créez des cartes à GoGo !
@@ -279,6 +342,9 @@ projects:
     plainPassword-1: Mot de passe
     plainPassword-2: Retapez votre mot de passe
     username: Nom d'utilisateur
+  controller:
+    main_categories: Catégories Principales
+    main_category: Une catégorie principale
 
 reports:
   _label: Mes Signalements
@@ -327,3 +393,25 @@ votes:
     la modération collaborative !
   status: Statut
   vote: Vote
+
+notifications:
+  moderation:
+    subject: Des éléments sont à modérer sur {appname}
+    content: >-
+      Bonjour !</br></br>
+      {count, plural, =1 {# {element_singular} est } other {# {element_plural} sont } } à modérer sur la carte
+      "{appname}"</br></br><a href='{url}'>Accéder à la carte</a></br></br>
+      Pour changer vos préférences de notification, <a href='{edit_url}'>cliquez ici</a>.
+  import_error:
+    subject: Des erreurs ont eu lieu lors d'un import sur {appname}
+    content: >-
+      Bonjour !</br></br>
+      L'import {import} semble avoir quelques soucis.. 
+      <a href='{url}'>Cliquez ici</a> pour essayer d'y remédier.
+  import_mapping:
+    subject: Action requise pour un import sur {appname}
+    content: >-
+      Bonjour !</br></br>
+      L'import {import} a de nouveaux champs ou de nouvelles catégories qui auraient 
+      peut être besoin de votre attention.. 
+      <a href='{url}'>Cliquez ici</a> pour accéder aux tables de correspondances.

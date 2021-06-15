@@ -22,7 +22,7 @@
             <li><a href={{ path(route_name, { id: currNode.id }) }}>{{ currNode.name }}</a></li>
             {% set isRootCategory = is_category ? currNode.isRootCategory : false %}
         {% endfor %}
-        <li><a href={{ admin.generateUrl('list') }}>Liste des catégories</a></li> {# TODO translate #}
+        <li><a href={{ admin.generateUrl('list') }}>{{ 'categories.list.title'|trans }}</a></li>
 
     {% endif %}
 

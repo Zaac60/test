@@ -151,8 +151,6 @@ js:
     geocoded_marker_text: Move me to specify the position</br>(in the centre of the
       building)
     geocode_error: Error when geolocating "{address}"
-  osm_query_builder:
-    title: List of queries in the OpenStreetMap database
   mapping_taxonomy:
     selectCategory: Select an existing category or enter the name of a new category
       to create
@@ -327,6 +325,32 @@ js:
     display: Display
   api:
     placeholder: Select one or more categories
+  bounds_picker:
+    title: Geographic zone of the request
+    search_by_address: Search by address
+    draw_rectangle: Draw a rectangle on the map
+    search_placeholder: A city, region, country ...
+    search_button: Search
+    nomatch: No match found for {address}
+  osm_query_builder:
+    title: List of queries in the OpenStreetMap database
+    or_add_manually: Or add a query manually
+    add_condition: Add a condition
+    auto_generated: Automatically generated code for the OpenStreetMap query (via OverPass)
+    condition:
+      title: Condition...
+      search: Search a key
+      exists: Exists
+      dont_exist: Don't exist
+      equal_to: Is equal to
+      different_from: Is different from
+      one_of: Is one of the values
+      none_of: Is none of the values
+    tagsearch:
+      search_placeholder: Quick search in OpenStreetMap (restaurant, organic, second hand...)
+    wikilink:
+      link_to: Link to the wiki page of {key}
+
 categories:
   list:
     multiple: Multiple
@@ -357,6 +381,7 @@ categories:
     addCategories: Add a group of categories
     unique: Unique
     title: List of categories
+    sort_alpha: Sort categories by alphabetical order
   form:
     groups:
       primary: Main settings
@@ -429,6 +454,7 @@ config_style:
     mainFont: Main font
     iconImport: Link for the icons CDN (by default, FontAwesome icons are loaded)
     fontImport: Link to the font CDN
+    select_font_placeholder: Select a font or use a custom one
   form:
     groups:
       secondaryColor: Other colours
@@ -468,10 +494,16 @@ sonata.user.user:
     reportsCount: Reports
     object: Title
     votesCount: Votes
+    votes: Votes
     username: Name
     groups: Groups
     createdAt: Created on
     contributionsCount: Contributions
+    permissions_warning: >-
+      For users who have access to the admin dashboard, you have to
+      <b>configure permissions on each item</b><br>
+      (Note: SUPER_ADMIN users already have access to every items, no need to configure anything for them)
+    check_uncheck: Check/uncheck all
   facebook_warning: 'WARNING: If your e-mail is private on Facebook, you will not
     be informed of the evolution of your contributions'
   form:
@@ -519,51 +551,54 @@ config_emails:
       report: When a report is taken into account - <a href=''{url}'' target='_blank'>TEST</a>
       refusal: In case of refusal - <a href=''{url}'' target='_blank'>TEST</a>
       newsletters: Newsletter
-      infosContributors_description: "These emails are automatically sent to contributors\
-        \ when their contributions are accepted, refused etc...</br>It is possible\
-        \ to include the following variables in the messages (keeping the ''{{'}}''):\
-        \ </br> <li>'{{ element '}} the name of {element}</li> <li>'{{ user '}} the\
-        \ name or email address of the contributor</li> <li>'{{ showUrl '}} the address\
-        \ which refers to the visualization of the file</li> <li>'{{ editUrl '}} the\
-        \ address that refers to the modification of the file</li> <li>'{{ homeUrl\
-        \ '}} the address of the home page of the site</li> <li>'{{ userContributionsUrl\
-        \ '}} the address of the \"My contributions\" page</li> <li>'{{ customMessage\
-        \ '}} the personal message that has been written by the admins (only in case\
-        \ of a refusal)</li></br> You can also use these variables in the special\
-        \ contents of the text editor. For example in the URL field of the popup that\
-        \ opens when you click on 'add link'.</br> <b>Once the email is saved</b>,\
-        \ you can click on the buttons <b>TESTER</b> to see the rendering"
-      infosElements_description: "<div class=\"text-and-iframe-container\"> <div class=\"\
-        iframe-container-aside\"><iframe height=\"200\" sandbox=\"allow-same-origin\
-        \ allow-scripts\" src=\"https://video.colibris-outilslibres.org/videos/embed/d5d007ec-e5c6-4a50-ab66-572e35e8905a\"\
-        \ frameborder=\"0\" allowfullscreen></iframe></div> These emails are automatically\
-        \ sent to {elements} when their entry is added, modified or deleted.</br>\
-        \ It is possible to include the following variables in messages (keeping the\
-        \ '''{{'}}'''): </br> <li>'{{ element '}} the name of {element}</li> <li>'{{\
-        \ showUrl '}}the address that refers to the visualization of the file</li>\
-        \ <li>'{{ editUrl '}} the address that refers to the modification of the record</li>\
-        \ <li>'{{ homeUrl '}} the address of the home page of the site</li> <li>'{{\
-        \ directEditElementUniqueUrl '}} the unique address to edit the element directly\
-        \ without being admin</li> <li>'{{ customMessage '}} the personal message\
-        \ that has been written by the admins (only when deleting)</li></br> </div>\
-        \ You can also use these variables in the special contents of the text editor.\
-        \ For example in the URL field of the popup that opens when you click on \"\
-        add link\".</br> <b>Once the email is saved</b>, you can click on the <b>TEST</b>\
-        \ buttons to view the rendering"
-      infosNewletter_description: "This email is automatically sent to users who have\
-        \ subscribed. It gives the list of the latest additions in a determined geographical\
-        \ area and optionally pieces of news.</br></br> <b>It is necessary to include\
-        \ the variable <u>'{{ newElements'}}</u> and/or <u>'{{ pendingElements'}}</u></b>\
-        \ which will be respectively replaced by the list of the newly added elements\
-        \ and the list of elements pending validation</br></br> It is also possible\
-        \ to include the following variables in the messages (keep the ''{{'}}''):\
-        \ </br> <ul> <li>'{{ news '}} which will be replaced by the latest published\
-        \ news</li> <li>'{{ user '}} replaced by the contributor's name or email address</li>\
-        \ <li>'{{ homeUrl '}} replaced by the URL of the site''s home page</li> <li>'{{\
-        \ userProfileUrl'}} replaced by the URL of the \"My Settings\" page.</li>\
-        \ <li>'{{ showOnMapBtn '}} replaced by a button allowing the user to return\
-        \ to the map centered on her position</li> </ul> </br> <b>Once the email is\
-        \ saved</b>, you can click on the <b>TEST</b> button to preview an email"
+      infosContributors_description: >-
+        These emails are automatically sent to contributors
+        when their contributions are accepted, refused etc...</br>It is possible
+        to include the following variables in the messages (keeping the '''{{'}}''):
+        </br> <li>'{{ element '}} the name of {element}</li> <li>'{{ user '}} the
+        name or email address of the contributor</li> <li>'{{ showUrl '}} the address
+        which refers to the visualization of the file</li> <li>'{{ editUrl '}} the
+        address that refers to the modification of the file</li> <li>'{{ homeUrl
+        '}} the address of the home page of the site</li> <li>'{{ userContributionsUrl
+        '}} the address of the "My contributions" page</li> <li>'{{ customMessage
+        '}} the personal message that has been written by the admins (only in case
+        of a refusal)</li></br> You can also use these variables in the special
+        contents of the text editor. For example in the URL field of the popup that
+        opens when you click on 'add link'.</br> <b>Once the email is saved</b>,
+        you can click on the buttons <b>TESTER</b> to see the rendering.
+      infosElements_description: >-
+        <div class="text-and-iframe-container"> <div class="iframe-container-aside">
+        <iframe height="200" sandbox="allow-same-origin allow-scripts" 
+        src="https://video.colibris-outilslibres.org/videos/embed/d5d007ec-e5c6-4a50-ab66-572e35e8905a"
+        frameborder=\"0\" allowfullscreen></iframe></div> These emails are automatically
+        sent to {elements} when their entry is added, modified or deleted.</br>
+        It is possible to include the following variables in messages (keeping the
+        '''{{'}}''): </br> <li>'{{ element '}} the name of {element}</li> <li>'{{
+        showUrl '}} the address that refers to the visualization of the file</li>
+        <li>'{{ editUrl '}} the address that refers to the modification of the record</li>
+        <li>'{{ homeUrl '}} the address of the home page of the site</li> <li>'{{
+        directEditElementUniqueUrl '}} the unique address to edit the element directly
+        without being admin</li> <li>'{{ customMessage '}} the personal message
+        that has been written by the admins (only when deleting)</li></br> </div>
+        You can also use these variables in the special contents of the text editor.
+        For example in the URL field of the popup that opens when you click on "add link".
+        </br> <b>Once the email is saved</b>, you can click on the <b>TEST</b>
+        buttons to view the rendering.
+      infosNewletter_description: >-
+        This email is automatically sent to users who have
+        subscribed. It gives the list of the latest additions in a determined geographical
+        area and optionally pieces of news.</br></br> <b>It is necessary to include
+        the variable <u>'{{ newElements'}}</u> and/or <u>'{{ pendingElements'}}</u></b>
+        which will be respectively replaced by the list of the newly added elements
+        and the list of elements pending validation</br></br> It is also possible
+        to include the following variables in the messages (keep the '''{{'}}''):
+        </br> <ul> <li>'{{ news '}} which will be replaced by the latest published
+        news</li> <li>'{{ user '}} replaced by the contributor's name or email address</li>
+        <li>'{{ homeUrl '}} replaced by the URL of the site''s home page</li> <li>'{{
+        userProfileUrl'}} replaced by the URL of the "My Settings" page.</li>
+        <li>'{{ showOnMapBtn '}} replaced by a button allowing the user to return
+        to the map centered on her position</li> </ul> </br> <b>Once the email is
+        saved</b>, you can click on the <b>TEST</b> button to preview an email.
   _label: E-mails / newsletter
 wrappers:
   fields:
@@ -719,14 +754,17 @@ config_api:
   elements: Elements
   config: Configuration
   _label: APIs
+
 commons:
   send: Send
-  date_time_format: d/m/Y at H:i
-  date_format: d/m/Y
+  date_time_format: m/d/Y at H:i
+  date_format: m/d/Y
   default: Default
   btn_update_and_edit: Update
   anonymous: Anonymous
   actual_file: 'Current file:'
+  more_options: More options
+
 charts:
   collabResolve:
     title: Collaborative Validations/Refusals
@@ -836,6 +874,17 @@ config_osm:
     osmPassword: Password
     osmHost: Server URL
   _label: OpenStreetMap
+  sync:
+    notags: This item has none of the main keys on OpenStreetMap (amenity, shop...)
+    version_mismatch: "Feature versions mismatch: {local_version} on our side, {remote_version} on OSM"
+    no_feature: Feature does not exist on OSM
+    comment_text: "{action}{name}"
+    comments:
+      add: Add
+      edit: Edit
+      delete: Delete
+
+
 config_mobile:
   form:
     groups:
@@ -1106,7 +1155,7 @@ dynamic_imports:
         site)
       otherOptions: Other options
       ontologyMappingTab: Transform the data to be imported {suffix}
-      ontologyMappingPanel: Correspondence table of fields
+      ontologyMappingPanel: Fields mapping table
       newFields: New fields
       newCategories: New categories
       historic: History
@@ -1348,11 +1397,26 @@ config_map:
       user will not see it again until you change the version number)
     customPopupId: Version number of the popup (to change when you modify the text)
   _label: Map / Features
+
 webhooks:
   fields:
     url: URL
     format: Format
   _label: Webhooks
+  messages:
+    error_send: Error while sending webhook {url} for the item {element}
+    error_sync: Error while synchronizing item {element}.
+    error_osm_auth: The credentials for your OSM may not be correct.
+    error_msg: "(Attempt n°{attempts}). Error is: {message}"
+  titles:
+    add: ADD
+    edit: EDIT
+    delete: DELETE
+  texts:
+    add: added
+    edit: updated
+    delete: deleted
+
 tile_layers:
   _label: Map backgrounds
 stamps:
@@ -1360,6 +1424,7 @@ stamps:
     name: Name
     isPublic: Public (anyone can assign it)
   _label: Labels
+
 imports:
   fields:
     refreshFrequency: '{days, plural, =1 {Daily} =7 {Weekly} other {Every # day} }'
@@ -1451,7 +1516,7 @@ imports:
         \ '{\n    $data[$key][''categories''] = array_map(function($cat) { return\
         \ $cat[0];\n}, $row[''categories'']); '}</pre>"
       ontologyMappingTab: Transform the data to be imported {suffix}
-      ontologyMappingPanel: Table of correspondence of the fields
+      ontologyMappingPanel: Fields mapping table
       newFields: New fields
       newCategories: New categories
       historic: History
@@ -1493,10 +1558,47 @@ imports:
     return_to_list: Return to the list
     return_to_import: Return to import
     inProgress: Pending…
+    reading_from: Reading data from {source}
   list:
     refreshFrequencyInDays: Update
     idsToIgnore: Information
   import: 'Import- '
+  controller:
+    sonata:
+      error:
+        main: It looks like there was a problem while reading the data.
+        empty: Error while loading data, the result is empty.
+        csv: >-
+          Check that the columns are <b>separated by commas</b>
+          (and not semi-colons nor spaces):
+          <a href='https://help.libreoffice.org/Calc/Importing_and_Exporting_CSV_Files'>
+          Click here to find out how to do</a>. 
+          Also check that <b>encoding is UTF-8</b>.
+        json: >-
+          Check that the <b>data object is at the root of the JSON file</b>.
+          If it's not the case, you can use the tab 'Modify data by running code'
+        need_title: >-
+          Before importing data, you first need to fill the Fields mapping table.
+          At least provide a Title for the item.
+        interlinked_fields: >-
+          The fields {name} and {reverse} are linked between each other,
+          and then can't be both imported at the same time.
+          Only the field {name} is preserved, the field {reverse}
+          will automatically be adjusted at the end of the import.
+      info: 
+        need_title: >-
+          Thanks to fill the Fields mapping table.
+          At least provide a Title for the item.
+      success:
+        main: >-
+          <b>{count} items have been read successfully.<b><br>
+          Here is the result for the first item:
+        see_all: See all data
+        removed: Items related to this import were removed
+    waiting: Waiting...
+    a_category: a category
+
+
 files:
   form:
     fileName_placeholder: new_name.png
@@ -1511,9 +1613,11 @@ files:
     fileName: File name
     file: File
   _label: Upload files
+
 importService:
   processing: Import of data {i}/{size} processed
   x: "Calculation of links for the field '{linkField}' : {i}/{size} elements processed"
+  duplicate: "Duplication detection : {i}/{size} elements processed"
   total: 'Total: {count}'
   potentialDuplicatesCount: '{count, plural, =1 {# potential duplicates detected}
     other {# potential duplicates detected} }'
@@ -1534,6 +1638,8 @@ importService:
   close: Close
   automaticMergesCount: '{count, plural, =1 {# merged} other {# merged} } with an
     already existing element'
+  auto_added_category: Automatically added (parent category of an imported category)
+
 images_partner:
   placeholder: Select an already imported image, or add one!
   fields:
@@ -1588,3 +1694,15 @@ emails:
     inactive_config: The {config} configuration is disabled
     error: 'Error :'
   show_map: View map near you
+  controller:
+    error:
+      not_sent: The emails were not sent, there are too many of them at once.
+      error_occured: "An error occured: {msg}"
+      missing_data: You need to provide a subject and content. Please try again.
+      no_email: "{nb} emails could not be delivered because they don't have an address."
+    info:
+      too_many: Too many items to process! Only {nb} were processed.
+    success:
+      processed: The {nb} items were properly processed.
+      sent: "{nb} mails were sent."
+      categories_updated: The categories of the {nb} items have been updated.

@@ -26,13 +26,15 @@ class UserNotificationService
                 // strange bug, if using doctrine we get the config of the root project... so using MongoClient instead
                 // Update: I think the bug does not occurs anymore...
                 $config = $this->dm->getCollection('Configuration')->findOne();
-                $subject = "Des éléments sont à modérer sur {$config['appName']}"; // TODO translate
-                $url = $this->urlService->generateUrlFor($config['dbName'], 'gogo_directory');
-                $editPreferenceUrl = $this->urlService->generateUrlFor($config['dbName'], 'admin_app_user_edit', ['id' => $user->getId()]);
-                $elementsCountText = $elementsCount == 1 ? "{$config['elementDisplayName']} est" : "{$config['elementDisplayNamePlural']} sont"; // TODO translate
-                $content = "Bonjour !</br></br>$elementsCount $elementsCountText à modérer sur la carte \"{$config['appName']}\"</br></br>
-                <a href='{$url}'>Accéder à la carte</a></br></br>
-                Pour changer vos préférences de notification, <a href='$editPreferenceUrl'>cliquez ici</a>"; // TODO translate
+                $subject = $this->t('notifications.moderation.subject', [ 'appname' => $config['appName'] ]);
+                $content = $this->t('notifications.moderation.content', [
+                    'count' => $elementsCount,
+                    'element_singular' => $config['elementDisplayName'],
+                    'element_plural' => $config['elementDisplayNamePlural'],
+                    'appname' => $config['appName'],
+                    'url' => $this->urlService->generateUrlFor($config['dbName'], 'gogo_directory'),
+                    'edit_url' => $this->urlService->generateUrlFor($config['dbName'], 'admin_app_user_edit', ['id' => $user->getId()])
+                ]);
                 $this->mailService->sendMail($user->getEmail(), $subject, $content);
                 $usersNotified++;
             }
@@ -45,9 +47,11 @@ class UserNotificationService
         if (!$import->isDynamicImport()) return;
         foreach($import->getUsersToNotify() as $user) {
             $config = $this->dm->get('Configuration')->findConfiguration();
-            $importUrl = $this->urlService->generateUrlFor($config, 'admin_app_import_edit', ['id' => $import->getId()]);
-            $subject = "Des erreurs ont eu lieu lors d'un import sur {$config->getAppName()}"; // TODO translate
-            $content = "Bonjour !</br></br>L'import {$import->getSourceName()} semble avoir quelques soucis.. <a href='$importUrl'>Cliquez ici</a> pour essayer d'y remédier"; // TODO translate
+            $subject = $this->t('notifications.import_error.subject', [ 'appname' => $config['appName'] ]);
+            $content = $this->t('notifications.import_error.content', [ 
+                'import' => $import->getSourceName(),
+                'url' => $this->urlService->generateUrlFor($config, 'admin_app_import_edit', ['id' => $import->getId()])
+            ]);
             $this->mailService->sendMail($user->getEmail(), $subject, $content);
         }
     }
@@ -57,9 +61,11 @@ class UserNotificationService
         if (!$import->isDynamicImport()) return;
         foreach($import->getUsersToNotify() as $user) {
             $config = $this->dm->get('Configuration')->findConfiguration();
-            $importUrl = $this->urlService->generateUrlFor($config, 'admin_app_import_edit', ['id' => $import->getId()]);
-            $subject = "Action requise pour un import sur {$config->getAppName()}"; // TODO translate
-            $content = "Bonjour !</br></br>L'import {$import->getSourceName()} a de nouveaux champs ou de nouvelles catégories qui auraient peut être besoin de votre attention.. <a href='$importUrl'>Cliquez ici</a> pour accéder aux tables de correspondances"; // TODO translate
+            $subject = $this->t('notifications.import_mapping.subject', [ 'appname' => $config['appName'] ]);
+            $content = $this->t('notifications.import_mapping.content', [
+                'import' => $import->getSourceName(),
+                'url' => $this->urlService->generateUrlFor($config, 'admin_app_import_edit', ['id' => $import->getId()])
+            ]);
             $this->mailService->sendMail($user->getEmail(), $subject, $content);
         }
     }

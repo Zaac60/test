@@ -13,10 +13,10 @@
       {% if oauthLoginAvailable %}
         <div class="col s12 m6 oauth-section section">
           {% if config.user.loginWithLesCommuns and oauth_communs != 'disabled' %}
-          <a class="oauth-btn waves-effect waves-light communs" href="{{ hwi_oauth_login_url('communs') }}"><i class="icon gogo-icon-communs left"></i>LesCommuns.org</a> {# TODO Translation ? #}
+          <a class="oauth-btn waves-effect waves-light communs" href="{{ hwi_oauth_login_url('communs') }}"><i class="icon gogo-icon-communs left"></i>LesCommuns.org</a>
           {% endif %}
           {% if config.user.loginWithMonPrintemps and oauth_communs != 'disabled' %}
-          <a class="oauth-btn waves-effect waves-light printemps" href="{{ hwi_oauth_login_url('communs') }}"><i class="icon gogo-icon-printemps left"></i>Printemps de l'éducation</a> {# TODO Translation ? #}
+          <a class="oauth-btn waves-effect waves-light printemps" href="{{ hwi_oauth_login_url('communs') }}"><i class="icon gogo-icon-printemps left"></i>Printemps de l'éducation</a>
           {% endif %}
           {% if config.user.loginWithGoogle and oauth_google != 'disabled' %}
           <a class="oauth-btn waves-effect waves-light gplus" href="{{ hwi_oauth_login_url('gplus') }}"><i class="icon gogo-icon-gplus left"></i>Google</a>

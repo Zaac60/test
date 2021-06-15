@@ -25,7 +25,7 @@ class WebhookService
     protected $config;
     protected $router;
 
-    const MAX_ATTEMPTS = 7; // number of attempte for posting webhook
+    const MAX_ATTEMPTS = 7; // number of attempts for posting webhook
 
     public function __construct(DocumentManager $dm, RouterInterface $router,
                                 TokenStorageInterface $securityContext,
@@ -108,18 +108,18 @@ class WebhookService
 
     private function handlePostFailure($errorMessage, $post, $contribution, $code = 500)
     {
-        $attemps = $post->incrementNumAttempts();
+        $attempts = $post->incrementNumAttempts();
         $this->logger->error("Webhook for contribution {$contribution->getId()} : $errorMessage"); 
         // After first try, wait 5m, 25m, 2h, 10h, 2d
-        $intervalInMinutes = pow(5, $attemps);
+        $intervalInMinutes = pow(5, $attempts);
         $elName = "\"{$contribution->getElement()->getName()}\" ({$contribution->getElement()->getId()})";
         if ($post->getWebhook()) {
-            $message = "Erreur lors de l'envoi du webhook {$post->getWebhook()->getUrl()} pour l'élement $elName"; // TODO translate
+            $message = $this->t('webhooks.messages.error_send', [ 'url' => $post->getWebhook()->getUrl(), 'element' => $elName ], 'admin');
         } else {
-            $message = "Erreur lors de la synchronisation de l'élement $elName."; // TODO translate
-            if ($code == 401) $message .= " Les identifiants de votre compte OSM sont probablement incorrect."; // TODO translate
+            $message = $this->t('webhooks.messages.error_sync', [ 'element' => $elName ], 'admin');
+            if ($code == 401) $message .= " ".$this->t('webhooks.messages.error_osm_auth', [], 'admin');
         }
-        $message .= " (Essai n°$attemps). L'erreur est : $errorMessage";
+        $message .= " ".$this->t('webhooks.messages.error_msg', [ 'attempts' => $attempts, 'message' => $errorMessage ], 'admin');
         $log = new GoGoLog(GoGoLogLevel::Error, $message);
         $this->dm->persist($log);
         $this->dm->flush();
@@ -171,14 +171,11 @@ class WebhookService
         }
     }
 
-    protected $transTitle = ['add' => 'AJOUT', 'edit' => 'MODIFICATION', 'delete' => 'SUPPRESSION']; // TODO translate
-    protected $transText = ['add' => 'ajoutés', 'edit' => 'mis à jour', 'delete' => 'supprimés']; // TODO translate
-
     private function getBatchNotificationText($result)
     {
         $elements = $this->getConfig()->getElementDisplayNamePlural();
-        $title = $this->transTitle[$result['action']];
-        $text = $this->transText[$result['action']];
+        $title = $this->t('webhooks.titles.'.$result['action'], [], 'admin');
+        $text = $this->t('webhooks.texts.'.$result['action'], [], 'admin');
         $count = count($result['data']['ids']);
 
         return "**{$title}** {$count} {$elements} {$text} par {$result['user']}";

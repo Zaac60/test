@@ -11,10 +11,10 @@ class CategoryLiteType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', null, ['required' => true, 'label' => 'Nom du groupe']) // TODO translation
-            ->add('index', null, ['required' => false, 'label' => 'Position']) // TODO translation
-            ->add('pickingOptionText', null, ['required' => true, 'label' => "Text à afficher dans le formulaire : Choisissez..."]) // TODO translation
-            ->add('id', null, ['required' => false, 'label' => 'Plus de paramètres', 'attr' => ['class' => 'gogo-route-id', 'data-route-id' => 'admin_app_category_edit']]) // TODO translation
+            ->add('name', null, ['required' => true, 'label' => $this->t('categories.fields.name', [], 'admin')])
+            ->add('index', null, ['required' => false, 'label' => $this->t('categories.fields.index', [], 'admin')]) 
+            ->add('pickingOptionText', null, ['required' => true, 'label' => $this->t('options.fields.pickingOptionText', [], 'admin')])
+            ->add('id', null, ['required' => false, 'label' => $this->t('categories.fields.option.id', [], 'admin'), 'attr' => ['class' => 'gogo-route-id', 'data-route-id' => 'admin_app_category_edit']])
         ;
     }
 

@@ -48,7 +48,7 @@ class ElementSynchronizationService
                 $gogoFeature = $this->elementToOsm($element);
                 $gogoFeaturesMainTags = $this->getMainTags($gogoFeature);
                 if (count($gogoFeaturesMainTags) == 0) {
-                    return $promise->resolve(new Response(500, [], null, '1.1', "Cet élément n'a aucun des clés principales d'OpenStreetMap (amenity, shop...)")); // TODO Translate
+                    return $promise->resolve(new Response(500, [], null, '1.1', $this->t('config_osm.sync.notags', [], 'admin') ));
                 }
 
                 // Check contribution validity according to OSM criterias
@@ -75,12 +75,15 @@ class ElementSynchronizationService
                                     return $promise->resolve(new Response(200, [], null, '1.1', ''));
                             }
                             else {
-                                $message = 'Feature versions mismatch: '.$gogoFeature['version'].' on our side, '.$osmFeature->getVersion().' on OSM';
+                                $message = $this->t('config_osm.sync.version_mismatch', [ 
+                                    'local_version' => $gogoFeature['version'],
+                                    'remote_version' => $osmFeature->getVersion()
+                                    ], 'admin');
                                 return $promise->resolve(new Response(500, [], null, '1.1', $message));
                             }
                         }
                         else {
-                            $message = 'Feature does not exist on OSM'; // TODO translate
+                            $message = $this->t('config_osm.sync.no_feature', [], 'admin');
                             return $promise->resolve(new Response(404, [], null, '1.1', $message));
                         }
                     }
@@ -455,9 +458,11 @@ class ElementSynchronizationService
      * Generate comment for OSM changeset
      */ 
     private function getOsmComment($preparedData) {
-        $actionsLabels = ['add' => 'Ajout', 'edit' => 'Modification', 'delete' => 'Suppression']; // TODO translate
         $name = isset($preparedData['data']) && isset($preparedData['data']['name']) ? " " . $preparedData['data']['name'] : "";
-        return $actionsLabels[$preparedData['action']] . $name;
+        return $this->t('config_osm.sync.comment_text', [
+            'action' => $this->t('config_osm.sync.comments.'.$preparedData['action']),
+            'name' => $name
+        ], 'admin');
     }
 
     /**

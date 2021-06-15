@@ -560,7 +560,7 @@ class Configuration implements \JsonSerializable
         $privateFieldsUsed = array_diff($privateFieldsUsed, ['email']);
         if (count($privateFieldsUsed) > 0) {
             $fieldsList = strtoupper(implode(', ', $privateFieldsUsed));
-            $context->buildViolation("Les champs \"$fieldsList\" ont été configuré pour ne pas être partagés. Vous ne pouvez pas les utiliser dans la fiche détail. Pour changer la configuration allez dans : Autre Configuration / API") // TODO translate
+            $context->buildViolation($this->t('error.fields_not_shared', [ 'fieldsList' => $fieldsList ]))
                 ->atPath($path)
                 ->addViolation()
             ;

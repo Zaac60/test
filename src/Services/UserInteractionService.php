@@ -77,7 +77,7 @@ class UserInteractionService
             $contribution->updateResolvedby($this->securityContext);
             $contribution->setStatus($isAccepted ? ElementStatus::AdminValidate : ElementStatus::AdminRefused);
         } else {
-            $text = $isAccepted ? 'Cette contribution a été approuvée le processus de modération collaborative' : 'Cette contribution a été refusée par le processus de modération collaborative'; // TODO translate
+            $text = $isAccepted ? $this->t('pending-contributions.approved') : $this->t('pending-contributions.rejected');
             $contribution->setResolvedMessage($text);
             $contribution->setResolvedby('Collaborative process');
             $contribution->setStatus($isAccepted ? ElementStatus::CollaborativeValidate : ElementStatus::CollaborativeRefused);

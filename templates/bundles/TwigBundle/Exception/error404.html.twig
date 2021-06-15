@@ -1,15 +1,15 @@
 {% extends "page-layout.html.twig" %}
 
 {% set pageName = 'error' %}
-{% set pageTitle = "Erreur !" %} {# TODO Translation #}
+{% set pageTitle = 'error.title'|trans %}
 
 {# BODY CONTENT #}
 {% block body_content %}
 
-	<h1 style="font-size: 2.5rem;">Oops! Une erreur s'est produite</h1> {# TODO Translation #}
+	<h1 style="font-size: 2.5rem;">{{ 'error.header'|trans }}</h1>
 
     <div>
-      La page demandée n'existe pas (ou plus!)... {# TODO Translation #}
+      {{ 'error.404.text'|trans }}
     </div>
 
 {% endblock %}

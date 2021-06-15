@@ -7,8 +7,6 @@
 
 <script>
 
-// TODO translate .vue file
-
 export default {
     props: ['condition'],
     computed: {
@@ -28,7 +26,7 @@ export default {
             return `${this.condition.key}=${this.condition.value}`
         },
         title() {
-            return `Lien vers la fiche Wiki de "${this.isTag ? this.tag : this.condition.key}"` 
+            return this.t('osm_query_builder.wikilink.link_to', { key: this.isTag ? this.tag : this.condition.key })
         }
     }
 }

@@ -78,8 +78,8 @@ class ProjectController extends Controller
 
             // Generate basic categories
             $mainCategory = new Category();
-            $mainCategory->setName('Catégories Principales'); // TODO translate
-            $mainCategory->setPickingOptionText('Une catégorie principale');// TODO translate
+            $mainCategory->setName($this->t('projects.controller.main_categories'));
+            $mainCategory->setPickingOptionText($this->t('projects.controller.main_categories'));
             $projectDm->persist($mainCategory);
 
             $mains = [

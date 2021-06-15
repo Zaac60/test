@@ -10,6 +10,15 @@ home:
   credits: Powered by {ggc}
   admin_interface: Admin interface
   my_space: My Space
+  discover: Discover
+  documentation: Documentation
+  source_code: Source Code
+  donate: Donate
+  pinned_projects: Pinned Projects
+  all_projects: All projects ({length})
+  sort_by_date: Sort by publication date
+  sort_by_points: Sort by number of points
+  search_placeholder: Search by name, by tag
 
 api_ui:
   use_limit: Limit the number of results
@@ -36,12 +45,14 @@ action:
     sendMail:
       uncomplete: The settings are incomplete
       emailSubject: Message received from the {instance} instance
-      emailContent: <p>Hello<i>{element}</i>,</p> <p>You have received a message from
+      emailContent: >-
+        <p>Hello<i>{element}</i>,</p> <p>You have received a message from
         <a href="mailto:{sender}">{sender}</a></br> </p> <p><b>Subject of the message</b></p><p>
         {subject}</p> <p><b>Content</b></p><p>{content}</p>
       done: The email has been sent
     sendEditLink:
-      emailContent: <p>Hello <i>'{{ element '}}</i>,</p> <p><a href="'{{ directEditElementUniqueUrl
+      emailContent: >-
+        <p>Hello <i>'{{ element '}}</i>,</p> <p><a href="'{{ directEditElementUniqueUrl
         '}}">Click here</a> to update your information</p>
       done: An edition link has been sent successfully to {email}
     resolveReports:
@@ -55,15 +66,21 @@ action:
       uncomplete: Missing parameters
       unallowed: Sorry, you are not allowed to delete an element!
       done: Element deletion confirmed
+  registration:
+    unallowed: Sorry, you are not allowed to create an account.
+    need_address: If you want to receive new additions, you need to provide an address
+    geo_error: Impossible to geolocate this address
   create: Create
   continue: Continue
   cancel: Cancel
+  ok: OK
   error: 'Error: {message}'
   submit: Save
   send_stay: Send and remain on the form
   send: Send
   search: Search
   geolocalize_me: Geolocate my position
+
 commons:
   choose_one_option: Please choose at least one option
   choose_category: Choose {cat}
@@ -88,46 +105,96 @@ commons:
     bad_number: This is not a number!
     bad_email: Please enter a valid email address
   email: Email address
-element.form:
-  controller:
-    error_unauthorized: You are not allowed to edit this element, sorry!
-    error_dont_exist: The requested element does not exist…
-    pending: Your contribution is currently pending validation. <a class='validation-process'
-      onclick="$('#popup-collaborative-explanation').openModal()">click here</a> to
-      learn more about the collective moderation process!
-    thankyou:
-      edited: Thank you for your help! The changes have been taken into account!
-      added: Thank you for your help! {name} has been added
-    success: Your account has been created! You can now complete <a href="{url}" >your
-      profile</a>!
-    user_contributions: Find and modify your contributions in the <a href="{url}">My
-      Contributions</a> page
-  admin_section:
-    send_mail:
-      modify: Notify the {element} changes by sending an email
-      add: Notify the addition of {element} by sending an email
-    recopy_info: Copy the information in a new form
-    admin_message: Change details, this text will replace 'customMessage' in the automatic
-      emails
-    _label: Validation
-  error_becomeOwner: Sorry, this element already belongs to someone!
-  create_user: Password to create your account
-  title_edit: Editing data
-  success_becomeOwner: You now own {name}!
-  open_hours:
-    to: to
-    recopy_tooltip: Copy the previous schedules
-    from: From
-    and: And
-    add_tooltip: Add time slot
-  need_help: Help?
-  localize: Locate
-  info_saved: Changes saved!
-  error_username: This username is already taken!
-  title_add: Add {element}
-  error_missing_adress: You need to enter an address in order to be notified of the
-    latest additions
-  error_geocode: Impossible to locate this address
+  continue_browsing: You can continue browsing the site!
+
+element:
+  status:
+    pending: Pending
+    modifications: Modifications
+    vote: Vote!
+    view: View
+    more_to_discover: ... and {nb} others to discover on the site!
+  form:
+    controller:
+      error_unauthorized: You are not allowed to edit this element, sorry!
+      error_dont_exist: The requested element does not exist…
+      pending: Your contribution is currently pending validation. <a class='validation-process'
+        onclick="$('#popup-collaborative-explanation').openModal()">click here</a> to
+        learn more about the collective moderation process!
+      thankyou:
+        edited: Thank you for your help! The changes have been taken into account!
+        added: Thank you for your help! {name} has been added
+      success: Your account has been created! You can now complete <a href="{url}" >your
+        profile</a>!
+      user_contributions: Find and modify your contributions in the <a href="{url}">My
+        Contributions</a> page
+    admin_section:
+      send_mail:
+        modify: Notify the {element} changes by sending an email
+        add: Notify the addition of {element} by sending an email
+      recopy_info: Copy the information in a new form
+      admin_message: Change details, this text will replace 'customMessage' in the automatic
+        emails
+      _label: Validation
+      do_not_validate: Do not validate {element}, I only change the appearance
+
+    error_becomeOwner: Sorry, this element already belongs to someone!
+    create_user: Password to create your account
+    title_edit: Editing data
+    success_becomeOwner: You now own {name}!
+    open_hours:
+      to: to
+      recopy_tooltip: Copy the previous schedules
+      from: From
+      and: And
+      add_tooltip: Add time slot
+      days_of_week:
+        0: Monday
+        1: Tuesday
+        2: Wednesday
+        3: Thursday
+        4: Friday
+        5: Saturday
+        6: Sunday
+      days_of_week_short:
+        0: Mon
+        1: Tue
+        2: Wed
+        3: Thu
+        4: Fri
+        5: Sat
+        6: Sun
+
+    need_help: Help?
+    localize: Locate
+    info_saved: Changes saved!
+    error_username: This username is already taken!
+    title_add: Add {element}
+    error_missing_adress: You need to enter an address in order to be notified of the
+      latest additions
+    error_geocode: Impossible to locate this address
+
+error:
+  title: Error !
+  header: Oops! Something went wrong
+  404:
+    text: The requested page doesn't exist (anymore?) ...
+  generic:
+    text: >-
+      If the problem is recurrent, please inform us, preferably in <br>
+      <a href="https://chat.lescommuns.org/channel/gogocarto" target="blank">GoGoCarto Chatroom</a>
+      or by mail to {email}, including the error message displayed below.
+    file_line: "{file} at Line {line}"
+  edit_constraints: >-
+    It is forbidden to use the folllowing words:
+    new , process, mongo, this, symfony, exec, passthru, shell_exec, system, proc_open, 
+    popen, curl_exec, curl_multi_exec, parse_ini_file, show_source, var_dump, print_r... 
+    Thank you for not messing up!
+  fields_not_shared: >-
+    The fields "{fieldsList}" were configured not to be shared.
+    You cannot use them on the details display. To change this setting,
+    go to: Other configuration / API
+
 duplicates:
   title: Duplicate detection
   subtitle: Similar elements have been detected, maybe you wanted to add one of them?
@@ -139,8 +206,10 @@ duplicates:
     merged: This element has been merged with a potential duplicate
     marked_long: The elements have been confirmed as non-duplicates
     marked: Flagged as not a duplicate
+
 directory:
   _label: The map
+
 contributor-login:
   printemps: Education spring
   oauth: Sign in with your account
@@ -160,16 +229,21 @@ js:
   login:
     wrong_id: Wrong credentials
     exception: An error occurred while attempting to log in
+
 my_parameters:
   input_location: Your address or town
   _label: My settings
   unit: kilometres
   range: 'Search range:'
+
 pending-contributions:
   _label: My pending contributions
   form: File
   empty_section: You have no pending contributions. Feel free to <a href="{url}">add
     a file</a>!
+  approved: This contribution has been approved by the collaborative moderation process
+  rejected: This contribution has been rejected by the collaborative moderation process
+
 project.create:
   domaine_name: Domain name
   data-error: Oops, this name is too long!
@@ -191,6 +265,7 @@ project.create:
   accept_cgu: I accept the general terms of use
   _label: GoGoCarto – Plenty of Maps
   contrib: Open to public contribution
+ 
 reports:
   empty: You haven't reported any errors yet. Could our database be perfect? :P
   element: Name
@@ -207,9 +282,10 @@ reports:
 vote:
   vote_modified: 'Thank you {user}: your vote has been edited!'
   vote_added: Thank you for your contribution!
-  user_vote_for_him: "Come on, you weren't going to vote for your own contribution,\
-    \ were you? Leave some for others! </br> Attention clever ones, if you use another\
-    \ of your personal addresses, we will see it too! "
+  user_vote_for_him: >-
+    Come on, you weren't going to vote for your own contribution,
+    were you? Leave some for others! </br> Attention clever ones, if you use another
+    of your personal addresses, we will see it too!
   pending:
     user_validated:
       positive: Congratulations, the changes have received enough votes to be validated!
@@ -308,3 +384,28 @@ projects:
     cgu: Terms of use
     _label: Create a project
   pitch: Create GoGo maps!
+  controller:
+    main_categories: Main categories
+    main_category: A main category
+
+notifications:
+  moderation:
+    subject: Some items need moderation on {appname}
+    content: >-
+      Hello!</br></br>
+      {count, plural, =1 {# {element_singular} requires } other {# {element_plural} require } } moderation 
+      on the map "{appname}"</br></br><a href='{url}'>Access the map</a></br></br>
+      To change your notifications preferences, <a href='{edit_url}'>click here</a>
+  import_error:
+    subject: Errors occured during the import on {appname}
+    content: >-
+      Hello!</br></br>
+      The import {import} seems to have failed for some reason ... 
+      <a href='{url}'>Click here</a> to try to figure it out.
+  import_mapping:
+    subject: Action required for an import on {appname}
+    content: >-
+      Hello!</br></br>
+      The import {import} has new fields or new categories,
+      which may require your attention ...
+      <a href='{url}'>Click here</a> to display the list of matches.

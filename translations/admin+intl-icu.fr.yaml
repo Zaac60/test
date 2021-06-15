@@ -13,8 +13,7 @@ bulk:
   delete: Supprimer les éléments reportés comme n'existant plus
   deleteElement: >-
     {count, plural,  =0 {Aucun élément supprimé} =1 {# élément a été supprimé} other
-    {# éléments ont
-    été supprimés} }
+    {# éléments ont été supprimés} }
   detectDuplicatesAction: Détection des doublons
   done: Tous les éléments ont été traités avec succès
   duplicateDeleted: Doublon Supprimé
@@ -81,6 +80,7 @@ categories:
       primary: Paramètres principaux
       secondary: Paramètres secondaires d'affichage
   list:
+    sort_alpha: Ranger les catégories par ordre alphabétique
     addCategories: Ajouter un Groupe de catégories
     addCategory: Ajouter une Catégorie
     categoriesDescription: Description des catégories
@@ -166,6 +166,7 @@ commons:
   date_format: d/m/Y
   date_time_format: d/m/Y à H:i
   send: Envoyer
+  more_options: Plus d'options
 
 config_api:
   _label: API
@@ -778,6 +779,15 @@ config_osm:
         href='https://www.openstreetmap.org/user/new'>le site d'OpenStreetMap</a>.
       host_description: URL du serveur OpenStreetMap sur lequel envoyer les données
         éditées par GoGoCarto
+  sync:
+    notags: Cet élément n'a aucun des clés principales d'OpenStreetMap (amenity, shop...)
+    version_mismatch: "Décallage de version: {local_version} ici, {remote_version} sur OSM"
+    no_feature: Cette fonctionnalité n'existe pas sur OSM
+    comment_text: "{action}{name}"
+    comments:
+      add: Ajout
+      edit: Modification
+      delete: Supression
 
 config_saas:
   _label: Configuration
@@ -818,6 +828,7 @@ config_style:
     textLightSoftColor: Couleur text clair adoucie
     theme: Thème
     titleFont: Police de titre
+    select_font_placeholder: Choisissez une police ou utilisez une police personalisée
   form:
     groups:
       advancedColor: Couleurs avancées
@@ -1228,6 +1239,18 @@ emails:
     missing_email: Aucune adresse électronique n'a été renseignée
     subject: 'Objet du message : <em>{subject}</em>'
     submit: Envoyer un test à cette adresse
+  controller:
+    error:
+      not_sent: Les emails n'ont pas été envoyés, trop d'éléments à traiter d'un coup.
+      error_occured: "Une erreur est survenue : {msg}"
+      missing_data: Vous devez renseigner un objet et un contenu. Veuillez recommencer.
+      no_email: "{nb} mails n'ont pas pu être envoyé car aucune adresse n'était renseignée."
+    info:
+      too_many: Trop d'éléments à traiter ! Seulement {nb} ont été traités.
+    success:
+      processed: Les {nb} élements ont bien été traités.
+      sent: "{nb} mails ont bien été envoyés."
+      categories_updated: Les catégories des {nb} élements ont bien été mis à jour.
 
 files:
   _label: Uploader des fichiers
@@ -1288,6 +1311,8 @@ importService:
   processing: Importation des données {i}/{size} traitées
   total: 'Total : {count}'
   x: 'Calcul des liens pour le champ ''{linkField}'' : {i}/{size} éléments traitées'
+  duplicate: "Détection des doublons : {i}/{size} éléments traitées"
+  auto_added_category: Automatiquement ajoutée (categorie parente d'une categorie importée)
 
 imports:
   _label: Import
@@ -1321,7 +1346,42 @@ imports:
     return_to_import: Retourner à l'import
     return_to_list: Retourner à la liste
     title: Importation de {name}
+    reading_from: Lecture des données issues de {source}
   static: Importer des données en dur, depuis un fichier CSV ou une API JSON
+  controller:
+    sonata:
+      error:
+        main: Un problème semble avoir lieu pendant la lecture des données.
+        empty: Erreur pendant le chargement des données, le résultat est vide.
+        csv: >-
+          Vérifiez que les colonnes sont bien <b>séparées avec des virgules</b> 
+          (et non pas avec des point virgules ou des espaces) :
+          <a href='https://help.libreoffice.org/Calc/Importing_and_Exporting_CSV_Files/fr'>
+          Cliquez ici pour savoir comment faire</a>. 
+          Vérifiez aussi que <b>l'encodage soit en UTF-8</b>.
+        json: >-
+          Vérifiez que le <b>tableau de donnée soit bien à la racine du JSON</b>. 
+          Si ce n'est pas le cas, utilisez l'onglet 'Modifier les données en exécutant du code'
+        need_title: >-
+          Avant d'importer les données, vous devez d'abord remplir le tableau de 
+          correspondance des champs. Renseignez au moins le Titre de la fiche.
+        interlinked_fields: >-
+          Les champs {name} et {reverse} étant liées entre eux, 
+          il n'est pas possible de les importer les deux en même temps. 
+          Seul le champ {name} est conservé pour l'import, le champ {reverse} 
+          sera automatiquement ajusté à la fin de l'import.
+      info: 
+        need_title: >-
+          Merci de remplir le tableau de correspondance des champs. 
+          Renseignez au moins le Titre de la fiche
+      success:
+        main: >-
+          <b>{count} éléments ont été lus avec succès.</b></br>
+          Voici le résultat obtenu pour le premier élément à importer :
+        see_all: Voir toutes les données
+        removed: Les éléments liés à cet import ont été effacés
+    waiting: En attente...
+    a_category: une catégorie
 
 js:
   api:
@@ -1505,8 +1565,32 @@ js:
     createTerm: '{term} (Sera créé au moment de sauvegarder)'
     selectCategory: Sélectionnez une catégorie existante ou entrez le nom d'une nouvelle
       catégorie à créer
+  bounds_picker:
+    title: Zone Géographique de la requête
+    search_by_address: Chercher par adresse
+    draw_rectangle: Dessiner un rectangle sur la carte
+    search_placeholder: Une ville, une région, un pays...
+    search_button: Chercher
+    nomatch: Aucune résultat trouvé pour {address}
   osm_query_builder:
     title: Liste des requêtes dans la base OpenStreetMap
+    or_add_manually: Ou ajouter une requête manuellement
+    add_condition: Ajouter une condition
+    auto_generated: Code automatiquement généré pour la requête OpenStreetMap (via OverPass)
+    condition:
+      title: Condition...
+      search: Chercher une clé
+      exists: Existe
+      dont_exist: N'existe pas
+      equal_to: Est égal à
+      different_from: Est différent de
+      one_of: Est l'une des valeurs
+      none_of: N'est aucune des valeurs
+    tagsearch:
+      search_placeholder: Recherche rapide dans OpenSteetMap en Anglais (restaurant, organic, second hand...)
+    wikilink:
+      link_to: Lien vers la fiche Wiki de {key}
+
 
 mapping-ontology:
   alert: >-
@@ -1689,7 +1773,13 @@ sonata.user.user:
     reportsCount: Signalements
     sendMail: Envoyer un e-mail
     username: Nom
+    votes: Votes
     votesCount: Votes
+    permissions_warning: >-
+      Pour les utilisateurs ayant accès à l'interface administrateur, vous devez 
+      <b>configurer les permissions sur chaque object</b></br>
+      (Note: les SUPER_ADMIN ont accès à tous les objects, pas besoin de configurer pour eux)
+    check_uncheck: Tout cocher/décocher
   forgottedPassword: Mot de passe oublié
   form:
     allowedStamps: Étiquettes autorisées
@@ -1742,6 +1832,19 @@ webhooks:
   fields:
     format: Format
     url: URL
+  messages:
+    error_send: Erreur lors de l'envoi du webhook {url} pour l'élement {element}
+    error_sync: Erreur lors de la synchronisation de l'élement {element}.
+    error_osm_auth: Les identifiants de votre compte OSM sont probablement incorrect.
+    error_msg: "(Essai n°{attempts}). L'erreur est : {message}"
+  titles:
+    add: AJOUT
+    edit: MODIFICATION
+    delete: SUPPRESSION
+  texts:
+    add: ajoutés
+    edit: mis à jour
+    delete: supprimés
 
 wrappers:
   _label: Bandeaux de la page d'accueil

@@ -6,7 +6,7 @@
   <section class="title">
     <img src="{{ asset('img/background1.jpg')}}"/>
     {# <h2>Créez des cartes à gogo!</h2> #}
-    <button class="btn btn-primary-neutral">Découvrir</button>
+    <button class="btn btn-primary-neutral">{{ 'home.discover'|trans }}</button>
    
   </section>
 
@@ -17,19 +17,19 @@
   <section class="projects">
      <div class="actions">
       <p>
-        <a href="{{ path('gogo_saas_new_project') }}"><button class="btn btn-primary-neutral new-project">Créer un projet</button></a> {# TODO translation #}
+        <a href="{{ path('gogo_saas_new_project') }}"><button class="btn btn-primary-neutral new-project">{{ 'projects.form._label'|trans }}</button></a>
       </p>
 
       <p class="secondary-buttons">
         <a href="https://doc.gogocarto.fr" target="_blank">
-          <button class="btn btn-outline-neutral btn-doc"><img src="{{ asset('img/icon-question.png') }}"></img>Documentation</button> {# TODO translation #}
+          <button class="btn btn-outline-neutral btn-doc"><img src="{{ asset('img/icon-question.png') }}"></img>{{ 'home.documentation'|trans}}</button>
         </a>
         <a href="https://gitlab.com/seballot/gogocarto" target="_blank">
-          <button class="btn btn-outline-neutral btn-repo"><img src="{{ asset('img/icon-code.png') }}"></img>Code Source</button> {# TODO translation #}
+          <button class="btn btn-outline-neutral btn-repo"><img src="{{ asset('img/icon-code.png') }}"></img>{{ 'home.source_code'|trans }}</button>
         </a>
         {% if config.saas.donationUrl %}
         <a href="{{ config.saas.donationUrl }}" target="_blank">
-          <button class="btn btn-outline-neutral btn-donate"><img src="{{ asset('img/icon-heart.png') }}"></img></i>Faire un Don</button> {# TODO translation #}
+          <button class="btn btn-outline-neutral btn-donate"><img src="{{ asset('img/icon-heart.png') }}"></img></i>{{ 'home.donate'|trans }}</button>
         </a>
         {% endif %}
       </p>
@@ -41,7 +41,7 @@
       <img class="img-hand before" src="{{ asset('img/hand.png') }}"/>
       <img class="img-hand after" src="{{ asset('img/hand-2.png') }}"/>
       <section class=" projects">
-        <h2>Projets mis en avant</h2> {# TODO translation #}
+        <h2>{{ 'home.pinned_projects'|trans }}</h2>
         <div class="pinned-projects projects-container">
           {% for project in pinnedProjects %}
             {% include 'saas/projects/project.html.twig' with {'project' : project } %}
@@ -53,12 +53,12 @@
 
   <div class="all-projects-container">
     <section class="projects">
-      <h2><img src="{{ asset('img/bike.png') }}">Tous les projets ({{ projects|length }})</h2> {# TODO translation #}
+      <h2><img src="{{ asset('img/bike.png') }}">{{ 'home.all_projects'|trans({ length: projects|length}) }}</h2>
       <div class="project-list" id="project-list">
         <div class="search-container">
-          <input class="search" placeholder="Chercher par nom, par tag" />
-          <button class="sort btn btn-sm btn-neutral" data-sort="published-at-int">Trier par date de publication</button> {# TODO translation #}
-          <button class="sort btn btn-sm btn-neutral" data-sort="size">Trier par nombre de points</button> {# TODO translation #}
+          <input class="search" placeholder="{{ 'home.search_placeholder'|trans }}" />
+          <button class="sort btn btn-sm btn-neutral" data-sort="published-at-int">{{ 'home.sort_by_date'|trans }}</button>
+          <button class="sort btn btn-sm btn-neutral" data-sort="size">{{ 'home.sort_by_points'|trans }}</button>
         </div>
         <div class="list projects-container">
           {% for project in projects %}

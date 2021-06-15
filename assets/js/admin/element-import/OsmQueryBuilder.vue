@@ -6,7 +6,7 @@
 
         <button type="button" class="btn btn-default" 
                 @click="queries.push([{key: '', operator: '=', value: ''}])">
-            Ou ajouter une requête manuellement
+            {{ t('osm_query_builder.or_add_manually') }}
         </button> 
         
         <div class="bs-callout" v-for="(query, queryIndex) in queries" :key="queryIndex">
@@ -20,12 +20,12 @@
                 </button>
             </div>
             <button type="button" class="btn btn-default btn-add-condition btn-sm" 
-                    @click="query.push({key: '', operator: '=', value: ''})">Ajouter une condition</button>        
-        </div>          
+                    @click="query.push({key: '', operator: '=', value: ''})">{{ t('osm_query_builder.add_condition') }}</button>
+        </div>
 
         <bounds-picker ref="boundsPicker" :osm-query-object="osmQueryObject" :tileLayer="tileLayer" :default-bounds="defaultBounds"></bounds-picker>
 
-        <label v-show="overpassQuery">Code automatiquement généré pour la requête OpenStreetMap (via OverPass)</label>
+        <label v-show="overpassQuery">{{ t('osm_query_builder.auto_generated') }}</label>
         <pre v-show="overpassQuery">{{ overpassQuery }}</pre>
     </div>
 </template>
@@ -60,7 +60,7 @@ export default {
                     }
                 }
                 queryString += this.$refs.boundsPicker.overpassQuery
-                if (query != '') result += `nwr${queryString};`                  
+                if (query != '') result += `nwr${queryString};`
             }
             return result
         },

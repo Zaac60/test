@@ -21,17 +21,18 @@ class ImportAdminController extends Controller
         $showUrl = $this->admin->generateUrl('showData', ['id' => $object->getId()]);
         $anchor = '';
         if ($result === null) {
-            $msg = "Un problème semble avoir lieu pendant la lecture des données."; // TODO translate
-            if ($object->getSourceType() == 'csv') $msg .= "Vérifiez que les colonnes sont bien <b>séparées avec des virgules</b> (et non pas avec des point virgules ou des espaces) : <a href='https://help.libreoffice.org/Calc/Importing_and_Exporting_CSV_Files/fr'>Cliquez ici pour savoir comment faire</a>. Vérifiez aussi que <b>l'encodage soit en UTF-8</b>."; // TODO translate
-            if ($object->getSourceType() == 'json') "Vérifiez que le <b>tableau de donnée soit bien à la racine du JSON</b>. Si ce n'est pas le cas, utilisez l'onglet 'Modifier les données en exécutant du code'"; // TODO translate
+            $msg = $this->trans('imports.controller.sonata.error.main');
+            "Un problème semble avoir lieu pendant la lecture des données.";
+            if ($object->getSourceType() == 'csv') $msg .= $this->trans('imports.controller.sonata.error.csv');
+            if ($object->getSourceType() == 'json') $msg .= $this->trans('imports.controller.sonata.error.json');
             $this->addFlash('sonata_flash_error', $msg);
         } elseif (!in_array('name', $object->getMappedProperties())) {
-            $this->addFlash('sonata_flash_info', 'Merci de remplir le tableau de correspondance des champs. Renseignez au moins le Titre de la fiche'); // TODO translate
+            $this->addFlash('sonata_flash_info', $this->trans('imports.controller.sonata.info.need_title'));
             $anchor = '#tab_3';
         } elseif ($count == 0) {
-            $this->addFlash('sonata_flash_error', 'Erreur pendant le chargement des données, le résultat est vide'); // TODO translate
+            $this->addFlash('sonata_flash_error', $this->trans('imports.controller.sonata.error.empty'));
         } elseif ($count > 0) {
-            $this->addFlash('sonata_flash_success', "<b>$count éléments ont été lus avec succès.</b></br>Voici le résultat obtenu pour le premier élément à importer :<pre>".print_r(reset($result), true).'</pre>'."<a href='$showUrl'>Voir toutes les données</a>"); // TODO translate
+            $this->addFlash('sonata_flash_success', $this->trans('imports.controller.sonata.success.main', [ 'count' => $count ]).'<pre>'.print_r(reset($result), true)."</pre><a href='$showUrl'>".$this->trans('imports.controller.sonata.success.see_all')."</a>");
             $anchor = '#tab_3';
         }
         $url = $this->admin->generateUrl('edit', ['id' => $object->getId()]) . $anchor;
@@ -60,14 +61,14 @@ class ImportAdminController extends Controller
         $object = $this->admin->getSubject();
 
         if (!in_array('name', $object->getMappedProperties())) {
-            $this->addFlash('sonata_flash_error', "Avant d'importer les données, vous devez d'abords remplir le tableau de correspondance des champs. Renseignez au moins le Titre de la fiche"); // TODO translate
+            $this->addFlash('sonata_flash_error', $this->trans('imports.controller.sonata.error.need_title'));
             $url = $this->admin->generateUrl('edit', ['id' => $object->getId()]);
 
             return $this->redirect($url);
         }
 
         $object->setCurrState(ImportState::Started);
-        $object->setCurrMessage('En attente...'); // TODO translate
+        $object->setCurrMessage($this->trans('projects.controller.waiting'));
         $dm->persist($object);
         $dm->flush();
 
@@ -98,7 +99,7 @@ class ImportAdminController extends Controller
         $object = $this->admin->getObject($id);
 
         if (!$object) {
-            throw $this->createNotFoundException(sprintf('unable to find the object with id : %s', $id)); // TODO translate ?
+            throw $this->createNotFoundException(sprintf('unable to find the object with id : %s', $id));
         }
         $dm = $this->container->get('doctrine_mongodb')->getManager();
         $config = $dm->get('Configuration')->findConfiguration();
@@ -124,30 +125,30 @@ class ImportAdminController extends Controller
 
             // persist if the form was valid and if in preview mode the preview was approved
             if ($isFormValid) {
-                try {                    
+                try {
                     $object->setSourceType($request->get('sourceType'));
                     
                     $ontology = $request->get('ontology');
-                    // Fix ontology mapping for elements fields with reverse value      
-                    if ($ontology) {                                         
+                    // Fix ontology mapping for elements fields with reverse value
+                    if ($ontology) {
                         
                         foreach($config->getElementFormFields() as $field) {
                             if ($field->type === 'elements'
                                && in_array($field->name, array_values($ontology))
                                && isset($field->reversedBy)
                                && in_array($field->reversedBy, array_values($ontology))) {
-                                $this->addFlash('sonata_flash_info', "Les champs $field->name et $field->reversedBy étant liées entre eux, il n'est pas possible de les importer les deux en même temps. Seul le champ $field->name est conservé pour l'import, le champ $field->reversedBy sera automatiquement ajusté à la fin de l'import"); // TODO translate
+                                $this->addFlash('sonata_flash_info', $this->trans('imports.controller.sonata.info.need_title', [ 'name' => $field->name, 'reverse' => $field->reversedBy ]));
                                 $key = array_search($field->reversedBy, $ontology);
                                 $ontology[$key] = '/';
                             }
                         }
-                    }                    
+                    }
                     $object->setOntologyMapping($ontology);
                     $currentTaxonomyMapping = $object->getTaxonomyMapping();
 
                     // Taxonomy Mapping
-                    if ($request->get('taxonomy')) {   
-                        $createdParent = [];                     
+                    if ($request->get('taxonomy')) {
+                        $createdParent = [];
                         $newTaxonomyMapping = $request->get('taxonomy');
                         $categoriesCreated = [];
                         foreach($newTaxonomyMapping as $originName => &$mappedCategories) {
@@ -169,7 +170,7 @@ class ImportAdminController extends Controller
                                         if (!$parent) {
                                             $parent = new Category();
                                             $parent->setCustomId($fieldName);
-                                            $parent->setPickingOptionText("une catégorie"); // TODO translate
+                                            $parent->setPickingOptionText($this->trans('projects.controller.a_category'));
                                             $parent->setName($fieldName);
                                             $createdParent[$fieldName] = $parent;
                                         }
@@ -221,7 +222,7 @@ class ImportAdminController extends Controller
                     } elseif ($request->get('clear-elements')) {
                         $url = $this->admin->generateUrl('edit', ['id' => $object->getId()]);
                         $dm->query('Element')->field('source')->references($object)->batchRemove();
-                        $this->addFlash('sonata_flash_success', "Les éléments liés à cet import ont été effacés"); // TODO translate
+                        $this->addFlash('sonata_flash_success', $this->trans('imports.controller.sonata.success.removed'));
                     } elseif ($request->get('collect') || ($oldUpdatedAt != $object->getMainConfigUpdatedAt() && $object->getSourceType() != 'osm')) {
                         // auto collect if we just changed the import config (unless it's an OSM import, cause it might take too much time)
                         $url = $this->admin->generateUrl('collect', ['id' => $object->getId()]);
