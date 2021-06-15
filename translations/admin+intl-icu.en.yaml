@@ -624,18 +624,23 @@ config_mobile:
   fields:
     appNameShort: Short name of the application (12 characters max.)
     hideHeaderInPwa: Hide the top bar when the map is open in PWA mode
-    packageName: 'Domain name of the app (if you publish it as a TWA). Format: fr.gogocarto.macarto'
-    sha256CertFingerprints: 'SHA256 certificate fingerprints (if you publish it as TWA).Format: 57:2B:36:…'
+    packageName: 'Domain name of the app (if you publish it as a TWA). Something like: fr.gogocarto.macarto'
+    sha256CertFingerprints: 'SHA256 certificate fingerprints (if you publish it as TWA). Something like: 57:2B:36:…'
   form:
     groups:
       progressive: Simulated mobile application (Progressive Web App)
       progressive_description: >-
-        Gogocarto is a natively<b>Progressive Web App</b>: when a user visits the site from their
-        cell phone, the user will have the possibility to add a shortcut on his/her home screen. By
+        Gogocarto is a natively <b>Progressive Web App</b>: when a user visits the site from their
+        cell phone, they will have the possibility to add a shortcut to they home screen. By
         clicking on this shortcut, the site will open in full screen like a standard mobile
         application.
       trusted: Real mobile application (Trusted Web Activity)
-      trusted_description: This feature is under testing, please wait for future explanations
+      trusted_description: >-
+        In order to publish your website as real mobile app in Google Play Store :</br>
+        1) Go to https://www.pwabuilder.com and create an Android app from your website URL</br>
+        2) Fill bellow two inputs with values from assetlinks.json downloaded file</br>
+        3) Create a new App from Google Play Store (about 25$, thanks Google..)</br>
+        4) Update SHA256 certificate fingerprints with the new value provided by Google</br>
 
 config_osm:
   _label: OpenStreetMap

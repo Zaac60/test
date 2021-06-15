@@ -502,8 +502,8 @@ config_infobar:
         le symbole <b>|</b> suivi du nom du filtre. Par example, pour afficher un champ en majuscule
         on pourra faire <b>'{{ nom_de_mon_champ|upper '}}</b>. Des filtres spéciaux pour gogocarto
         ont été créés, ils permettent d''afficher simplement certains type de champ. Par example,
-        pour un champ de description longue, on pourra utiliser <b>'{{
-        nom_de_mon_champ_description_longue|gogo_textarea(truncate = 300) }}</b>. Cela coupera la
+        pour un champ de description longue, on pourra utiliser <br>'{{
+        nom_de_mon_champ_description_longue|gogo_textarea(truncate = 300) }}</br>. Cela coupera la
         description aux environs de 300 caractères et affichera un petit bouton pour afficher la
         description entière.<p> <p>Consultez la liste des <a
         href="https://mozilla.github.io/nunjucks/templating.html#builtin-filters">filtres nunjucks
@@ -614,8 +614,8 @@ config_mobile:
   fields:
     appNameShort: Nom court de l'application (12 caractères max.)
     hideHeaderInPwa: Masquer la barre du haut lorsque la carte est ouverte en mode PWA
-    packageName: 'Nom de domaine de l''appli (si vous la publiez en tant que TWA). Format: fr.gogocarto.macarto'
-    sha256CertFingerprints: 'Empreintes du certificat SHA256 (si vous la publiez en tant que TWA). Format: 57:2B:36:…'
+    packageName: 'Nom de domaine de l''appli (si vous la publiez en tant que TWA). Quelque chose comme: fr.gogocarto.macarto'
+    sha256CertFingerprints: 'Empreintes du certificat SHA256 (si vous la publiez en tant que TWA). Quelque chose comme: 57:2B:36:…'
   form:
     groups:
       progressive: Application mobile simulée (Progressive Web App)
@@ -625,7 +625,12 @@ config_mobile:
         écran d'accueil. En cliquant sur ce raccourci, le site s'ouvrira en plein écran comme une
         application mobile standard.
       trusted: Vrai application mobile (Trusted Web Activity)
-      trusted_description: Cette fonctionalité est en cours de test, merci de patienter pour de future explications
+      trusted_description: >-
+        Pour publier votre site sous forme d'application mobile dans le Play Store de Google:</br>
+        1) Aller sur https://www.pwabuilder.com et créer une application Android à partir l'url de votre carte</br>
+        2) Renseigner ci-dessous les valeurs contenues dans le fichier assetlinks.json que vous aurez téléchargé</br>
+        3) Créez l'application depuis le Play Store (processus payant, merci Google..)</br>
+        4) Mettez à jour la valeur de l'empreinte du certificat SHA256 avec la nouvelle valeur donnée par Google</br>
 
 config_osm:
   _label: OpenStreetMap
