@@ -31,7 +31,8 @@ class ConfigurationAdmin extends ConfigurationAbstractAdmin
                 ->add('appTags')
                 ->add('locale', ChoiceType::class, ['choices' => [
                     'Français' => 'fr', 
-                    'English' => 'en'
+                    'English' => 'en',
+                    'Deutsche' => 'de'
                 ]])
                 ->add('customDomain', UrlType::class, ['help_trans_params' => ['ip' => $_SERVER['SERVER_ADDR']]])
                 ->add('dataLicenseUrl')
